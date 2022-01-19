@@ -1,13 +1,13 @@
-# Connect Magento with Shopflix
+# Connect Magento with SHOPFLIX
 
-This extension is connecting your Magento 2 with [Shopflix](https://shopflix.gr)
+This extension is connecting your Magento 2 with [SHOPFLIX](https://SHOPFLIX.gr)
 
-## 1. How to install Onecode_ShopFlixConnector
+## 1. How to install Onecode_SHOPFLIXConnector
 
 ### 1.1 Install  via composer
 
 ```
-composer require onecode/shopflix-connector
+composer require onecode/SHOPFLIX-connector
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 php bin/magento setup:di:compile
@@ -16,7 +16,7 @@ php bin/magento setup:di:compile
 ### 1.2 Upgrade via composer
 
 ```
-composer update  onecode/shopflix-connector
+composer update  onecode/SHOPFLIX-connector
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
@@ -31,13 +31,13 @@ php bin/magento setup:di:compile
 
 If you don't want to install via composer, you can use this way.
 
-- Download [the latest version here](https://github.com/OnecodeGr/shopflix-connector/archive/master.zip)
-- Extract `master.zip` file to `app/code/Onecode/ShopFlixConnector` ; You should create a folder
-  path `app/code/Onecode/ShopFlixConnector` if not exist.
-- Go to Magento root folder and run upgrade command line to install `Onecode_ShopFlixConnector`:
-- Require ShopFlixConnectorLibrary before installation run the command ``composer require onecode/shopflix_connector_library``
+- Download [the latest version here](https://github.com/OnecodeGr/SHOPFLIX-connector/archive/master.zip)
+- Extract `master.zip` file to `app/code/Onecode/SHOPFLIXConnector` ; You should create a folder
+  path `app/code/Onecode/SHOPFLIXConnector` if not exist.
+- Go to Magento root folder and run upgrade command line to install `Onecode_SHOPFLIXConnector`:
+- Require SHOPFLIXConnectorLibrary before installation run the command ``composer require onecode/SHOPFLIX_connector_library``
 ```
-php bin/magento module:enable Onecode_ShopFlixConnector
+php bin/magento module:enable Onecode_SHOPFLIXConnector
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
@@ -48,13 +48,13 @@ Run compile if you have your application in Production Mode
 php bin/magento setup:di:compile
 ```
 
-## 2. Magento 2 Shopflix extension
+## 2. Magento 2 SHOPFLIX extension
 
 In this guide we will show you how to configure the extension and use it.
 
 ### 2.1 Configuration
 
-Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Extensions > ShopFlix`
+Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Extensions > SHOPFLIX`
 
 ![Imgur](https://i.imgur.com/OE52Qhi.gif)
 
@@ -72,11 +72,11 @@ Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Ext
 
 ![Imgur](https://i.imgur.com/qSzA1Eh.png)
 
-**Api Url / Username / Api Key**: These fields are provider by [Shopflix](https://shopflix.gr)
+**Api Url / Username / Api Key**: These fields are provider by [SHOPFLIX](https://SHOPFLIX.gr)
 
 ![Imgur](https://i.imgur.com/OC9WgCY.png)
 
-**Product type to export on xml**: Select Witch product types you can export on xml
+**Product type to export on xml**: Select which product types you can export on xml
 
 ![Imgur](https://i.imgur.com/cg5v1Br.png)
 
@@ -118,18 +118,18 @@ Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Ext
 
 Navigate to `Catalog > Products` there are 2 ways to configure your products
 
-**Sell On ShopFlix**: Select `Yes` to export it on xml
+**Sell On SHOPFLIX**: Select `Yes` to export it on xml
 
 **Shipping Lead Time**: Select the time slot that you can prepare the order and be ready be slot per product
 ``default value``: Same day
 
-**Offer Date From**: Set Date of offer from for [Shoflix](https://shopflix.gr)
+**Offer Date From**: Set Date of offer from for [SHOPFLIX](https://SHOPFLIX.gr)
 
-**Offer Date To**: Set Date of offer to [Shoflix](https://shopflix.gr)
+**Offer Date To**: Set Date of offer to [SHOPFLIX](https://SHOPFLIX.gr)
 
-**Offer Price**: Set the price for offer to [Shoflix](https://shopflix.gr)
+**Offer Price**: Set the price for offer to [SHOPFLIX](https://SHOPFLIX.gr)
 
-**Offer Qty**: Set the qty of the products for offer to [Shoflix](https://shopflix.gr)
+**Offer Qty**: Set the qty of the products for offer to [SHOPFLIX](https://SHOPFLIX.gr)
 
 ### 2.2.1 Single edit product
 
@@ -139,7 +139,7 @@ Navigate to `Catalog > Products` there are 2 ways to configure your products
 
 ![Imgur](https://i.imgur.com/DAjzGhu.png)
 
-### 2.3 Shopflix Order
+### 2.3 SHOPFLIX Order
 
 In this guide we will show how to use the extension
 
@@ -168,7 +168,7 @@ Select rejection reason
 
 #### 2.3.2 Shipment Grid
 
-Navigate to `Onecode > ShopFlix Shipments`
+Navigate to `Onecode > SHOPFLIX Shipments`
 
 There are 2 ways to print the pdf for courier with tracking data on it.
 
