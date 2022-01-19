@@ -36,7 +36,7 @@ If you don't want to install via composer, you can use this way.
   path `app/code/Onecode/ShopFlixConnector` if not exist.
 - Go to Magento root folder and run upgrade command line to install `Onecode_ShopFlixConnector`:
 - Require ShopFlixConnectoLibrary before installation run the command ``composer require onecode/shopflix-connector-library``
-- Require Onecode_Base before installation run the command ``composer require onecode/base`` or Download [the latest] (https://github.com/OnecodeGr/base/archive/master.zip). Extract `master.zip` file to `app/code/Onecode/Base`  ; You should create a folder
+- Require Onecode_Base before installation run the command ``composer require onecode/base`` or Download [the latest](https://github.com/OnecodeGr/base/archive/master.zip). Extract `master.zip` file to `app/code/Onecode/Base`  ; You should create a folder
   path `app/code/Onecode/Base` if not exist.
 ```
 php bin/magento module:enable Onecode_ShopFlixConnector
