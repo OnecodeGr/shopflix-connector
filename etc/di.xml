@@ -1,0 +1,583 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Onecode\ShopFlixConnector\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">OnecodeShopFlixLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Onecode\ShopFlixConnector\Logger\SystemHandler</item>
+                <item name="info" xsi:type="object">Onecode\ShopFlixConnector\Logger\InfoHandler</item>
+                <item name="debug" xsi:type="object">Onecode\ShopFlixConnector\Logger\DebugHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="onecodeShopFlixOrderItemMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName" xsi:type="string">
+                Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item
+            </argument>
+            <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\Order\Item</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="mainTableName" xsi:type="string">onecode_shopflix_order</argument>
+            <argument name="gridTableName" xsi:type="string">onecode_shopflix_order_grid</argument>
+            <argument name="orderIdField" xsi:type="string">onecode_shopflix_order.entity_id</argument>
+            <argument name="joins" xsi:type="array">
+                <item name="onecode_shopflix_shipping_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_order_address</item>
+                    <item name="origin_column" xsi:type="string">shipping_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="onecode_shopflix_billing_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_order_address</item>
+                    <item name="origin_column" xsi:type="string">billing_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <argument name="columns" xsi:type="array">
+                <item name="entity_id" xsi:type="string">onecode_shopflix_order.entity_id</item>
+                <item name="status" xsi:type="string">onecode_shopflix_order.status</item>
+                <item name="total_paid" xsi:type="string">onecode_shopflix_order.total_paid</item>
+                <item name="increment_id" xsi:type="string">onecode_shopflix_order.increment_id</item>
+                <item name="shipping_name" xsi:type="object">OnecodeShopFlixConnectorShippingNameAggregator</item>
+                <item name="billing_name" xsi:type="object">OnecodeShopFlixConnectorBillingNameAggregator</item>
+                <item name="created_at" xsi:type="string">onecode_shopflix_order.created_at</item>
+                <item name="updated_at" xsi:type="string">onecode_shopflix_order.updated_at</item>
+                <item name="billing_address" xsi:type="object">OnecodeShopFlixConnectorBillingAddressAggregator
+                </item>
+                <item name="shipping_address" xsi:type="object">OnecodeShopFlixConnectorShippingAddressAggregator
+                </item>
+                <item name="customer_email" xsi:type="string">onecode_shopflix_order.customer_email</item>
+                <item name="subtotal" xsi:type="string">onecode_shopflix_order.subtotal</item>
+                <item name="customer_name" xsi:type="object">OnecodeShopFlixCustomerNameAggregator</item>
+            </argument>
+            <argument name="notSyncedDataProvider" xsi:type="object">
+                Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedOrderDataProvider
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedOrderDataProvider"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedDataProvider">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="default" xsi:type="string">
+                    Onecode\ShopFlixConnector\Model\ResourceModel\Provider\UpdatedIdListProvider
+                </item>
+                <item name="updated_at" xsi:type="string">
+                    Onecode\ShopFlixConnector\Model\ResourceModel\Provider\UpdatedAtListProvider
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixCustomerNameAggregator" type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="customer_firstname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_order</item>
+                    <item name="columnName" xsi:type="string">customer_firstname</item>
+                </item>
+                <item name="customer_lastname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_order</item>
+                    <item name="columnName" xsi:type="string">customer_lastname</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorOrderIndexGridSyncInsert"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncInsertObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncInsertObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShippingNameAggregator"
+                 type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="firstname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">firstname</item>
+                </item>
+                <item name="lastname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">lastname</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorBillingNameAggregator"
+                 type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="firstname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">firstname</item>
+                </item>
+                <item name="lastname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">lastname</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorOrderIndexGridAsyncInsert"
+                 type="Onecode\ShopFlixConnector\Model\GridAsyncInsert">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorIndexGridAsyncInsertCron"
+                 type="Onecode\ShopFlixConnector\Cron\GridAsyncInsert">
+        <arguments>
+            <argument name="asyncInsert"
+                      xsi:type="object">OnecodeShopFlixConnectorOrderIndexGridAsyncInsert
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorIndexGridAsyncInsertShipmentCron"
+                 type="Onecode\ShopFlixConnector\Cron\GridAsyncInsert">
+        <arguments>
+            <argument name="asyncInsert"
+                      xsi:type="object">OnecodeShopFlixConnectorShipmentIndexGridAsyncInsert
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorSyncFromShopFlixCron"
+                 type="Onecode\ShopFlixConnector\Cron\SyncOrdersFromShopFlix">
+        <arguments>
+            <argument name="importOrders" xsi:type="object">Onecode\ShopFlixConnector\Helper\ImportOrders</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixConnectorSyncToShopFlixCron"
+                 type="Onecode\ShopFlixConnector\Cron\SyncOrdersToShopFlix">
+        <arguments>
+            <argument name="exportOrders" xsi:type="object">Onecode\ShopFlixConnector\Helper\ExportOrders</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixConnectorSyncShipmentCron"
+                 type="Onecode\ShopFlixConnector\Cron\SyncOrdersShipment">
+        <arguments>
+            <argument name="importShipments" xsi:type="object">Onecode\ShopFlixConnector\Helper\ImportShipments</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixConnectorShippingAddressAggregator"
+                 type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="street" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">street</item>
+                </item>
+                <item name="city" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">city</item>
+                </item>
+                <item name="region" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">region</item>
+                </item>
+                <item name="postcode" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_shipping_address</item>
+                    <item name="columnName" xsi:type="string">postcode</item>
+                </item>
+            </argument>
+            <argument name="separator" xsi:type="string">,</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorOrderRelationsComposite"
+                 type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite">
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="default" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Relation
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShipmentRelationsComposite"
+                 type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite">
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="default" xsi:type="object">
+                    Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Relation
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">
+                OnecodeShopFlixConnectorShipmentRelationsComposite
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="OnecodeShopFlixConnectorBillingAddressAggregator"
+                 type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="street" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">street</item>
+                </item>
+                <item name="city" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">city</item>
+                </item>
+                <item name="region" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">region</item>
+                </item>
+                <item name="postcode" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_billing_address</item>
+                    <item name="columnName" xsi:type="string">postcode</item>
+                </item>
+            </argument>
+            <argument name="separator" xsi:type="string">,</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="onecodeShopFlixOrderAddressMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address
+            </argument>
+            <argument name="modelClassName"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\Order\Address
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="onecodeShopFlixShipmentMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment</argument>
+            <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\Order\Shipment</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Order\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+            <argument name="mainTable" xsi:type="string">onecode_shopflix_shipment_grid</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorOrderIndexGridSyncRemove"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncRemoveObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncRemove"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncRemoveObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridAsyncInsert"
+                 type="Onecode\ShopFlixConnector\Model\GridAsyncInsert">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncInsertObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</argument>
+        </arguments>
+    </virtualType>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\GridPool">
+        <arguments>
+            <argument name="grids" xsi:type="array">
+                <item name="order_grid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid
+                </item>
+                <item name="shipment_grid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="OnecodeShopFlixConnectorShipmentGridAggregator"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="mainTableName" xsi:type="string">onecode_shopflix_shipment</argument>
+            <argument name="gridTableName" xsi:type="string">onecode_shopflix_shipment_grid</argument>
+            <argument name="orderIdField" xsi:type="string">onecode_shopflix_shipment.order_id</argument>
+            <argument name="joins" xsi:type="array">
+                <item name="onecode_shopflix_order" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_order</item>
+                    <item name="origin_column" xsi:type="string">order_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="onecode_shopflix_shipping_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_order_address</item>
+                    <item name="origin_column" xsi:type="string">shipping_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="onecode_shopflix_billing_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_order_address</item>
+                    <item name="origin_column" xsi:type="string">billing_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <argument name="columns" xsi:type="array">
+                <item name="entity_id" xsi:type="string">onecode_shopflix_shipment.entity_id</item>
+                <item name="increment_id" xsi:type="string">onecode_shopflix_shipment.increment_id</item>
+                <item name="order_increment_id" xsi:type="string">onecode_shopflix_order.increment_id</item>
+                <item name="order_created_at" xsi:type="string">onecode_shopflix_order.created_at</item>
+                <item name="customer_name" xsi:type="object">OnecodeShopFlixCustomerNameAggregator</item>
+                <item name="shipment_status" xsi:type="string">onecode_shopflix_shipment.shipment_status</item>
+                <item name="order_status" xsi:type="string">onecode_shopflix_order.status</item>
+                <item name="billing_address" xsi:type="object">OnecodeShopFlixConnectorBillingAddressAggregator
+                </item>
+                <item name="shipping_address" xsi:type="object">OnecodeShopFlixConnectorShippingAddressAggregator
+                </item>
+                <item name="billing_name" xsi:type="object">OnecodeShopFlixConnectorBillingNameAggregator</item>
+                <item name="shipping_name" xsi:type="object">OnecodeShopFlixConnectorShippingNameAggregator</item>
+                <item name="customer_email" xsi:type="string">onecode_shopflix_order.customer_email</item>
+                <item name="created_at" xsi:type="string">onecode_shopflix_shipment.created_at</item>
+                <item name="updated_at" xsi:type="string">onecode_shopflix_shipment.updated_at</item>
+                <item name="order_id" xsi:type="string">onecode_shopflix_shipment.order_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <type name="Onecode\ShopFlixConnector\Model\Order\ShipmentRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixShipmentMetadata</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="onecode_shopflix_syncing_order" xsi:type="object">SyncOrderCommand</item>
+                <item name="onecode_shopflix_syncing_shipments" xsi:type="object">SyncShipmentsCommand</item>
+                <item name="onecode_shopflix_syncing_order_to_shopflix" xsi:type="object">
+                    SyncOrderToShopFlixCommand
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="SyncOrderCommand" type="Onecode\ShopFlixConnector\Console\Command\SyncOrders"/>
+    <virtualType name="SyncShipmentsCommand" type="Onecode\ShopFlixConnector\Console\Command\SyncShipments"/>
+    <virtualType name="SyncOrderToShopFlixCommand"
+                 type="Onecode\ShopFlixConnector\Console\Command\SyncOrderToShopFlix"/>
+    <type name="Onecode\ShopFlixConnector\Helper\ImportOrders">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Helper\ImportShipments">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\Order\Shipment\TrackRepository">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Helper\ExportOrders">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\Service\OrderService">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\Carrier\Method">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Controller\Adminhtml\Order\CommentsHistory">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Grid\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\Order\AddressRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixOrderAddressMetadata</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\Order\ItemRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixOrderItemMetadata</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">
+                OnecodeShopFlixConnectorOrderRelationsComposite
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shopflix_order_listing_data_source"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid\Collection
+                </item>
+                <item name="shopflix_order_view_shipment_grid_data_source"
+                      xsi:type="string">
+                    Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Order\Grid\Collection
+                </item>
+                <item name="shopflix_shipment_grid_data_source"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Onecode\ShopFlixConnector\Api\OrderRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\OrderRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\OrderInterface"
+                type="Onecode\ShopFlixConnector\Model\Order"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\OrderSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ManagementInterface"
+                type="Onecode\ShopFlixConnector\Model\Service\OrderService"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\StatusHistoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Status\History"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ItemSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\StatusHistoryRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Status\HistoryRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\AddressResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ItemResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\StatusHistoryResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\OrderResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\StatusHistorySearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ItemRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\ItemRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\AddressRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\AddressRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ItemInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Item"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ShipmentItemRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Shipment\ItemRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ShipmentItemRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Shipment\ItemRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ShipmentItemResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Item"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ShipmentResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ShipmentTrackResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Track"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ShipmentSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ShipmentItemSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Item\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ShipmentTrackSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Track\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ShipmentTrackRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\Shipment\TrackRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ShipmentRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\Order\ShipmentRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedDataProviderInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedDataProvider"/>
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="OnecodeShopFlixPaymentFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider::CODE
+            </argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">OnecodeShopFlixValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+ <!--   <type name="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider::CODE</argument>
+        </arguments>
+    </type>-->
+
+    <!-- Value handlers infrastructure -->
+<!--    <type name="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Payment\Gateway\Config\ConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+    <virtualType name="OnecodeShopFlixValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">OnecodeShopFlixConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">OnecodeShopFlixConfigProvider</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixConfigProvider" type="Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+
+    <type name="Onecode\ShopFlixConnector\Model\Convert\Order">
+        <arguments>
+            <argument name="paymentProvider" xsi:type="object">OnecodeShopFlixConfigProvider</argument>
+        </arguments>
+    </type>
+  <!--  <type name="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">
+                Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider
+            </argument>
+        </arguments>
+    </type>-->
+
+
+</config>

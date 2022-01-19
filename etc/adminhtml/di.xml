@@ -1,0 +1,48 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Onecode\ShopFlixConnector\Controller\Adminhtml\Order">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+
+
+
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="onecode_shopflix_order_grid" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                </item>
+                <item name="onecode_shopflix_order_shipment_grid" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                    <item name="order_created_at" xsi:type="string">order_created_at</item>
+                </item>
+                <item name="onecode_shopflix_order_view_shipment_grid" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                    <item name="order_created_at" xsi:type="string">order_created_at</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="onecode_shopflix_datetime_from" xsi:type="array">
+                    <item name="class" xsi:type="string">
+                        Onecode\ShopFlixConnector\Ui\DataProvider\Product\Form\Modifier\OfferDateFrom
+                    </item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+                <item name="onecode_shopflix_datetime_to" xsi:type="array">
+                    <item name="class" xsi:type="string">
+                        Onecode\ShopFlixConnector\Ui\DataProvider\Product\Form\Modifier\OfferDateTo
+                    </item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+</config>

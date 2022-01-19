@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="shopflix_order_items">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn" name="column_price"
+                   template="Onecode_ShopFlixConnector::items/price/unit.phtml" group="column"/>
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn"
+                   name="column_subtotal" template="Onecode_ShopFlixConnector::items/price/row.phtml"
+                   group="column"/>
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn" name="column_total"
+                   template="Onecode_ShopFlixConnector::items/price/total.phtml" group="column"/>
+        </referenceBlock>
+    </body>
+</page>

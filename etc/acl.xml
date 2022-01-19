@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Onecode_Base::menu">
+                    <resource id="Onecode_ShopFlixConnector::shopflix" title="ShopFlix Sales" translate="title"
+                              sortOrder="20">
+                        <resource id="Onecode_ShopFlixConnector::sales_operation" title="ShopFlix Operations"
+                                  translate="title"
+                                  sortOrder="10">
+                            <resource id="Onecode_ShopFlixConnector::shopflix_order" title="Order"
+                                      translate="title"
+                                      sortOrder="10">
+                                <resource id="Onecode_ShopFlixConnector::actions" title="Actions" translate="title"
+                                          sortOrder="10">
+                                    <resource id="Onecode_ShopFlixConnector::actions_view" title="View"
+                                              translate="title"
+                                              sortOrder="10"/>
+                                    <resource id="Onecode_ShopFlixConnector::accept" title="Accept" translate="title"
+                                              sortOrder="50"/>
+                                    <resource id="Onecode_ShopFlixConnector::download_manifest"
+                                              title="Download Manifest"
+                                              translate="title"
+                                              sortOrder="50"/>
+                                    <resource id="Onecode_ShopFlixConnector::reject" title="Cancel" translate="title"
+                                              sortOrder="60"/>
+                                    <resource id="Onecode_ShopFlixConnector::ready_to_be_shipped"
+                                              title="Ready to be shipped" translate="title"
+                                              sortOrder="70"/>
+                                    <resource id="Onecode_ShopFlixConnector::comment" title="Comment"
+                                              translate="title"
+                                              sortOrder="140"/>
+                                </resource>
+                            </resource>
+                            <resource id="Onecode_ShopFlixConnector::shipment" title="Shipments" translate="title"
+                                      sortOrder="30"/>
+                        </resource>
+                    </resource>
+                </resource>
+
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Onecode_Base::config">
+                                <resource id="Onecode_ShopFlixConnector::config_settings"
+                                          title="ShopFlix Settings Section" translate="title"
+                                          sortOrder="100"/>
+
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

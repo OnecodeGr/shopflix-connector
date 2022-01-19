@@ -1,0 +1,32 @@
+{
+    "name": "onecode/shopflix-connector",
+    "version": "1.0.0",
+    "description": "Connect Magento with ShopFlix",
+    "type": "magento2-module",
+    "require": {
+        "php": "~7.3.0||~7.4.0",
+        "magento/framework": "102.0.*||103.0.*",
+        "magento/module-catalog": "103.0.*||104.0.*",
+        "magento/module-directory": "100.3.*||100.4.*",
+        "magento/module-sales": "102.0.*||103.0.*",
+        "magento/module-sales-rule": "101.1.*||101.2.*",
+        "magento/module-backend": "101.0.*||102.0.*",
+        "magento/module-config": "101.1.*||101.2.*",
+        "magento/module-quote": "101.1.*||101.2.*",
+        "magento/module-shipping": "100.3.*||100.4.*",
+        "magento/module-store": "101.0.*||101.1.*",
+        "onecode/shopflix-connector-library": "1.0.*",
+        "onecode/base": "1.0.*",
+        "ext-simplexml": "*",
+        "ext-intl": "*"
+    },
+    "license": "OSL-3.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Onecode\\ShopFlixConnector\\": ""
+        }
+    }
+}

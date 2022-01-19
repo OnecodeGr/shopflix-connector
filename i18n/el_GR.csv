@@ -1,0 +1,237 @@
+"We can't get the order instance right now.","Δεν μπορούμε να λάβουμε το instance της παραγγελίας αυτήν τη στιγμή."
+"Rejection for Order #%1","Απόρριψη για την παραγγελία #%1"
+"Paid Amount","Πληρωμένο ποσό"
+"Order Grand Total","Παραγγελία Grand Total"
+"Submit Rejection","Υποβολή Απόρριψης"
+"Total Paid","Συνολική πληρωμή"
+"Order # %1 %2 | %3","Παραγγελία # %1 %2 | %3"
+"Accept","Αποδοχή"
+"Reject","Απόρριψη"
+"Ready to be shipped","Έτοιμο για αποστολή"
+"Are you sure? You are going to accept the shopflix Order .","Είστε σίγουρος? Θα αποδεχτείτε την παραγγελία του shopflix."
+"Submit Comment","Υποβολή σχόλιου"
+"Please correct the parent block for this block.","Διορθώστε το γονικό μπλοκ για αυτό το μπλοκ."
+"Invalid parent block for this block","Μη έγκυρο γονικό μπλοκ για αυτό το μπλοκ"
+"Comments History","Ιστορικό σχολίων"
+"Order History","Ιστορικό παραγγελιών"
+"Information","Πληροφορίες"
+"Order Information","Πληροφορίες Παραγγελίας"
+"Order View","Προβολή παραγγελίας"
+"Subtotal","Μερικό Σύνολο"
+"Discount","Έκπτωση"
+"Total","Σύνολο"
+"ShopFlix","Αγορά"
+"Order","Σειρά"
+"This order no longer exists.","Αυτή η παραγγελία δεν υπάρχει πλέον."
+"You have not accept the item.","Δεν έχετε αποδεχτεί το στοιχείο."
+"You accepted the order.","Αποδεχτήκατε την παραγγελία."
+"You have not accepted the item.","Δεν έχετε αποδεχτεί το στοιχείο."
+"The comment is missing. Enter and try again.","Το σχόλιο λείπει. Εισαγάγετε και δοκιμάστε ξανά."
+"We cannot add order history.","Δεν μπορούμε να προσθέσουμε ιστορικό παραγγελιών."
+"SHOPFLIX Order","Παραγγελία στην αγορά"
+"%1 order(s) cannot be ready to be shipped.","%1 παραγγελίες δεν μπορούν να είναι έτοιμες για αποστολή."
+"You cannot ready to be shipped the order(s).","Δεν μπορείτε να είστε έτοιμοι για αποστολή των παραγγελιών."
+"We changed the status to Ready to be shipped %1 order(s).","Αλλάξαμε την κατάσταση σε Έτοιμο για αποστολή %1 παραγγελία (ες)."
+"You have not change the status to ready to be shipped.","Δεν έχετε αλλάξει την κατάσταση σε έτοιμο για αποστολή."
+"You change the status to ready to be shipped.","Αλλάζετε την κατάσταση σε έτοιμο για αποστολή."
+"You have not change the status to ready to be shipped","Δεν έχετε αλλάξει την κατάσταση σε έτοιμο για αποστολή"
+"The order can not rejected","Η παραγγελία δεν μπορεί να απορριφθεί"
+"Reject Order","Απόρριψη παραγγελίας"
+"You rejected the order.","Απορρίψατε την παραγγελία."
+"Exception occurred during order load","Η εξαίρεση προέκυψε κατά τη φόρτωση της παραγγελίας"
+"Order loading error","Σφάλμα φόρτωσης παραγγελίας"
+"SHOPFLIX Order %1 has %2","Παραγγελία Shopflix %1 έχει %2"
+"Order Accepted","Η παραγγελία έγινε αποδεκτή"
+"We cannot accept this order.","Δεν μπορούμε να δεχτούμε αυτήν την παραγγελία."
+"We cannot reject this order.","Δεν μπορούμε να απορρίψουμε αυτήν την εντολή."
+"Ordered is ready to be shipped","Η παραγγελία είναι έτοιμη για αποστολή"
+"An ID is needed. Set the ID and try again.","Απαιτείται ταυτότητα. Ορίστε το αναγνωριστικό και δοκιμάστε ξανά."
+"The entity that was requested doesn't exist. Verify the entity and try again.","Η οντότητα που ζητήθηκε δεν υπάρχει. Επαληθεύστε την οντότητα και δοκιμάστε ξανά."
+"The order address couldn't be saved.","Δεν ήταν δυνατή η αποθήκευση της διεύθυνσης παραγγελίας."
+"The order address couldn't be deleted.","Δεν ήταν δυνατή η διαγραφή της διεύθυνσης παραγγελίας."
+"Accepted","Αποδεκτό"
+"Picking","Συλλογή"
+"Pending Acceptance","Εκκρεμεί αποδοχή"
+"Rejected","Απορρίφθηκε"
+"Default","Προκαθορισμένο"
+"Could not delete the order status history.","Δεν ήταν δυνατή η διαγραφή του ιστορικού κατάστασης παραγγελίας."
+"Could not save the order status history.","Δεν ήταν δυνατή η αποθήκευση του ιστορικού κατάστασης παραγγελίας."
+"Unable to find shopflix order with id ""%1""","Δεν είναι δυνατή η εύρεση παραγγελίας αγοράς με αναγνωριστικό ""%1"""
+"Unable to find shopflix order with increment id ""%1""","Δεν είναι δυνατή η εύρεση παραγγελίας αγοράς με αναγνωριστικό προσαύξησης ""%1"""
+"We cannot determine the field name.","Δεν μπορούμε να καθορίσουμε το όνομα του πεδίου."
+"City","Πόλη"
+"Company","Εταιρία"
+"Country","Χώρα"
+"Email","Ηλεκτρονική Διεύθυνση"
+"First Name","Όνομα"
+"Last Name","Επίθετο"
+"State/Province","Πολιτεία/Επαρχία"
+"Street Address","Διεύθυνση"
+"Phone Number","Τηλεφωνικό νούμερο"
+"Zip/Postal Code","Ταχυδρομικός κώδικας"
+"We can't save the address:\n%1","Δεν μπορούμε να αποθηκεύσουμε τη διεύθυνση: \ n%1"
+"Cannot save comment:\n%1","Δεν είναι δυνατή η αποθήκευση σχολίου: \ n%1"
+"View","View"
+"SKU","SKU"
+"Ordered","Σε παραγγελία"
+"In Stock","Σε απόθεμα"
+"Comment Text","Κείμενο σχολίου"
+"Customer","Πελάτης"
+"Notified","Ειδοποιήθηκε"
+"Not Notified","Δεν ειδοποιήθηκε"
+"Payment &amp; Shipping Method","Πληρωμή & amp; Μέθοδος αποστολής"
+"Payment Information","Πληροφορίες Πληρωμής"
+"The order was placed using %1.","Η παραγγελία πραγματοποιήθηκε χρησιμοποιώντας %1."
+"Shipping Information","Πληροφορίες αποστολής"
+"The order was placed on shopflix and will shipped by the shopflix","Η παραγγελία έγινε στην αγορά και θα σταλεί από την αγορά"
+"%1","%1"
+"Product","Προϊόν"
+"Price","Τιμή"
+"Qty","Ποσότητα"
+"Discount Amount","Ποσό έκπτωσης"
+"Row Total","Σύνολο σειράς"
+"Order Total","Σύνολο παραγγελίας"
+"Rejection Reason","Αιτία Απόρριψης"
+"Select Reason For Rejection","Επιλέξτε Αιτία Απόρριψης"
+"Out of stock at the store or at the supplier","Εκτός αποθέματος στο κατάστημα ή στον προμηθευτή"
+"Incorrectly entered value (s)","Λάθος εισαγόμενες τιμές"
+"Limited pieces","Περιορισμένα κομμάτια"
+"The product has been removed","Το προϊόν έχει αφαιρεθεί"
+"Other","Άλλος"
+"Reject Totals","Απόρριψη Ολικών"
+"Status","Κατάσταση"
+"Comment","Σχόλιο"
+"Order & Account Information","Πληροφορίες παραγγελίας & λογαριασμού"
+"Order # %1","Παραγγελία # %1"
+"Order Date","Ημερομηνία παραγγελίας"
+"Order Date (%1)","Ημερομηνία παραγγελίας (%1)"
+"Order Status","Κατάσταση παραγγελίας"
+"Link to Magento Order","Σύνδεσμος για την παραγγελία Magento"
+"Placed from IP","Τοποθετείται από IP"
+"%1 / %2 rate:","Ποσοστό %1 / %2:"
+"Account Information","Πληροφορίες λογαριασμού"
+"Edit Customer","Επεξεργασία πελάτη"
+"Customer Name","Όνομα πελάτη"
+"Address Information","πληροφορίες διεύθυνσης"
+"Billing Address","διεύθυνση χρέωσης"
+"Shipping Address","Διεύθυνση αποστολής"
+"Notes for this Order","Σημειώσεις για αυτήν την παραγγελία"
+"Comment added","Το σχόλιο προστέθηκε"
+"Shipping &amp; Handling Information","Αποστολή & amp; Πληροφορίες χειρισμού"
+"Items Ordered","Παραγγελία αντικειμένων"
+"Order Totals","Παραγγελία Σύνολα"
+"Are you sure you want to reject this order?","Είστε βέβαιοι ότι θέλετε να απορρίψετε αυτήν την παραγγελία;"
+"Are you sure you want to accept this shopflix order?","Είστε βέβαιοι ότι θέλετε να αποδεχτείτε αυτήν την παραγγελία αγοράς;"
+"Are you sure you want to change the status to Ready to be shipped this shopflix order?","Είστε βέβαιοι ότι θέλετε να αλλάξετε την κατάσταση σε Έτοιμο για αποστολή αυτής της παραγγελίας στην αγορά;"
+"Shopflix Sales","Πωλήσεις Shopflix"
+"Shopflix Operations","Λειτουργίες Αγοράς"
+"Actions","Ενέργειες"
+"Cancel","Ματαίωση"
+"General Settings Section","Ενότητα Γενικές ρυθμίσεις"
+"Xml Settings Section","Ενότητα Ρυθμίσεις Xml"
+"Shopflix Shipping Settings","Ρυθμίσεις αποστολής Shopflix"
+"Shopflix Payment Settings","Ρυθμίσεις πληρωμής Shopflix"
+"General","Γενικός"
+"Enabled","Ενεργοποιημένο"
+"Convert to magento order","Μετατροπή σε παραγγελία magento"
+"Use Dev Environment","Χρησιμοποιήστε το Dev περιβάλλον"
+"Username","Όνομα χρήστη"
+"Api Key","Κλειδί Api"
+"Select products types","Επιλέξτε τύπους προϊόντων"
+"Xml Configs","Διαμορφώνει το Xml"
+"Generate Xml","Δημιουργία Xml"
+"NPM Attribute","Χαρακτηριστικό NPM"
+"EAN Attribute","Χαρακτηριστικό EAN"
+"Title Attribute","Χαρακτηριστικό τίτλου"
+"Description Attribute","Περιγραφή Χαρακτηριστικό"
+"Export Category Tree","Δέντρο κατηγορίας εξαγωγής"
+"Brand Attribute","Χαρακτηριστικό μάρκας"
+"Weight Attribute","Ιδιότητα βάρους"
+"Shopflix Shipping Method","Μέθοδος αποστολής στην αγορά"
+"Title","Τίτλος"
+"Method Name","Όνομα μεθόδου"
+"Displayed Error Message","Εμφανίζεται μήνυμα σφάλματος"
+"Ship to Applicable Countries","Αποστολή σε εφαρμοστέες χώρες"
+"Ship to Specific Countries","Αποστολή σε συγκεκριμένες χώρες"
+"Sort Order","Σειρά ταξινόμησης"
+"Onecode Shopflix Payment","Πληρωμή Onecode Shopflix"
+"Instructions","Οδηγίες"
+"New Order Status","Κατάσταση νέας παραγγελίας"
+"Payment from Applicable Countries","Πληρωμή από εφαρμοστέες χώρες"
+"Payment from Specific Countries","Πληρωμή από συγκεκριμένες χώρες"
+"ID","ID"
+"Purchase Date","Ημερομηνία αγοράς"
+"Bill-to Name","Bill-to όνομα"
+"Ship-to Name","Ship-to όνομα"
+"Customer Email","Email Πελάτη"
+Shipments,Αποστολές
+SHOPFLIX Order Shipments,Αποστολές για της παραγγελίες ShopFlix
+"Shipment #%1 | %3","Αποστολή #%1 | %3"
+Print,Εκτύπωση
+Print Shipping Label,Εκτύπωση Αποστολής
+"We can print 20 vouchers at once you have selected %1","Μπορούμε να εκτυπώσουμε μόνο 20 vouchers στο ίδιο request. Έχετε επιλέξει %1"
+Same day,Ίδια ημέρα
+Next day,Επόμενη μέρα
+2 days,2 ημέρες
+3 days,3 ημέρες
+4 days,4 ημέρες
+5 days,5 ημέρες
+6 days,6 ημέρες
+7+ days,7+ ημέρες
+Please enter the username and password and set to yes to get the link for xml,Εισαγάγετε το όνομα χρήστη και τον κωδικό πρόσβασης και ορίστε ναι για να λάβετε τον σύνδεσμο για το xml
+"<a href='%1' target='_blank'>Xml file for Store View <strong>%2</strong></a>","<a href='%1' target='_blank'>Αρχείο Xml για την προβολή καταστήματος <strong>%2</strong></a>"
+Order Partial Shipped,Μερική αποστολή
+We cannot partial shipped this order.,Δεν είναι δυνατή η μερική αποστολή αυτής της παραγγελίας.
+Order Shipped,Η παραγγελία έχει αποσταλεί
+We cannot shipped this order.,Δεν μπορούμε να στείλουμε αυτήν την παραγγελία.
+Order On the way,Παραγγελία Καθ' οδόν
+We cannot cancel this order.,Δεν μπορούμε να ακυρώσουμε αυτήν την παραγγελία.
+Pending Acceptance,Εκκρεμεί Αποδοχή
+Rejected,Απορρίφθηκε
+On the way,Καθ' οδόν
+Partial Shipped,Μερική αποστολή
+Shipped,Η παραγγελία έχει αποσταλεί
+Completed,Ολοκληρωμένη
+Ready to be shipped,Έτοιμη για αποστολή
+Canceled,Ακυρώθηκε
+Could not delete the shipment item.,Δεν ήταν δυνατή η διαγραφή του αντικειμένου αποστολής.
+Could not save the shipment item.,Δεν ήταν δυνατή η αποθήκευση του αντικειμένου αποστολής.
+Could not delete the shipment tracking.,Δεν ήταν δυνατή η διαγραφή του αριθμού παρακολούθησης της αποστολής.
+Could not save the shipment tracking.
+This shipment no longer exists.
+The order no longer exists.
+Tracking information must contain title, carrier code, and tracking number
+An increment id is needed. Set the increment id  and try again.
+Could not save the shipment tracking.,Δεν ήταν δυνατή η αποθήκευση της παρακολούθησης αποστολής.
+This shipment no longer exists.,Αυτή η αποστολή δεν υπάρχει πλέον.
+The order no longer exists.,Η παραγγελία δεν υπάρχει πλέον.
+Tracking information must contain title, carrier code, and tracking number,Οι πληροφορίες παρακολούθησης πρέπει να περιέχουν τίτλο, κωδικό εταιρίας courier και αριθμό παρακολούθησης
+An increment id is needed. Set the increment id  and try again.,Απαιτείται ένα αναγνωριστικό αύξησης. Ορίστε το αναγνωριστικό αύξησης και δοκιμάστε ξανά.
+The shipment couldn't be deleted.,Δεν ήταν δυνατή η διαγραφή της αποστολής.
+The shipment couldn't be saved.,Δεν ήταν δυνατή η αποθήκευση της αποστολής.
+We cannot create an empty shipment.,Δεν μπορούμε να δημιουργήσουμε κενή αποστολή.
+"Cannot save track:\n%1","Δεν είναι δυνατή η αποθήκευση του αριθμού παρακολούθησης:\n%1"
+Carrier,Φορέας
+Number,Αριθμός
+Action,Δράση
+ShopFlix Courier,ShopFlix Courier
+Track Voucher,Κουπόνι παρακολούθησης
+Shipping and Tracking Information,Πληροφορίες αποστολής και παρακολούθησης
+Items Shipped,Είδη που αποστέλλονται
+Qty Shipped,Ποσότητα Αποστολή
+Download Manifest,Κατεβάστε το Manifest
+ShopFlix Settings Section,Ενότητα ρυθμίσεων ShopFlix
+ShopFlix Shipments,Αποστολές ShopFlix
+ShopFlix Settings,Ρυθμίσεις ShopFlix
+Auto Accept Order,Αυτόματη αποδοχή παραγγελίας
+Api Url,Api Url
+"Allows a valid URL. For example, https://www.example.com/api","Επιτρέπει μια έγκυρη διεύθυνση URL. Για παράδειγμα, https://www.example.com/api"
+MPN Attribute,Ιδιότητα MPN
+Shipment,Αποστολή
+Ship-to Name,Όνομα αποστολής
+Ship Date,Ημερομηνία αποστολής
+Total Quantity,Συνολική ποσότητα
+Print Vouchers,Εκτύπωση κουπονιών
+Order #,Σειρά #
+Ship Date,Ημερομηνία αποστολής
+Method Name,Όνομα μεθόδου

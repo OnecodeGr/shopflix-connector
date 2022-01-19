@@ -1,0 +1,190 @@
+# Connect Magento with Shopflix
+
+This extension is connecting your Magento 2 with [Shopflix](https://shopflix.gr)
+
+## 1. How to install Onecode_ShopFlixConnector
+
+### 1.1 Install  via composer
+
+```
+composer require onecode/shopflix-connector
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+php bin/magento setup:di:compile
+```
+
+### 1.2 Upgrade via composer
+
+```
+composer update  onecode/shopflix-connector
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Run compile if you have your application in Production Mode
+
+```
+php bin/magento setup:di:compile
+```
+
+### 2. Copy and paste
+
+If you don't want to install via composer, you can use this way.
+
+- Download [the latest version here](https://github.com/OnecodeGr/shopflix-connector/archive/master.zip)
+- Extract `master.zip` file to `app/code/Onecode/ShopFlixConnector` ; You should create a folder
+  path `app/code/Onecode/ShopFlixConnector` if not exist.
+- Go to Magento root folder and run upgrade command line to install `Onecode_ShopFlixConnector`:
+- Require ShopFlixConnectorLibrary before installation run the command ``composer require onecode/shopflix_connector_library``
+```
+php bin/magento module:enable Onecode_ShopFlixConnector
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Run compile if you have your application in Production Mode
+
+```
+php bin/magento setup:di:compile
+```
+
+## 2. Magento 2 Shopflix extension
+
+In this guide we will show you how to configure the extension and use it.
+
+### 2.1 Configuration
+
+Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Extensions > ShopFlix`
+
+![Imgur](https://i.imgur.com/OE52Qhi.gif)
+
+#### 2.1.1 General
+
+**Enable**: Select `Yes` to activate the module and No to disable it.
+
+![Imgur](https://i.imgur.com/n1Iz7YT.png)
+
+**Convert to magento order**: Select `Yes` to convert order to magento order after accepting the order
+
+![Imgur](https://i.imgur.com/0XvscwO.png)
+
+**Auto accept order**: Select `Yes` if you want to auto accept the order if you have the requested qty
+
+![Imgur](https://i.imgur.com/qSzA1Eh.png)
+
+**Api Url / Username / Api Key**: These fields are provider by [Shopflix](https://shopflix.gr)
+
+![Imgur](https://i.imgur.com/OC9WgCY.png)
+
+**Product type to export on xml**: Select Witch product types you can export on xml
+
+![Imgur](https://i.imgur.com/cg5v1Br.png)
+
+#### 2.1.2 Xml Config
+
+**Generate Xml**: Select `Yes` if you want the extension generate the xml files
+
+![Imgur](https://i.imgur.com/SJ72Tk0.png)
+
+**Export Category Tree**: Select `Yes` if you want to export the categories in xml
+
+![Imgur](https://i.imgur.com/1oW23SQ.png)
+
+**MPN Attribute**: Select the MPN attribute from your system for xml
+
+![Imgur](https://i.imgur.com/02cl3BK.png)
+
+**EAN Attribute**: Select the EAN attribute from your system for xml
+
+![Imgur](https://i.imgur.com/t0Xh3GQ.png)
+
+**Title Attribute**: Select the Title attribute from your system for xml
+
+![Imgur](https://i.imgur.com/0s3njBp.png)
+
+**Description Attribute**: Select the Description attribute from your system for xml
+
+![Imgur](https://i.imgur.com/tntHGI4.png)
+
+**Brand Attribute**: Select the Brand attribute from your system for xml
+
+![Imgur](https://i.imgur.com/HDCKH4y.png)
+
+**Weight Attribute**: Select the Weight attribute from your system for xml
+
+![Imgur](https://i.imgur.com/05OFx3z.png)
+
+## 2.2 Configure Products
+
+Navigate to `Catalog > Products` there are 2 ways to configure your products
+
+**Sell On ShopFlix**: Select `Yes` to export it on xml
+
+**Shipping Lead Time**: Select the time slot that you can prepare the order and be ready be slot per product
+``default value``: Same day
+
+**Offer Date From**: Set Date of offer from for [Shoflix](https://shopflix.gr)
+
+**Offer Date To**: Set Date of offer to [Shoflix](https://shopflix.gr)
+
+**Offer Price**: Set the price for offer to [Shoflix](https://shopflix.gr)
+
+**Offer Qty**: Set the qty of the products for offer to [Shoflix](https://shopflix.gr)
+
+### 2.2.1 Single edit product
+
+![Imgur](https://i.imgur.com/9EUhwHh.png)
+
+### 2.2.2 Mass Edit products
+
+![Imgur](https://i.imgur.com/DAjzGhu.png)
+
+### 2.3 Shopflix Order
+
+In this guide we will show how to use the extension
+
+#### 2.3.1 Order Grid
+
+Navigate to `Onecode > SHOPFLIX Order`
+
+![Imgur](https://i.imgur.com/mDhkgeR.png)
+
+#### 2.3.1.1 Order View
+
+![Imgur](https://i.imgur.com/DXXBFst.png)
+
+##### 2.3.1.1 Accept Order 
+
+![Imgur](https://i.imgur.com/EBuBfPA.png)
+
+###### 2.3.1.2 Reject Order
+Enter in rejection form
+
+![Imgur](https://i.imgur.com/pxBNz3X.png)
+
+Select rejection reason
+
+![Imgur](https://i.imgur.com/nX2VXQw.png)
+
+#### 2.3.2 Shipment Grid
+
+Navigate to `Onecode > ShopFlix Shipments`
+
+There are 2 ways to print the pdf for courier with tracking data on it.
+
+
+
+![Imgur](https://i.imgur.com/tkafZzM.png)
+
+###### 2.3.2.1 Single Print
+
+![Imgur](https://i.imgur.com/sJUVrna.png)
+
+![Imgur](https://i.imgur.com/LRzwdZZ.png)
+
+###### 2.3.2.2 Mass Print
+
+![Imgur](https://i.imgur.com/4wsdGBx.png)
+
+![Imgur](https://i.imgur.com/Y95AoBr.png)
+

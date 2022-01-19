@@ -1,0 +1,66 @@
+<?php
+
+
+/* @var Form $block */
+
+/** @var SecureHtmlRenderer $secureRenderer */
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Create\Form;
+
+?>
+<form id="reject_form" class="order-reject-edit" method="post"
+      action="<?= $block->escapeUrl($block->getSaveUrl()) ?>">
+    <?= $block->getBlockHtml('formkey') ?>
+    <?php $_order = $block->getOrder() ?>
+
+    <?= $block->getChildHtml('order_info') ?>
+
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Payment &amp; Shipping Method')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item order-payment-method">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?= $block->escapeHtml(__('Payment Information')) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div class="order-payment-method-title"><?= $block->getChildHtml('order_payment') ?></div>
+                    <div class="order-payment-currency">
+                        <?= $block->escapeHtml(__('The order was placed using %1.', $_order->getOrderCurrencyCode())) ?>
+                    </div>
+                    <div
+                        class="order-payment-additional"><?= $block->getChildHtml('order_payment_additional') ?></div>
+                </div>
+            </div>
+
+            <div class="admin__page-section-item order-shipping-address">
+                <?php /*Shipping Address */ ?>
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?= $block->escapeHtml(__('Shipping Information')) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <strong>
+                        <?= $block->escapeHtml(__('The order was placed on shopflix and will shipped by the shopflix')) ?>
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="reject_item_container">
+        <?= $block->getChildHtml('shopflix_order_items') ?>
+    </section>
+
+
+</form>
+<?php
+$scriptString = <<<script
+    require(['prototype','jquery'], function(){
+    });
+    script;
+?>
+<?= /* @noEscape */
+$secureRenderer->renderTag('script', [], $scriptString, false) ?>

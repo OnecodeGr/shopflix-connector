@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @var $block Onecode\ShopFlixConnector\Block\Adminhtml\Shipment\Tracking\View
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Onecode\ShopFlixConnector\Model\Order\Shipment\Track;
+
+
+?>
+<div class="admin__control-table-wrapper">
+    <form id="tracking-shipping-form" data-mage-init='{"validation": {}}'>
+        <table class="data-table admin__control-table" id="shipment_tracking_info">
+            <thead>
+            <tr class="headings">
+                <th class="col-carrier"><?= $block->escapeHtml(__('Carrier')) ?></th>
+                <th class="col-number"><?= $block->escapeHtml(__('Number')) ?></th>
+                <th class="col-delete last"><?= $block->escapeHtml(__('Action')) ?></th>
+            </tr>
+            </thead>
+
+            <?php if ($_tracks = $block->getShipment()->getAllTracks()): ?>
+                <tbody>
+                <?php $i = 0;
+                /** @var Track $_track */
+                foreach ($_tracks as $_track): $i++ ?>
+                    <tr class="<?= /* @noEscape */
+                    ($i % 2 == 0) ? 'even' : 'odd' ?>">
+                        <td class="col-carrier">
+                            <?= $block->escapeHtml(__("ShopFlix Courier")) ?>
+                        </td>
+                        <td class="col-number">
+                            <?= $block->escapeHtml($_track->getTrackNumber()) ?>
+                        </td>
+                        <td class="last">
+                            <a href="<?= $_track->getTrackingUrl() ?>" target="_blank"
+                               id="del-track-<?= (int)$_track->getId() ?>">
+                                <span><?= $block->escapeHtml(__('Track Voucher')) ?></span>
+                            </a>
+                        </td>
+
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            <?php endif; ?>
+        </table>
+    </form>
+</div>

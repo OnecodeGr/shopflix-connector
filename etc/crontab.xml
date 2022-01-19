@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="onecode_shopflix_grid_order_async_insert"
+             instance="OnecodeShopFlixConnectorIndexGridAsyncInsertCron"
+             method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="onecode_shopflix_grid_shipment_async_insert"
+             instance="OnecodeShopFlixConnectorIndexGridAsyncInsertShipmentCron"
+             method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+    <group id="onecode_shopflix_sync_order_from_shopflix">
+        <job name="onecode_shopflix_order_sync_from_shopflix"
+             instance="OnecodeShopFlixConnectorSyncFromShopFlixCron"
+             method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group>
+    <group id="onecode_shopflix_sync_order_to_shopflix">
+        <job name="onecode_shopflix_order_sync_to_shopflix"
+             instance="OnecodeShopFlixConnectorSyncToShopFlixCron"
+             method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+    <group id="onecode_shopflix_sync_shipments">
+        <job name="onecode_shopflix_sync_shipments"
+             instance="OnecodeShopFlixConnectorSyncShipmentCron"
+             method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>

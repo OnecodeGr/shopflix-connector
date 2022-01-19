@@ -1,0 +1,41 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Onecode_ShopFlixConnector::js/bootstrap/order-post-action.js"/>
+    </head>
+    <update handle="shopflix_order_item_price"/>
+    <body>
+        <referenceContainer name="admin.scope.col.wrap"
+                            htmlClass="admin__old"/> <!-- ToDo UI: remove this wrapper with old styles removal. The class name "admin__old" is for tests only, we shouldn't use it in any way -->
+
+        <referenceContainer name="content">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Create" name="sales_invoice_create">
+                <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Create\Form" name="form"
+                       template="Onecode_ShopFlixConnector::order/reject/create/form.phtml">
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\View\Info" name="order_info"
+                           template="Onecode_ShopFlixConnector::order/view/info.phtml">
+                        <container name="extra_customer_info"/>
+                    </block>
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Create\Items"
+                           name="shopflix_order_items"
+                           template="Onecode_ShopFlixConnector::order/reject/create/items.phtml">
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Renderer\DefaultRenderer"
+                               name="shopflix_order_items.default" as="default"
+                               template="Onecode_ShopFlixConnector::order/reject/create/items/renderer/default.phtml"/>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn"
+                               name="column_qty" template="Onecode_ShopFlixConnector::items/column/qty.phtml"
+                               group="column"/>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\Name" name="column_name"
+                               template="Onecode_ShopFlixConnector::items/column/name.phtml" group="column"/>
+                        <block class="Magento\Framework\View\Element\Text\ListText" name="order_item_extra_info"/>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Totals"
+                               name="reject_totals" template="Onecode_ShopFlixConnector::order/totals.phtml">
+                        </block>
+                        <container name="submit_before" label="Submit Before"/>
+                        <container name="submit_after" label="Submit After"/>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

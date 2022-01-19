@@ -1,0 +1,172 @@
+<?php
+/** @var Items $block */
+
+/** @var SecureHtmlRenderer $secureRenderer */
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Onecode\ShopFlixConnector\Block\Adminhtml\Order\Reject\Create\Items;
+
+?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <?php $_itemsGridLabel = 'Items to Reject'; ?>
+        <span class="title"><?= $block->escapeHtml(__('%1', $_itemsGridLabel)) ?></span>
+    </div>
+    <div class="admin__page-section-content grid">
+        <div class="admin__table-wrapper">
+            <table class="data-table admin__table-primary order-reject-tables">
+                <thead>
+                <tr class="headings">
+                    <th class="col-product"><span><?= $block->escapeHtml(__('Product')) ?></span></th>
+                    <th class="col-price"><span><?= $block->escapeHtml(__('Price')) ?></span></th>
+                    <th class="col-ordered-qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></th>
+                    <th class="col-discount"><span><?= $block->escapeHtml(__('Discount Amount')) ?></span></th>
+                    <th class="col-total last"><span><?= $block->escapeHtml(__('Row Total')) ?></span></th>
+                </tr>
+                </thead>
+                <?php $_items = $block->getOrder()->getAllItems() ?>
+                <?php $_i = 0;
+                foreach ($_items as $_item): ?>
+                    <?php $_i++; ?>
+                    <tbody class="<?= /* @noEscape */
+                    $_i % 2 ? 'even' : 'odd' ?>">
+                    <?= $block->getItemHtml($_item) ?>
+                    <?= $block->getItemExtraInfoHtml($_item) ?>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+</section>
+
+<?php $orderTotalBar = $block->getChildHtml('order_totalbar'); ?>
+
+<?php if (!empty($orderTotalBar)): ?>
+    <section class="admin__page-section">
+        <?= /* @noEscape */
+        $orderTotalBar ?>
+    </section>
+<?php endif; ?>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Order Total')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-comments-history">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Rejection Reason')) ?></span>
+            </div>
+            <div id="history_form" class="admin__page-section-item-content order-history-form">
+                <div class="admin__field">
+                    <label for="reject_comment_text" class="admin__field-label">
+                        <span><?= $block->escapeHtml(__('Select Reason For Rejection')) ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <select id="reject_reason_text"
+                                name="reject[reason]"
+                                class="admin__control-select reject-reason">
+                            <option
+                                value="<?= $block->escapeHtml(__('Out of stock at the store or at the supplier')) ?>"><?= $block->escapeHtml(__('Out of stock at the store or at the supplier')) ?></option>
+                            <option
+                                value="<?= $block->escapeHtml(__('Incorrectly entered value (s)')) ?>"><?= $block->escapeHtml(__('Incorrectly entered value (s)')) ?></option>
+                            <option
+                                value="<?= $block->escapeHtml(__('Limited pieces')) ?>"><?= $block->escapeHtml(__('Limited pieces')) ?></option>
+                            <option
+                                value="<?= $block->escapeHtml(__('The product has been removed')) ?>"><?= $block->escapeHtml(__('The product has been removed')) ?></option>
+                            <option
+                                value="other"><?= $block->escapeHtml(__('Other')) ?></option>
+
+                        </select>
+                    </div>
+                    <div class="admin__field-control">
+                        <textarea id="reject_comment_text"
+                                  name="reject[comment_text]"
+                                  class="admin__control-textarea other-reason disabled"
+                                  disabled
+                                  rows="3"
+                                  cols="5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reject_totals" class="admin__page-section-item order-totals">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Reject Totals')) ?></span>
+            </div>
+            <div class="admin__page-section-item-content order-totals-actions">
+                <?= $block->getChildHtml('reject_totals') ?>
+                <?= $block->getChildHtml('submit_before') ?>
+                <div class="actions">
+                    <?= $block->getChildHtml('submit_button') ?>
+                    <?= $block->getChildHtml('submit_after') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php
+$enableSubmitButton = (int)!$block->getDisableSubmitButton();
+$scriptString = <<<script
+
+require(['jquery'], function(jQuery){
+
+//<![CDATA[
+var submitButtons = jQuery('.submit-button');
+var textArea = jQuery('.other-reason');
+var enableSubmitButtons = {$enableSubmitButton};
+var fields = jQuery('.reject-reason');
+
+function enableButtons(buttons) {
+    buttons.removeClass('disabled').prop('disabled', false);
+}
+
+function disableButtons(buttons) {
+    buttons.addClass('disabled').prop('disabled', true);
+}
+
+function enableTextArea() {
+    textArea.removeClass('disabled').prop('disabled', false);
+}
+
+function disableTextArea() {
+    textArea.addClass('disabled').prop('disabled', true);
+}
+
+fields.on('change', checkButtonsRelation);
+
+
+function checkButtonsRelation() {
+    var hasChanges = false;
+    fields.each(function (i, elem) {
+    if(jQuery(elem).find(":selected").val()==="other"){
+        enableTextArea();
+    }else{
+        disableTextArea();
+    }
+    hasChanges = true;
+
+    }.bind(this));
+    if (hasChanges) {
+        enableButtons(submitButtons);
+    }
+    else {
+        if (enableSubmitButtons) {
+            enableButtons(submitButtons);
+        }
+    }
+}
+
+
+
+
+window.checkButtonsRelation = checkButtonsRelation;
+//]]>
+
+});
+script;
+?>
+<?= /* @noEscape */
+$secureRenderer->renderTag('script', [], $scriptString, false) ?>

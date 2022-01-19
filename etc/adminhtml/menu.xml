@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Onecode_ShopFlixConnector::shopflix_menu"
+             title="ShopFlix Menu"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_Base::sidebar_base_menu"
+             sortOrder="100"
+             resource="Onecode_ShopFlixConnector::shopflix"/>
+        <add id="Onecode_ShopFlixConnector::shopflix_order" sortOrder="20" title="SHOPFLIX Orders"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_ShopFlixConnector::shopflix_menu"
+             resource="Onecode_ShopFlixConnector::shopflix_order"
+             translate="title"
+             action="shopflix/order/index"/>
+        <add id="Onecode_ShopFlixConnector::shipment" sortOrder="21" title="SHOPFLIX Shipments"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_ShopFlixConnector::shopflix_menu"
+             resource="Onecode_ShopFlixConnector::shipment"
+             translate="title"
+             action="shopflix/shipment/index"/>
+        <add id="Onecode_ShopFlixConnector::shopflix_settings"
+             sortOrder="30"
+             title="SHOPFLIX Settings"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_ShopFlixConnector::shopflix_menu"
+             resource="Magento_Config::config"
+             translate="title"
+             action="adminhtml/system_config/edit/section/shopflix"/>
+<!--        <add id="Onecode_ShopFlixConnector::shopflix_shipping_method"
+             sortOrder="40"
+             title="ShopFlix Shipping Settings"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_ShopFlixConnector::shopflix_menu"
+             resource="Magento_Config::config"
+             translate="title"
+             action="adminhtml/system_config/edit/section/carriers"/>
+        <add id="Onecode_ShopFlixConnector::shopflix_payment_method"
+             sortOrder="50"
+             title="ShopFlix Payment Settings"
+             module="Onecode_ShopFlixConnector"
+             parent="Onecode_ShopFlixConnector::shopflix_menu"
+             resource="Magento_Config::config"
+             translate="title"
+             action="adminhtml/system_config/edit/section/payment"/>-->
+    </menu>
+</config>

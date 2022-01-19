@@ -1,0 +1,11 @@
+<?php
+/** @var DefaultColumn $block */
+
+use Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn;
+
+$_item = $block->getItem();
+?>
+<div class="price-excl-tax">
+    <?= /* @noEscape */
+    $block->displayPrices($_item->getPrice()) ?>
+</div>

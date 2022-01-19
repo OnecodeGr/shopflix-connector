@@ -1,0 +1,223 @@
+{
+    "onecode_shopflix_order": {
+        "column": {
+            "entity_id": true,
+            "shopflix_order_id": true,
+            "magento_order_id": true,
+            "state": true,
+            "status": true,
+            "subtotal": true,
+            "discount_amount": true,
+            "total_paid": true,
+            "increment_id": true,
+            "customer_email": true,
+            "customer_firstname": true,
+            "customer_lastname": true,
+            "remote_ip": true,
+            "customer_note": true,
+            "shipping_address_id": true,
+            "billing_address_id": true,
+            "sync": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ONECODE_SHOPFLIX_ORDER_MAGENTO_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_ORDER_MAGENTO_ORDER_ID": true
+        }
+    },
+    "onecode_shopflix_order_grid": {
+        "column": {
+            "entity_id": true,
+            "status": true,
+            "total_paid": true,
+            "increment_id": true,
+            "shipping_name": true,
+            "billing_name": true,
+            "created_at": true,
+            "updated_at": true,
+            "billing_address": true,
+            "shipping_address": true,
+            "customer_email": true,
+            "subtotal": true,
+            "customer_name": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_ORDER_GRID_STATUS": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_TOTAL_PAID": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_SHIPPING_NAME": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_BILLING_NAME": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_CREATED_AT": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_UPDATED_AT": true,
+            "FTI_2AEFCCE74ECAA44E9B1B153F3EE56DCE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ONECODE_SHOPFLIX_ORDER_GRID_INCREMENT_ID": true
+        }
+    },
+    "onecode_shopflix_order_address": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "fax": true,
+            "region": true,
+            "postcode": true,
+            "lastname": true,
+            "street": true,
+            "city": true,
+            "email": true,
+            "telephone": true,
+            "country_id": true,
+            "firstname": true,
+            "address_type": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_ORDER_ADDRESS_PARENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_3E5F881671A2DB1114C9DBFDEAE348D2": true
+        }
+    },
+    "onecode_shopflix_order_status_history": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "comment": true,
+            "is_shopflix": true,
+            "status": true,
+            "created_at": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_ORDER_STATUS_HISTORY_PARENT_ID": true,
+            "ONECODE_SHOPFLIX_ORDER_STATUS_HISTORY_CREATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_078562D2431827CB8F03C7D685C8457A": true
+        }
+    },
+    "onecode_shopflix_order_item": {
+        "column": {
+            "item_id": true,
+            "parent_id": true,
+            "parent_item_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "product_id": true,
+            "product_type": true,
+            "sku": true,
+            "name": true,
+            "price": true,
+            "qty": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_ORDER_ITEM_PARENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_3A9125C80F7CB33A4A4A80F313E3AEC0": true
+        }
+    },
+    "onecode_shopflix_shipment": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "shipping_address_id": true,
+            "billing_address_id": true,
+            "shipment_status": true,
+            "increment_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_SHIPMENT_ORDER_ID": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_CREATED_AT": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_UPDATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_0FACE42F5D12F7BEAB57123FD9CD5216": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_INCREMENT_ID": true
+        }
+    },
+    "onecode_shopflix_shipment_grid": {
+        "column": {
+            "entity_id": true,
+            "increment_id": true,
+            "order_increment_id": true,
+            "order_id": true,
+            "order_created_at": true,
+            "customer_name": true,
+            "shipment_status": true,
+            "order_status": true,
+            "billing_address": true,
+            "shipping_address": true,
+            "billing_name": true,
+            "shipping_name": true,
+            "customer_email": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_SHIPMENT_STATUS": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_ORDER_STATUS": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_CREATED_AT": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_UPDATED_AT": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_ORDER_CREATED_AT": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_SHIPPING_NAME": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_BILLING_NAME": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_ORDER_ID": true,
+            "FTI_72386FF6E51F27022102E7C72B91F9B9": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_GRID_INCREMENT_ID": true
+        }
+    },
+    "onecode_shopflix_shipment_item": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "row_total": true,
+            "price": true,
+            "qty": true,
+            "order_item_id": true,
+            "name": true,
+            "sku": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_SHIPMENT_ITEM_PARENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_7B5D4359CE5F69BB6EDAB9A4AC2F9A77": true
+        }
+    },
+    "onecode_shopflix_shipment_track": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "qty": true,
+            "order_id": true,
+            "track_number": true,
+            "created_at": true,
+            "updated_at": true,
+            "track_url": true,
+            "tracking_url": true
+        },
+        "index": {
+            "ONECODE_SHOPFLIX_SHIPMENT_TRACK_PARENT_ID": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_TRACK_ORDER_ID": true,
+            "ONECODE_SHOPFLIX_SHIPMENT_TRACK_CREATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_E58A3D1B6332099FFD0239E895FEC515": true
+        }
+    }
+}

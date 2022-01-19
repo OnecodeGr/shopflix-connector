@@ -1,0 +1,10 @@
+<?php
+use Onecode\ShopFlixConnector\Block\Adminhtml\Items\Column\DefaultColumn;
+
+?>
+<?php
+/** @var DefaultColumn $block */
+$_item = $block->getItem();
+?>
+<?= /* @noEscape */
+$block->displayPrices($block->getTotalAmount($_item)) ?>

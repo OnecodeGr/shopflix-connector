@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <shopflix>
+            <settings>
+                <enable>0</enable>
+                <supported_products>simple,configurable</supported_products>
+                <to_order>0</to_order>
+            </settings>
+            <xml_setting>
+                <enable>0</enable>
+                <mpn>sku</mpn>
+                <ean>sku</ean>
+                <title>name</title>
+                <description>description</description>
+                <manufacturer>manufacturer</manufacturer>
+                <weight>weight</weight>
+                <export_category_tree>0</export_category_tree>
+            </xml_setting>
+        </shopflix>
+        <carriers>
+            <onecode_shopflix_shipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Onecode\ShopFlixConnector\Model\Carrier\Method</model>
+                <name>ShopFlix Shipping Method</name>
+                <title>Shipping method for shopflix orders</title>
+                <specificerrmsg>This shipping method is not available.</specificerrmsg>
+            </onecode_shopflix_shipping>
+        </carriers>
+        <payment>
+            <onecode_shopflix_payment>
+                <active>1</active>
+                <title><![CDATA[ShopFlix Payment Method]]></title>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+                <model>OnecodeShopFlixPaymentFacade</model>
+                <group>offline</group>
+                <instructions>Instructions.</instructions>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>0</can_use_checkout>
+                <is_offline>1</is_offline>
+                <can_edit>0</can_edit>
+                <can_refund>0</can_refund>
+                <can_void>0</can_void>
+                <can_cancel>0</can_cancel>
+            </onecode_shopflix_payment>
+        </payment>
+    </default>
+</config>

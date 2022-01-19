@@ -1,0 +1,52 @@
+<?php
+/**
+ * @var Form $block
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Onecode\ShopFlixConnector\Block\Adminhtml\Shipment\View\Form;
+use Onecode\ShopFlixConnector\Model\Order;
+
+/** @var Order $order */
+$order = $block->getShipment()->getOrder();
+?>
+<?= $block->getChildHtml('order_info'); ?>
+<section class="admin__page-section order-shipment-billing-shipping">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Payment &amp; Shipping Method')); ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-payment-method">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Payment Information')); ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <div><?= $block->getChildHtml('order_payment') ?></div>
+                <div class="order-payment-currency">
+                    <?= $block->escapeHtml(__('The order was placed using %1.', $order->getOrderCurrencyCode())); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__page-section-item order-shipping-address">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Shipping and Tracking Information')); ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?= $block->getChildHtml('shipment_tracking'); ?>
+            </div>
+        </div>
+    </div>
+</section>
+<div><?= $block->getChildHtml('extra_shipment_info') ?></div>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Items Shipped')); ?></span>
+    </div>
+    <?= $block->getChildHtml('shipment_items'); ?>
+</section>
+
+

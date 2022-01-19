@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="onecode_shopflix_order" resource="default" engine="innodb" comment="ShopFlix Flat Order">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="shopflix_order_id" unsigned="true" nullable="false"
+                identity="false"
+                comment="SHOPFLIX Order Id"/>
+        <column xsi:type="int" name="magento_order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Magento Order Id"/>
+        <column xsi:type="varchar" name="state" nullable="true" length="32" comment="State"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="32" comment="Status"/>
+        <column xsi:type="decimal" name="subtotal" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Subtotal"/>
+        <column xsi:type="decimal" name="discount_amount" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Discount Amount"/>
+        <column xsi:type="decimal" name="total_paid" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Total Paid"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="32" comment="Increment ID"/>
+        <column xsi:type="varchar" name="customer_email" nullable="true" length="128" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_firstname" nullable="true" length="128" comment="Customer Firstname"/>
+        <column xsi:type="varchar" name="customer_lastname" nullable="true" length="128" comment="Customer Lastname"/>
+        <column xsi:type="varchar" name="remote_ip" nullable="true" length="45" comment="Remote Ip"/>
+        <column xsi:type="text" name="customer_note" nullable="true" comment="Customer Note"/>
+        <column xsi:type="int" name="shipping_address_id" unsigned="false" nullable="true" identity="false"
+                comment="Shipping Address ID"/>
+        <column xsi:type="int" name="billing_address_id" unsigned="false" nullable="true" identity="false"
+                comment="Billing Address ID"/>
+        <column xsi:type="boolean" default="1" name="sync" nullable="false" comment="Sync Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_ORDER_MAGENTO_ORDER_ID_ENTITY_ID"
+                    table="onecode_shopflix_order"
+                    column="magento_order_id" referenceTable="sales_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="SHOPFLIX_ORDER_MAGENTO_ORDER_ID" indexType="btree">
+            <column name="magento_order_id"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_order_grid" resource="sales" engine="innodb" comment="ShopFlix Flat Order Grid">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="32" comment="Status"/>
+        <column xsi:type="decimal" name="total_paid" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Total Paid"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="50" comment="Increment ID"/>
+        <column xsi:type="varchar" name="shipping_name" nullable="true" length="255" comment="Shipping Name"/>
+        <column xsi:type="varchar" name="billing_name" nullable="true" length="255" comment="Billing Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <column xsi:type="varchar" name="billing_address" nullable="true" length="255" comment="Billing Address"/>
+        <column xsi:type="varchar" name="shipping_address" nullable="true" length="255" comment="Shipping Address"/>
+        <column xsi:type="varchar" name="customer_email" nullable="true" length="255" comment="Customer Email"/>
+        <column xsi:type="decimal" name="subtotal" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Subtotal"/>
+        <column xsi:type="varchar" name="customer_name" nullable="true" length="255" comment="Customer Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="ONECODE_SHOPFLIX_ORDER_GRID_INCREMENT_ID_STORE_ID">
+            <column name="increment_id"/>
+        </constraint>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_TOTAL_PAID" indexType="btree">
+            <column name="total_paid"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_SHIPPING_NAME" indexType="btree">
+            <column name="shipping_name"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_BILLING_NAME" indexType="btree">
+            <column name="billing_name"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_UPDATED_AT" indexType="btree">
+            <column name="updated_at"/>
+        </index>
+        <index referenceId="ONECODE_SHOPFLIX_ORDER_GRID_FULLTEXT" indexType="fulltext">
+            <column name="increment_id"/>
+            <column name="billing_name"/>
+            <column name="shipping_name"/>
+            <column name="shipping_address"/>
+            <column name="billing_address"/>
+            <column name="customer_name"/>
+            <column name="customer_email"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_order_address" resource="default" engine="innodb"
+           comment="ShopFlix Flat Order Address">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="true" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="varchar" name="fax" nullable="true" length="255" comment="Fax"/>
+        <column xsi:type="varchar" name="region" nullable="true" length="255" comment="Region"/>
+        <column xsi:type="varchar" name="postcode" nullable="true" length="255" comment="Postcode"/>
+        <column xsi:type="varchar" name="lastname" nullable="true" length="255" comment="Lastname"/>
+        <column xsi:type="varchar" name="street" nullable="true" length="255" comment="Street"/>
+        <column xsi:type="varchar" name="city" nullable="true" length="255" comment="City"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="telephone" nullable="true" length="255" comment="Phone Number"/>
+        <column xsi:type="varchar" name="country_id" nullable="true" length="2" comment="Country ID"/>
+        <column xsi:type="varchar" name="firstname" nullable="true" length="255" comment="Firstname"/>
+        <column xsi:type="varchar" name="address_type" nullable="true" length="255" comment="Address Type"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_ORDER_ADDRESS_PARENT_ID_ORDER_ENTITY_ID"
+                    table="onecode_shopflix_order_address" column="parent_id"
+                    referenceTable="onecode_shopflix_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="ORDER_ADDRESS_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_order_status_history" resource="default" engine="innodb"
+           comment="ShopFlix Flat Order Status History">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="text" name="comment" nullable="true" comment="Comment"/>
+        <column xsi:type="boolean" name="is_shopflix" default="0" comment="Comment is for shopflix"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="32" comment="Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ORDER_STATUS_HISTORY_PARENT_ID_ORDER_ENTITY_ID"
+                    table="onecode_shopflix_order_status_history" column="parent_id"
+                    referenceTable="onecode_shopflix_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="ORDER_STATUS_HISTORY_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+        <index referenceId="ORDER_STATUS_HISTORY_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_order_item" resource="default" engine="innodb"
+           comment="ShopFlix Flat Order Item">
+        <column xsi:type="int" name="item_id" unsigned="true" nullable="false" identity="true"
+                comment="Item ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Order ID"/>
+        <column xsi:type="int" name="parent_item_id" unsigned="true" nullable="true" identity="false"
+                comment="Parent Item ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="true" identity="false"
+                comment="Product ID"/>
+        <column xsi:type="varchar" name="product_type" nullable="true" length="255" comment="Product Type"/>
+        <column xsi:type="varchar" name="sku" nullable="true" length="255" comment="Sku"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="false" default="0"
+                comment="Price"/>
+        <column xsi:type="int" name="qty" unsigned="false" nullable="false" default="0"
+                comment="Quantity"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_ORDER_ITEM_ORDER_ID_ORDER_ENTITY_ID"
+                    table="onecode_shopflix_order_item"
+                    column="parent_id" referenceTable="onecode_shopflix_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="SHOPFLIX_ORDER_ITEM_ORDER_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_shipment" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="int" name="shipping_address_id" unsigned="false" nullable="true" identity="false"
+                comment="Shipping Address ID"/>
+        <column xsi:type="int" name="billing_address_id" unsigned="false" nullable="true" identity="false"
+                comment="Billing Address ID"/>
+        <column xsi:type="int" name="shipment_status" unsigned="false" nullable="true" identity="false"
+                comment="Shipment Status"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="50" comment="Increment ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_SHIPMENT_ORDER_ID_SHOPFLIX_ORDER_ENTITY_ID"
+                    table="onecode_shopflix_shipment"
+                    column="order_id" referenceTable="onecode_shopflix_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="SHOPFLIX_SHIPMENT_INCREMENT">
+            <column name="increment_id"/>
+        </constraint>
+        <index referenceId="SHOPFLIX_SHIPMENT_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_UPDATED_AT" indexType="btree">
+            <column name="updated_at"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_shipment_grid" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="50" comment="Increment ID"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="false" length="32" comment="Order Increment ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="timestamp" name="order_created_at" on_update="false" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Order Increment ID"/>
+        <column xsi:type="varchar" name="customer_name" nullable="false" length="128" comment="Customer Name"/>
+        <column xsi:type="int" name="shipment_status" unsigned="false" nullable="true" identity="false"
+                comment="Shipment Status"/>
+        <column xsi:type="varchar" name="order_status" nullable="true" length="32" comment="Order"/>
+        <column xsi:type="varchar" name="billing_address" nullable="true" length="255" comment="Billing Address"/>
+        <column xsi:type="varchar" name="shipping_address" nullable="true" length="255" comment="Shipping Address"/>
+        <column xsi:type="varchar" name="billing_name" nullable="true" length="128" comment="Billing Name"/>
+        <column xsi:type="varchar" name="shipping_name" nullable="true" length="128" comment="Shipping Name"/>
+        <column xsi:type="varchar" name="customer_email" nullable="true" length="128" comment="Customer Email"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="SHOPFLIX_SHIPMENT_GRID_INCREMENT_ID">
+            <column name="increment_id"/>
+        </constraint>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_SHIPMENT_STATUS" indexType="btree">
+            <column name="shipment_status"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_ORDER_STATUS" indexType="btree">
+            <column name="order_status"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_UPDATED_AT" indexType="btree">
+            <column name="updated_at"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_ORDER_CREATED_AT" indexType="btree">
+            <column name="order_created_at"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_SHIPPING_NAME" indexType="btree">
+            <column name="shipping_name"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_BILLING_NAME" indexType="btree">
+            <column name="billing_name"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_GRID_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="FTI_764AFC0A4C624BB98D7A4FB4C8CA5D9E" indexType="fulltext">
+            <column name="increment_id"/>
+            <column name="order_increment_id"/>
+            <column name="shipping_name"/>
+            <column name="customer_name"/>
+            <column name="customer_email"/>
+            <column name="billing_address"/>
+            <column name="shipping_address"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_shipment_item" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="decimal" name="row_total" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Row Total"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="20" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="qty" scale="4" precision="12" unsigned="false" nullable="true" comment="Qty"/>
+        <column xsi:type="int" name="order_item_id" unsigned="false" nullable="true" identity="false"
+                comment="Order Item ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="sku" nullable="true" length="255" comment="Sku"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_SHIPMENT_ITEM_PARENT_ID_SHOPFLIX_SHIPMENT_ENTITY_ID"
+                    table="onecode_shopflix_shipment_item" column="parent_id"
+                    referenceTable="onecode_shopflix_shipment"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="SHOPFLIX_SHIPMENT_ITEM_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+    </table>
+    <table name="onecode_shopflix_shipment_track" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="text" name="track_number" nullable="true" comment="Number"/>
+        <column xsi:type="text" name="tracking_url" nullable="true" comment="Tracking Url"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SHOPFLIX_SHIPMENT_TRACK_PARENT_ID_SHOPFLIX_SHIPMENT_ENTITY_ID"
+                    table="onecode_shopflix_shipment_track" column="parent_id"
+                    referenceTable="onecode_shopflix_shipment"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="SHOPFLIX_SHIPMENT_TRACK_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_TRACK_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="SHOPFLIX_SHIPMENT_TRACK_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+</schema>
