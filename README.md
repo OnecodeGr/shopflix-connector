@@ -4,7 +4,7 @@ This extension is connecting your Magento 2 with [SHOPFLIX](https://SHOPFLIX.gr)
 
 ## 1. How to install Onecode_ShopFlixConnector
 
-### 1.1 Install  via composer
+### 1.1 Install via composer
 
 ```
 composer require onecode/shopflix-connector
@@ -16,7 +16,7 @@ php bin/magento setup:di:compile
 ### 1.2 Upgrade via composer
 
 ```
-composer update  onecode/shopflix-connector
+composer update onecode/shopflix-connector
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
@@ -32,10 +32,10 @@ php bin/magento setup:di:compile
 If you don't want to install via composer, you can use this way.
 
 - Download [the latest version here](https://github.com/OnecodeGr/shopflix-connector/archive/master.zip)
-- Extract `master.zip` file to `app/code/Onecode/SHOPFLIXConnector` ; You should create a folder
+- Extract `master.zip` file to `app/code/Onecode/ShopFlixConnector` ; You should create a folder
   path `app/code/Onecode/SHOPFLIXConnector` if not exist.
 - Go to Magento root folder and run upgrade command line to install `Onecode_ShopFlixConnector`:
-- Require SHOPFLIXConnectorLibrary before installation run the command ``composer require onecode/ShopFlix_Connector_Library``
+- Require ShopFlixConnectoLibrary before installation run the command ``composer require onecode/sshopflix-connector-library``
 ```
 php bin/magento module:enable Onecode_ShopFlixConnector
 php bin/magento setup:upgrade
