@@ -33,9 +33,11 @@ If you don't want to install via composer, you can use this way.
 
 - Download [the latest version here](https://github.com/OnecodeGr/shopflix-connector/archive/master.zip)
 - Extract `master.zip` file to `app/code/Onecode/ShopFlixConnector` ; You should create a folder
-  path `app/code/Onecode/SHOPFLIXConnector` if not exist.
+  path `app/code/Onecode/ShopFlixConnector` if not exist.
 - Go to Magento root folder and run upgrade command line to install `Onecode_ShopFlixConnector`:
 - Require ShopFlixConnectoLibrary before installation run the command ``composer require onecode/shopflix-connector-library``
+- Require Onecode_Base before installation run the command ``composer require onecode/base`` or Download [the latest] (https://github.com/OnecodeGr/base/archive/master.zip). Extract `master.zip` file to `app/code/Onecode/Base`  ; You should create a folder
+  path `app/code/Onecode/Base` if not exist.
 ```
 php bin/magento module:enable Onecode_ShopFlixConnector
 php bin/magento setup:upgrade
@@ -114,13 +116,13 @@ Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Ext
 
 ![Imgur](https://i.imgur.com/05OFx3z.png)
 
-## 2.2 Configure Products
+### 2.2 Configure Products
 
 Navigate to `Catalog > Products` there are 2 ways to configure your products
 
 **Sell On SHOPFLIX**: Select `Yes` to export it on xml
 
-**Shipping Lead Time**: Select the time slot that you can prepare the order and be ready be slot per product
+ **Shipping Lead Time**: Select the lead time that you can have the order ready to be shipped per product
 ``default value``: Same day
 
 **Offer Date From**: Set Date of offer from for [SHOPFLIX](https://SHOPFLIX.gr)
@@ -131,11 +133,11 @@ Navigate to `Catalog > Products` there are 2 ways to configure your products
 
 **Offer Qty**: Set the qty of the products for offer to [SHOPFLIX](https://SHOPFLIX.gr)
 
-### 2.2.1 Single edit product
+#### 2.2.1  Edit single product
 
 ![Imgur](https://i.imgur.com/9EUhwHh.png)
 
-### 2.2.2 Mass Edit products
+#### 2.2.2 Edit mulltiple products
 
 ![Imgur](https://i.imgur.com/DAjzGhu.png)
 
@@ -149,15 +151,15 @@ Navigate to `Onecode > SHOPFLIX Order`
 
 ![Imgur](https://i.imgur.com/mDhkgeR.png)
 
-#### 2.3.1.1 Order View
+##### 2.3.1.1 Order View
 
 ![Imgur](https://i.imgur.com/DXXBFst.png)
 
-##### 2.3.1.1 Accept Order 
+##### 2.3.1.1.1 Accept Order 
 
 ![Imgur](https://i.imgur.com/EBuBfPA.png)
 
-###### 2.3.1.2 Reject Order
+##### 2.3.1.1.2 Reject Order
 Enter in rejection form
 
 ![Imgur](https://i.imgur.com/pxBNz3X.png)
@@ -176,13 +178,13 @@ There are 2 ways to print the pdf for courier with tracking data on it.
 
 ![Imgur](https://i.imgur.com/tkafZzM.png)
 
-###### 2.3.2.1 Single Print
+##### 2.3.2.1 Single Print
 
 ![Imgur](https://i.imgur.com/sJUVrna.png)
 
 ![Imgur](https://i.imgur.com/LRzwdZZ.png)
 
-###### 2.3.2.2 Mass Print
+##### 2.3.2.2 Mass Print
 
 ![Imgur](https://i.imgur.com/4wsdGBx.png)
 
