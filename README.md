@@ -74,7 +74,7 @@ Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Ext
 
 ![Imgur](https://i.imgur.com/qSzA1Eh.png)
 
-**Api Url / Username / Api Key**: These fields are provider by [SHOPFLIX](https://SHOPFLIX.gr)
+**API URL / Username / API Key**: These fields are provided by [SHOPFLIX](https://SHOPFLIX.gr)
 
 ![Imgur](https://i.imgur.com/OC9WgCY.png)
 
