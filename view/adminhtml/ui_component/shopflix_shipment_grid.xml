@@ -73,7 +73,7 @@
         <column name="increment_id">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Shipment</label>
+                <label translate="true">SHOPFLIX Shipment</label>
                 <sorting>asc</sorting>
             </settings>
         </column>

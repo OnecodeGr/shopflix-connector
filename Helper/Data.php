@@ -43,6 +43,8 @@ class Data extends AbstractHelper implements ScopeInterface
 
     const CONVERT_SHOPFLIX_ORDER_TO_MAGENTO = 'shopflix/settings/to_order';
 
+    const CONVERT_SHOPFLIX_TIME_MODIFIER = 'shopflix/settings/time_modifier';
+
     const INVOICE_ON_ACCEPTANCE = 'shopflix/settings/invoice';
     /**
      * Selected products types
@@ -224,5 +226,10 @@ class Data extends AbstractHelper implements ScopeInterface
     public function autoAccept(): bool
     {
         return (boolean)$this->getConfig(self::AUTO_ACCEPT_PATH);
+    }
+
+    public function getTimeModifier(): string
+    {
+        return $this->getConfig(self::CONVERT_SHOPFLIX_TIME_MODIFIER);
     }
 }

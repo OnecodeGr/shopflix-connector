@@ -13,7 +13,7 @@ class Shipment extends \Magento\Backend\Block\Widget\Grid\Container
     {
         $this->_controller = 'shopflix_shipment';
         $this->_blockGroup = 'Onecode_ShopFlixConnector';
-        $this->_headerText = __('Shipments');
+        $this->_headerText = __('SHOPFLIX Shipments');
         parent::_construct();
         $this->buttonList->remove('add');
     }

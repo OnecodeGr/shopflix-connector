@@ -75,7 +75,7 @@ class ImportOrders
     )
     {
         $this->_helper = $data;
-        $this->_connector = new Connector($data->getUsername(), $data->getApikey(), $data->getApiUrl());
+
         $this->_orderFactory = $orderFactory;
         $this->_orderRepository = $orderRepository;
         $this->_productRepository = $productRepository;
@@ -96,6 +96,15 @@ class ImportOrders
     public function import()
     {
 
+        if (!$this->_helper->isEnabled()) {
+           return;
+        }
+        $this->_connector = new Connector(
+            $this->_helper->getUsername(),
+            $this->_helper->getApikey(),
+            $this->_helper->getApiUrl(),
+            $this->_helper->getTimeModifier()
+        );
         $newOrders = $this->_connector->getNewOrders();
         foreach ($newOrders as $order) {
             $this->processNewOrder($order);
@@ -108,6 +117,7 @@ class ImportOrders
         }
 
         $onTheWayOrders = $this->_connector->getOnTheWayOrders();
+
         foreach ($onTheWayOrders as $onTheWayOrder) {
             $this->processOnTheWayOrder($onTheWayOrder);
         }

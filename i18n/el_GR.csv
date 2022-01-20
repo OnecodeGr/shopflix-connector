@@ -197,9 +197,6 @@ Canceled,Ακυρώθηκε
 Could not delete the shipment item.,Δεν ήταν δυνατή η διαγραφή του αντικειμένου αποστολής.
 Could not save the shipment item.,Δεν ήταν δυνατή η αποθήκευση του αντικειμένου αποστολής.
 Could not delete the shipment tracking.,Δεν ήταν δυνατή η διαγραφή του αριθμού παρακολούθησης της αποστολής.
-Could not save the shipment tracking.
-This shipment no longer exists.
-The order no longer exists.
 Tracking information must contain title, carrier code, and tracking number
 An increment id is needed. Set the increment id  and try again.
 Could not save the shipment tracking.,Δεν ήταν δυνατή η αποθήκευση της παρακολούθησης αποστολής.
@@ -232,7 +229,14 @@ Ship-to Name,Όνομα αποστολής
 Ship Date,Ημερομηνία αποστολής
 Total Quantity,Συνολική ποσότητα
 Print Vouchers,Εκτύπωση κουπονιών
-Order #,Σειρά #
+Order #,Παραγγελία #
 Ship Date,Ημερομηνία αποστολής
 Method Name,Όνομα μεθόδου
 Invoice on acceptance,Τιμολόγιο κατά την αποδοχή
+This field is used to filter the orders we requested from the SHOPFLIX API,Αυτό το πεδίο χρησιμοποιείται για το φιλτράρισμα των παραγγελιών που ζητήσαμε από το SHOPFLIX API
+-6 hours,-6 ώρες
+-12 hours,-12 ώρες
+-18 hours,-18 ώρες
+-1 day,-1 ήμερα
+Time modifier,Tροποποιητής χρόνου
+

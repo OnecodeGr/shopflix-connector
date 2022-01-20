@@ -39,6 +39,8 @@ class ImportShipments
     private $itemFactory;
     private $trackFactory;
     private $logger;
+    private $_connector;
+    private $_helper;
 
     public function __construct(OrderRepository            $orderRepository,
                                 SearchCriteriaBuilder      $searchCriteriaBuilder,
@@ -53,7 +55,7 @@ class ImportShipments
     {
         $this->orderRepository = $orderRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->connector = new Connector($data->getUsername(), $data->getApikey(), $data->getApiUrl());
+        $this->_helper = $data;
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentFactory = $shipmentFactory;
         $this->itemFactory = $itemFactory;
@@ -65,7 +67,14 @@ class ImportShipments
 
     public function import()
     {
-
+        if (!$this->_helper->isEnabled()) {
+            return;
+        }
+        $this->_connector = new Connector(
+            $this->_helper->getUsername(),
+            $this->_helper->getApikey(),
+            $this->_helper->getApiUrl()
+        );
         $this->searchCriteriaBuilder->addFilter(
             OrderInterface::STATE,
             OrderInterface::STATE_ACCEPTED,

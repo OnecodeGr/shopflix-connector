@@ -68,7 +68,7 @@ class ExportOrders
     )
     {
         $this->_helper = $data;
-        $this->_connector = new Connector($data->getUsername(), $data->getApikey(), $data->getApiUrl());
+
         $this->_orderFactory = $orderFactory;
         $this->_orderRepository = $orderRepository;
         $this->_productRepository = $productRepository;
@@ -83,6 +83,15 @@ class ExportOrders
 
     public function export()
     {
+
+        if (!$this->_helper->isEnabled()) {
+            return;
+        }
+        $this->_connector = new Connector(
+            $this->_helper->getUsername(),
+            $this->_helper->getApikey(),
+            $this->_helper->getApiUrl()
+        );
         $this->searchCriteriaBuilder->addFilter(OrderInterface::SYNCED, false);
         $searchCriteria = $this->searchCriteriaBuilder->create();
         $orders = $this->_orderRepository->getList($searchCriteria);

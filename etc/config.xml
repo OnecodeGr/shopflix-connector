@@ -8,6 +8,7 @@
                 <supported_products>simple,configurable</supported_products>
                 <to_order>0</to_order>
                 <invoice>0</invoice>
+                <time_modifier>-6 hours</time_modifier>
             </settings>
             <xml_setting>
                 <enable>0</enable>
