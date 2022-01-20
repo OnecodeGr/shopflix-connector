@@ -571,13 +571,13 @@
             <argument name="paymentProvider" xsi:type="object">OnecodeShopFlixConfigProvider</argument>
         </arguments>
     </type>
-  <!--  <type name="Magento\Payment\Gateway\Config\ConfigValueHandler">
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
         <arguments>
-            <argument name="configInterface" xsi:type="object">
-                Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider
+            <argument name="columns" xsi:type="array">
+                <item name="is_shopflix" xsi:type="string">sales_order.is_shopflix</item>
             </argument>
         </arguments>
-    </type>-->
-
+    </virtualType>
 
 </config>

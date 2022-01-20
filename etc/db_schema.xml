@@ -331,4 +331,10 @@
             <column name="created_at"/>
         </index>
     </table>
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
+        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0" comment="Is ShopFlix Order"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Order">
+        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0" comment="Is ShopFlix Order"/>
+    </table>
 </schema>

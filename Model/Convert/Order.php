@@ -204,13 +204,10 @@ class Order
                 ->setFirstname($order->getCustomerFirstname())
                 ->setLastname($order->getCustomerLastname())
                 ->setEmail($order->getCustomerEmail());
-            $customer->save();///
+            $customer->save();
             $customer = $this->customerRepository->getById($customer->getEntityId());
 
         }
-
-
-        //CREATE QUOTE//
         $quote = $this->quote->create();
         $quote->setStore($store);
         $quote->setCurrency();
@@ -240,7 +237,6 @@ class Order
             ->setMethodDescription($shippingDescription);
 
         $quote->setPaymentMethod(PaymentProvider::CODE);
-        #dd($quote->);
         $this->quoteRepository->save($quote);
         $quote->getPayment()->importData([
                 PaymentInterface::KEY_METHOD => PaymentProvider::CODE,
@@ -253,7 +249,6 @@ class Order
             ->setStoreId($store->getId())
             ->setCustomerId($customer->getId());
 
-        #dd($quote->getShippingAddress()->getData());
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setCollectShippingRates(true)
             ->collectShippingRates()
@@ -268,6 +263,7 @@ class Order
         $magentoOrder = $this->quoteManagement->submit($quote);
         $magentoOrder->setEmailSent(0);
         $magentoOrder->setData("shipping_description", $shippingDescription);
+        $magentoOrder->setData("is_shopflix", true);
         $payment = $magentoOrder->getPayment()
             ->setAdditionalInformation(["method_title" => $this->paymentProvider->getMethodTitle()]);
         $this->paymentRepository->save($payment);
@@ -347,18 +343,15 @@ class Order
         if ($magentoOrder->canShip()) {
             $shipment = $this->magentoOrderConverter->toShipment($magentoOrder);
             foreach ($magentoOrder->getAllItems() as $orderItem) {
-                // Check if order item has qty to ship or is virtual
                 if (!$orderItem->getQtyToShip() || $orderItem->getIsVirtual()) {
                     continue;
                 }
 
                 $qtyShipped = $orderItem->getQtyToShip();
 
-                // Create shipment item with qty
                 $shipmentItem = $this->magentoOrderConverter->itemToShipmentItem($orderItem)
                     ->setQty($qtyShipped);
 
-                // Add shipment item to shipment
                 $shipment->addItem($shipmentItem);
             }
             $shipment->register();
