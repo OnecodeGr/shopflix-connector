@@ -42,6 +42,8 @@ class Data extends AbstractHelper implements ScopeInterface
     const API_KEY_PATH = 'shopflix/settings/api_key';
 
     const CONVERT_SHOPFLIX_ORDER_TO_MAGENTO = 'shopflix/settings/to_order';
+
+    const INVOICE_ON_ACCEPTANCE = 'shopflix/settings/invoice';
     /**
      * Selected products types
      */
@@ -103,13 +105,13 @@ class Data extends AbstractHelper implements ScopeInterface
     }
 
     /**
-     * Get Username
-     * @return string
+     * Get selected products types
+     * @return array
      */
-    public function getUsername(): ?string
+    public function getSelectedProductsTypes(): array
     {
         return
-            $this->getConfig(self::USERNAME_PATH);
+            explode(",", $this->getConfig(self::SELECTED_PRODUCTS_PATH));
 
     }
 
@@ -127,26 +129,36 @@ class Data extends AbstractHelper implements ScopeInterface
         );
     }
 
-    /**
-     * Get selected products types
-     * @return array
-     */
-    public function getSelectedProductsTypes(): array
-    {
-        return
-            explode(",", $this->getConfig(self::SELECTED_PRODUCTS_PATH));
-
-    }
-
     public function isEnabled(): bool
     {
         return (boolean)$this->getConfig(self::ENABLE_PATH);
+    }
+
+    public function invoice(): bool
+    {
+        return (boolean)$this->getConfig(self::INVOICE_ON_ACCEPTANCE);
     }
 
     public function canGenerateXml($token): bool
     {
         return (boolean)$this->getConfig(self::ENABLE_PATH) &&
             (boolean)$this->getConfig(self::GENERATE_XML_PATH) && $token == $this->getHashedCode();
+    }
+
+    public function getHashedCode()
+    {
+        return $this->_encryptor->hash($this->getUsername());
+    }
+
+    /**
+     * Get Username
+     * @return string
+     */
+    public function getUsername(): ?string
+    {
+        return
+            $this->getConfig(self::USERNAME_PATH);
+
     }
 
     /**
@@ -158,11 +170,6 @@ class Data extends AbstractHelper implements ScopeInterface
         return
             (string)$this->_encryptor->decrypt($this->getConfig(self::API_KEY_PATH));
 
-    }
-
-    public function getHashedCode()
-    {
-        return $this->_encryptor->hash($this->getUsername());
     }
 
     public function getApiUrl(): string

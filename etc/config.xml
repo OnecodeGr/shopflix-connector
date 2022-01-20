@@ -7,6 +7,7 @@
                 <enable>0</enable>
                 <supported_products>simple,configurable</supported_products>
                 <to_order>0</to_order>
+                <invoice>0</invoice>
             </settings>
             <xml_setting>
                 <enable>0</enable>
@@ -33,7 +34,7 @@
             <onecode_shopflix_payment>
                 <active>1</active>
                 <title><![CDATA[ShopFlix Payment Method]]></title>
-                <order_status>processing</order_status>
+                <order_status>pending</order_status>
                 <allowspecific>0</allowspecific>
                 <model>OnecodeShopFlixPaymentFacade</model>
                 <group>offline</group>

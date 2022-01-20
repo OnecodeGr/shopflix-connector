@@ -27,12 +27,24 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <validate>required-entry</validate>
                 </field>
-                <field id="auto_accept" translate="label" type="select" sortOrder="100"
+                <field id="auto_accept" translate="label" type="select" sortOrder="110"
                        showInStore="0" showInDefault="1" showInWebsite="0">
                     <label>Auto Accept Order</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <validate>required-entry</validate>
                     <comment><![CDATA[Automatic acceptance of order if there is stock]]></comment>
+                    <depends>
+                        <field id="*/*/to_order">1</field>
+                    </depends>
+                </field>
+                <field id="invoice" translate="label" type="select" sortOrder="120"
+                       showInStore="0" showInDefault="1" showInWebsite="0">
+                    <label>Invoice on acceptance</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="*/*/to_order">1</field>
+                    </depends>
                 </field>
                 <field id="api_url" translate="label,comment" type="text" sortOrder="400" showInStore="0"
                        showInDefault="1" showInWebsite="0">

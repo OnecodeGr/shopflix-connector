@@ -33,6 +33,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Onecode\ShopFlixConnector\Api\Data\AddressInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider as PaymentProvider;
+use Onecode\ShopFlixConnector\Helper\Data;
 use Onecode\ShopFlixConnector\Helper\Shipping;
 use Onecode\ShopFlixConnector\Model\Carrier\Method as ShippingMethod;
 use Magento\Backend\Model\Session\Quote;
@@ -116,9 +117,22 @@ class Order
      * @var ShipmentRepositoryInterface
      */
     private $shipmentRepository;
-    private AddressInterfaceFactory $addressFactory;
-    private Quote $quoteSession;
-    private OrderPaymentRepositoryInterface $paymentRepository;
+    /**
+     * @var AddressInterfaceFactory
+     */
+    private $addressFactory;
+    /**
+     * @var Quote
+     */
+    private $quoteSession;
+    /**
+     * @var OrderPaymentRepositoryInterface
+     */
+    private $paymentRepository;
+    /**
+     * @var Data
+     */
+    private $helper;
 
     public function __construct(
         StoreManagerInterface              $storeManager,
@@ -140,7 +154,8 @@ class Order
         \Magento\Sales\Model\Convert\Order $magentoOrderConverter,
         AddressInterfaceFactory            $addressFactory,
         Quote                              $quoteSession,
-        OrderPaymentRepositoryInterface    $paymentRepository
+        OrderPaymentRepositoryInterface    $paymentRepository,
+        Data                               $helper
     )
     {
         $this->_storeManager = $storeManager;
@@ -163,6 +178,7 @@ class Order
         $this->addressFactory = $addressFactory;
         $this->quoteSession = $quoteSession;
         $this->paymentRepository = $paymentRepository;
+        $this->helper = $helper;
 
     }
 
@@ -198,7 +214,6 @@ class Order
         $quote = $this->quote->create();
         $quote->setStore($store);
         $quote->setCurrency();
-        #$quote->assignCustomer($customer);
         foreach ($order->getItems() as $item) {
             $product = $this->productRepository->get($item->getSku());
             $product->setPrice($item->getPrice());
@@ -253,12 +268,13 @@ class Order
         $magentoOrder = $this->quoteManagement->submit($quote);
         $magentoOrder->setEmailSent(0);
         $magentoOrder->setData("shipping_description", $shippingDescription);
-       $payment =  $magentoOrder->getPayment()
+        $payment = $magentoOrder->getPayment()
             ->setAdditionalInformation(["method_title" => $this->paymentProvider->getMethodTitle()]);
         $this->paymentRepository->save($payment);
         $this->orderRepository->save($magentoOrder);
-
-        $this->invoice($magentoOrder);
+        if ($this->helper->invoice()) {
+            $this->invoice($magentoOrder);
+        }
 
 
         if ($magentoOrder->getEntityId()) {
