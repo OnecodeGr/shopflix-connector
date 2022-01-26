@@ -27,7 +27,7 @@ Run compile if you have your application in Production Mode
 php bin/magento setup:di:compile
 ```
 
-### 2. Copy and paste
+### 1.3 Copy and paste
 
 If you don't want to install via composer, you can use this way.
 
