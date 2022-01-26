@@ -11,7 +11,6 @@ namespace Onecode\ShopFlixConnector\Controller\Adminhtml\Shipment\AbstractShipme
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\PageFactory;
 
 abstract class Index extends Action

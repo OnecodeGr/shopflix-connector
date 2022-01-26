@@ -8,6 +8,7 @@
 
 namespace Onecode\ShopFlixConnector\Controller\Adminhtml\Shipment;
 
+use Exception;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -111,7 +112,7 @@ class MassPrintManifest extends AbstractMassAction implements HttpPostActionInte
             }
 
         } catch (Exception $e) {
-            #$this->logger->info($e->getMessage());
+
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('shopflix/shipment/index');

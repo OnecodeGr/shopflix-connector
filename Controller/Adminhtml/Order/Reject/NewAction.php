@@ -74,20 +74,9 @@ class NewAction extends Action implements HttpGetActionInterface
                     __('The order can not rejected')
                 );
             }
-            /*   #  $invoice = $this->invoiceService->prepareInvoice($order, $invoiceItems);
-
-                 if (!$invoice->getTotalQty()) {
-                     throw new LocalizedException(
-                         __("The invoice can't be created without products. Add products and try again.")
-                     );
-                 }
-                ;*/
             $this->registry->register('current_shopflix_order', $order);
             $this->registry->register('onecode_shopflix_order', $order);
             $comment = $this->_objectManager->get(Session::class)->getCommentText(true);
-            if ($comment) {
-                #    $invoice->setCommentText($comment);
-            }
 
             /** @var Page $resultPage */
             $resultPage = $this->resultPageFactory->create();

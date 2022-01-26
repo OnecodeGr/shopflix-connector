@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Onecode_ShopFlixConnector::shopflix_menu"
-             title="ShopFlix Menu"
+             title="SHOPFLIX Menu"
              module="Onecode_ShopFlixConnector"
              parent="Onecode_Base::sidebar_base_menu"
              sortOrder="100"
@@ -28,21 +28,5 @@
              resource="Magento_Config::config"
              translate="title"
              action="adminhtml/system_config/edit/section/shopflix"/>
-<!--        <add id="Onecode_ShopFlixConnector::shopflix_shipping_method"
-             sortOrder="40"
-             title="ShopFlix Shipping Settings"
-             module="Onecode_ShopFlixConnector"
-             parent="Onecode_ShopFlixConnector::shopflix_menu"
-             resource="Magento_Config::config"
-             translate="title"
-             action="adminhtml/system_config/edit/section/carriers"/>
-        <add id="Onecode_ShopFlixConnector::shopflix_payment_method"
-             sortOrder="50"
-             title="ShopFlix Payment Settings"
-             module="Onecode_ShopFlixConnector"
-             parent="Onecode_ShopFlixConnector::shopflix_menu"
-             resource="Magento_Config::config"
-             translate="title"
-             action="adminhtml/system_config/edit/section/payment"/>-->
     </menu>
 </config>

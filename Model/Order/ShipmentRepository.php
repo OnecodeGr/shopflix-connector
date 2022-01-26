@@ -15,11 +15,10 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Onecode\ShopFlixConnector\Api\Data\ShipmentSearchResultInterfaceFactory as SearchResultFactory;
-use Onecode\ShopFlixConnector\Model\ResourceModel\Metadata;
 use Onecode\ShopFlixConnector\Api\Data\ShipmentInterface;
-use Onecode\ShopFlixConnector\Api\Data\ShipmentSearchResultInterface;
+use Onecode\ShopFlixConnector\Api\Data\ShipmentSearchResultInterfaceFactory as SearchResultFactory;
 use Onecode\ShopFlixConnector\Api\ShipmentRepositoryInterface;
+use Onecode\ShopFlixConnector\Model\ResourceModel\Metadata;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Collection;
 
 class ShipmentRepository implements ShipmentRepositoryInterface

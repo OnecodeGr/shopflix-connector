@@ -190,11 +190,9 @@ class ImportOrders
             $address = $this->_addressFactory->create()->setData($address);
             switch ($address->getAddressType()) {
                 case "billing":
-                    #$address->setEntityId($order->getBillingAddressId());
                     $order->setBillingAddress($address);
                     break;
                 case "shipping":
-                    #$address->setEntityId($order->getShippingAddressId());
                     $order->setShippingAddress($address);
                     break;
             }

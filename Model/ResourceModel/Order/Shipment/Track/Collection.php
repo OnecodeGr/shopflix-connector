@@ -9,8 +9,8 @@
 namespace Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Track;
 
 use Onecode\ShopFlixConnector\Api\Data\ShipmentTrackSearchResultInterface;
-use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Collection\AbstractCollection;
 use Onecode\ShopFlixConnector\Model\Order\Shipment\Track as Model;
+use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Collection\AbstractCollection;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\Track as ResourceModel;
 
 class Collection extends AbstractCollection implements ShipmentTrackSearchResultInterface

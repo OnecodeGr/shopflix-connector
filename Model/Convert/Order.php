@@ -9,6 +9,7 @@
 namespace Onecode\ShopFlixConnector\Model\Convert;
 
 use Exception;
+use Magento\Backend\Model\Session\Quote;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\CustomerFactory;
@@ -36,7 +37,6 @@ use Onecode\ShopFlixConnector\Gateway\Config\ConfigProvider as PaymentProvider;
 use Onecode\ShopFlixConnector\Helper\Data;
 use Onecode\ShopFlixConnector\Helper\Shipping;
 use Onecode\ShopFlixConnector\Model\Carrier\Method as ShippingMethod;
-use Magento\Backend\Model\Session\Quote;
 
 class Order
 {

@@ -120,7 +120,6 @@ abstract class PrintAction extends Action
                         }
 
                         if ($shipment->getShipmentStatus() == 1) {
-                            #dd($shipment->getIncrementId());
                             $connector->forShipment($shipment->getIncrementId());
 
                         }

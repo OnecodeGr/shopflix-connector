@@ -16,6 +16,7 @@ use Onecode\ShopFlixConnector\Helper\ImportShipments;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
 class SyncShipments extends Command
 {
     const NAME = 'Sync SHOPFLIX Order';

@@ -148,7 +148,6 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
             return $this->downloader->create("shopflix_vouchers_order_{$order->getIncrementId()}_$date.pdf",
                 $fileContent, DirectoryList::VAR_DIR, 'application/pdf');
         } catch (Exception $e) {
-            #$this->logger->info($e->getMessage());
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('shopflix/order/view', ['order_id' => $order->getId()]);

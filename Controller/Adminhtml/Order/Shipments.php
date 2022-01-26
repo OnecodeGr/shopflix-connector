@@ -8,7 +8,6 @@
 
 namespace Onecode\ShopFlixConnector\Controller\Adminhtml\Order;
 
-use Magento\Framework\App\ResponseInterface;
 use Onecode\ShopFlixConnector\Controller\Adminhtml\Order;
 
 class Shipments extends Order

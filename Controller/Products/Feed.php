@@ -17,9 +17,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Store\Model\StoreManagerInterface;
+use Onecode\Base\Helper\SimpleXMLExtended;
 use Onecode\ShopFlixConnector\Helper\Data;
 use Onecode\ShopFlixConnector\Helper\ExportProductData;
-use Onecode\Base\Helper\SimpleXMLExtended;
 
 
 /**

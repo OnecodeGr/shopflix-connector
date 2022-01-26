@@ -165,54 +165,13 @@ class ExportProductData
                     $this->processSimple($product, $result['products']);
                     break;
                 case Configurable::TYPE_CODE:
-                    /**  try {
-                     * $image = $product->getMediaGalleryImages()->getFirstItem()->getData("url");
-                     * } catch (Exception $e) {
-                     * $image = "";
-                     * }
-                     * $result['products'][$product->getId()] = [
-                     * "product_id" => $product->getSku(),
-                     * "mpn" => $product->getData($this->_helper->getMpnAttribute()),
-                     * "ean" => $product->getData($this->_helper->getEanAttribute()),
-                     * "weight" => $product->getData($this->_helper->getWeightAttribute()),
-                     * "title" => $product->getData($this->_helper->getTitleAttribute()),
-                     * "description" => $product->getData($this->_helper->getDescriptionAttribute()),
-                     * "price_with_vat" => (float)$product->getData('final_price') . " " .
-                     * $this->_storeManager->getStore()->getCurrentCurrency()->getCode(),
-                     * "manufacturer" => $product->getAttributeText($this->_helper->getManufacturerAttribute()),
-                     * "link" => $product->getProductUrl(),
-                     * "in_stock" => 0,
-                     * "remaining_stock" => 0,
-                     * "image" => $image,
-                     * #"variation_attributes" => [],
-                     * ];
-                     *
-                     * if ($this->_helper->exportCategory()) {
-                     * $this->addCategories($product, $result['products'][$product->getId()]);
-                     * }*/
                     /** @var ConfigurableType $typeInstance */
                         $typeInstance = $product->getTypeInstance();
-                    /*      $data = $typeInstance->getConfigurableOptions($product);
-                          $variationAttributes = [];
-                          foreach ($data as $attr) {
-                              foreach ($attr as $p) {
-                                  $variationAttributes[$p['sku']][$p['attribute_code']] = $p['option_title'];
-                              }
-                          }*/
                     $_children = $typeInstance->getUsedProducts($product);
-
-                    $stock = 0;
                     /** @var Product $child */
                     foreach ($_children as $child) {
                         $this->processSimple($child, $result['products'], [], $product);
-                        # $result['products'][$child->getId()]['shop_price'];
-                        #$result['products'][$product->getId()]['in_stock'] = $child->g > 0;
-                        //$result['products'][$product->getId()]['children'] = array_values($result['products'][$product->getId()]['children']);
-                        // $stock += $this->processSimple($child, $result['products'][$product->getId()]['children'], $variationAttributes[$child->getSku()]);
                     }
-
-                    #$result['products'][$product->getId()]['in_stock'] = $stock > 0;
-                    #$result['products'][$product->getId()]['children'] = array_values($result['products'][$product->getId()]['children']);
                     break;
                 default:
                     break;
@@ -271,11 +230,8 @@ class ExportProductData
             "offer_to" => $parent != null ? $parent->getData("onecode_shopflix_offer_date_to") : $product->getData("onecode_shopflix_offer_date_to"),
             "offer_price" => number_format($parent != null ? $parent->getData("onecode_shopflix_offer_price") : $product->getData("onecode_shopflix_offer_price"), 2),
             "offer_quantity" => $parent != null ? $parent->getData("onecode_shopflix_offer_qty") : $product->getData("onecode_shopflix_offer_qty"),
-            # "in_stock" => $stock > 0,
             "quantity" => $stock,
             "image" => $image,
-            #"variation_attributes" => empty($variation) ? [] : $variation,
-            #"children" => []
         ];
 
         if (!$this->_simpler) {

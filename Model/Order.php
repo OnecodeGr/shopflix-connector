@@ -42,7 +42,6 @@ use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\Collection as ItemC
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\Collection as HistoryCollection;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\CollectionFactory as OrderHistoryCollectionFactory;
-use const Grpc\STATUS_INTERNAL;
 
 /**
  *

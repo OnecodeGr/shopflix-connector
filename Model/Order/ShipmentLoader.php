@@ -9,14 +9,11 @@
 namespace Onecode\ShopFlixConnector\Model\Order;
 
 use Magento\Framework\DataObject;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Registry;
-use Magento\Sales\Api\Data\ShipmentItemCreationInterface;
-use Magento\Sales\Api\Data\ShipmentTrackCreationInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\ShipmentRepositoryInterface;
-#use Onecode\ShopFlixConnector\Model\Order\ShipmentDocumentFactory;
+
 /**
  * Loader for shipment
  *
@@ -118,10 +115,6 @@ class ShipmentLoader extends DataObject
         $this->registry->register('current_shopflix_shipment', $shipment);
         return $shipment;
     }
-
-
-
-
 
     /**
      * Retrieve shipment

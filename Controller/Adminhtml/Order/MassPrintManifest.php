@@ -118,7 +118,6 @@ class MassPrintManifest extends AbstractMassAction implements HttpPostActionInte
             }
 
         } catch (\Exception $e) {
-            #$this->logger->info($e->getMessage());
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('shopflix/order/view', ['order_id' => $order->getId()]);
