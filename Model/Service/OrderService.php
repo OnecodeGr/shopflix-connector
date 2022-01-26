@@ -245,4 +245,28 @@ class OrderService implements ManagementInterface
     }
 
 
+    public function completed(int $id): bool
+    {
+        $order = $this->orderRepository->getById($id);
+        if ($order->canCompleted()) {
+            try {
+                $order->complete();
+                if ($this->configHelper->toOrder() && $order->getMagentoOrderId()) {
+                    if ($order->getMagentoRealOrder()->canInvoice()) {
+                        $this->converter->invoice($order->getMagentoRealOrder());
+                    }
+                    if ($order->getMagentoRealOrder()->canShip()) {
+                        $this->converter->ship($order->getMagentoRealOrder());
+                    }
+
+                }
+            } catch (LocalizedException $e) {
+                $this->logger->debug($e->getMessage());
+                return false;
+            }
+            $this->orderRepository->save($order);
+            return true;
+        }
+        return false;
+    }
 }

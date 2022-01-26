@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="extra_customer_info">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Sales\Order\View\Shopflix"
+                   name="sales_order_view_shopflix" template="Onecode_ShopFlixConnector::sales/order/view/shopflix.phtml" />
+        </referenceBlock>
+    </body>
+</page>

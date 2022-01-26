@@ -47,6 +47,16 @@ class OrderRepository implements OrderRepositoryInterface
         return $order;
     }
 
+    public function getByMagentoOrderId(int $id)
+    {
+        $order = $this->orderFactory->create();
+        $order->getResource()->load($order, $id, OrderInterface::MAGENTO_ORDER_ID);
+        if (!$order->getId()) {
+            throw new NoSuchEntityException(__('Unable to find shopflix order with magento order "%1"', $id));
+        }
+        return $order;
+    }
+
     /**
      * @inheritDoc
      */

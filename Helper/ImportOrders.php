@@ -97,7 +97,7 @@ class ImportOrders
     {
 
         if (!$this->_helper->isEnabled()) {
-           return;
+            return;
         }
         $this->_connector = new Connector(
             $this->_helper->getUsername(),
@@ -130,6 +130,11 @@ class ImportOrders
         $shippedOrders = $this->_connector->getShipped();
         foreach ($shippedOrders as $shippedOrder) {
             $this->processShippedOrder($shippedOrder);
+        }
+
+        $completedOrders = $this->_connector->getCompletedOrders();
+        foreach ($completedOrders as $completedOrder) {
+            $this->processCompletedOrder($completedOrder);
         }
     }
 
@@ -279,6 +284,22 @@ class ImportOrders
 
         if ($order->canShipped()) {
             $this->_orderManagement->shipped($order->getEntityId());
+        }
+
+    }
+
+
+    private function processCompletedOrder($data)
+    {
+        try {
+            $order = $this->_orderRepository->getByIncrementId($data['order']['increment_id']);
+        } catch (NoSuchEntityException $e) {
+            $this->_logger->info($e);
+            $order = $this->processNewOrder($data);
+        }
+
+        if ($order->canCompleted()) {
+            $this->_orderManagement->completed($order->getEntityId());
         }
 
     }

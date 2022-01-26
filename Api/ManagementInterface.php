@@ -97,4 +97,12 @@ interface ManagementInterface
      * @return bool
      */
     public function onTheWay(int $id): bool;
+
+    /**
+     *  Complete specified order.
+     *
+     * @param int $id The order ID.
+     * @return bool
+     */
+    public function completed(int $id):bool;
 }

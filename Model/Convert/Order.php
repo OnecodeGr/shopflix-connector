@@ -312,13 +312,9 @@ class Order
      */
     public function invoice($magentoOrder)
     {
-        if ($magentoOrder->canInvoice() &&
-            $this->paymentProvider->getMethodDefaultStatus()
-            === \Magento\Sales\Model\Order::STATE_PROCESSING) {
-
+        if ($magentoOrder->canInvoice()) {
             $magentoOrder->setState(\Magento\Sales\Model\Order::STATE_PROCESSING)
                 ->setStatus(\Magento\Sales\Model\Order::STATE_PROCESSING);
-
             $invoice = $this->invoiceService->prepareInvoice($magentoOrder);
             $invoice->register();
 

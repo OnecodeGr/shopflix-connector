@@ -30,6 +30,13 @@ interface OrderRepositoryInterface
      */
     public function getByIncrementId(string $incrementId);
 
+    /**
+     * @param int $id
+     * @return OrderInterface
+     * @throws NoSuchEntityException
+     */
+    public function getByMagentoOrderId(int $id);
+
 
     /**
      * @param OrderInterface $order

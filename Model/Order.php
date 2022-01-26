@@ -42,6 +42,7 @@ use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\Collection as ItemC
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\Collection as HistoryCollection;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\CollectionFactory as OrderHistoryCollectionFactory;
+use const Grpc\STATUS_INTERNAL;
 
 /**
  *
@@ -936,6 +937,7 @@ class Order extends AbstractModel implements OrderInterface
                 && ($this->getStatus() === StatusInterface::STATUS_ACCEPTED ||
                     $this->getStatus() === StatusInterface::STATUS_PICKING))
             || ($this->getState() === self::STATE_COMPLETED &&
+                $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED ||
                 $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY);
     }
 
@@ -970,8 +972,9 @@ class Order extends AbstractModel implements OrderInterface
                 && ($this->getStatus() === StatusInterface::STATUS_ACCEPTED ||
                     $this->getStatus() === StatusInterface::STATUS_PICKING))
             || ($this->getState() === self::STATE_COMPLETED &&
-                $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY ||
-                $this->getStatus() === StatusInterface::STATUS_PARTIAL_SHIPPED);
+                ($this->getStatus() === StatusInterface::STATUS_ON_THE_WAY ||
+                    $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED ||
+                    $this->getStatus() === StatusInterface::STATUS_PARTIAL_SHIPPED));
     }
 
     public function registerShipped(string $comment = '', bool $graceful = true): OrderInterface
@@ -987,6 +990,10 @@ class Order extends AbstractModel implements OrderInterface
         return $this;
     }
 
+    /**
+     * @return $this
+     * @throws LocalizedException
+     */
     public function onTheWay()
     {
         if ($this->canOnTheWay()) {
@@ -1014,7 +1021,45 @@ class Order extends AbstractModel implements OrderInterface
             $this->addStatusHistoryComment(__("Order On the way"), StatusInterface::STATUS_ON_THE_WAY);
 
         } elseif (!$graceful) {
-            throw new LocalizedException(__('We cannot cancel this order.'));
+            throw new LocalizedException(__('We cannot change status for this order.'));
+        }
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws LocalizedException
+     */
+    public function complete()
+    {
+        if ($this->canCompleted()) {
+            $this->registerCompleted();
+        }
+        return $this;
+    }
+
+    public function canCompleted(): bool
+    {
+        return ($this->getState() === self::STATE_ACCEPTED
+                && ($this->getStatus() === StatusInterface::STATUS_ACCEPTED ||
+                    $this->getStatus() === StatusInterface::STATUS_PICKING))
+            || ($this->getState() === self::STATE_COMPLETED &&
+                ($this->getStatus() === StatusInterface::STATUS_ON_THE_WAY ||
+                    $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED ||
+                    $this->getStatus() === StatusInterface::STATUS_PARTIAL_SHIPPED ||
+                    $this->getStatus() === StatusInterface::STATUS_SHIPPED));
+    }
+
+    public function registerCompleted(string $comment = '', bool $graceful = true): OrderInterface
+    {
+        if ($this->canCompleted()) {
+            $state = self::STATE_COMPLETED;
+            $this->setState($state)
+                ->setStatus(StatusInterface::STATUS_COMPLETED);
+            $this->addStatusHistoryComment(__("Order Completed"), StatusInterface::STATUS_COMPLETED);
+
+        } elseif (!$graceful) {
+            throw new LocalizedException(__('We cannot complete this order.'));
         }
         return $this;
     }

@@ -1,0 +1,16 @@
+<?php
+
+use Onecode\ShopFlixConnector\Block\Adminhtml\Sales\Order\View\Shopflix;
+
+/**
+ * @var Shopflix $block
+ */
+?>
+<?php if ($shopFlixOrder = $block->getShopFlixOrder()) { ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('SHOPFLIX Order')) ?></th>
+        <td>
+            <a href="<?= $block->getUrl("shopflix/order/view", ["order_id" => $shopFlixOrder->getId()]) ?>">#<?= $shopFlixOrder->getIncrementId() ?></a>
+        </td>
+    </tr>
+<?php } ?>
