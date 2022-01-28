@@ -16,7 +16,7 @@
         "magento/module-shipping": "100.3.*||100.4.*",
         "magento/module-store": "101.0.*||101.1.*",
         "onecode/shopflix-connector-library": "1.0.2",
-        "onecode/base": "1.0.*",
+        "onecode/base": "^1.0",
         "ext-simplexml": "*",
         "ext-intl": "*"
     },
