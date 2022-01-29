@@ -19,18 +19,9 @@ use Onecode\ShopFlixConnector\Model\Order;
 
 class Admin extends AbstractHelper
 {
-    /**
-     * @var PriceCurrencyInterface
-     */
-    protected $priceCurrency;
-    /**
-     * @var Escaper
-     */
-    protected $escaper;
 
-    /**
-     * @var DOMDocumentFactory
-     */
+    protected $priceCurrency;
+    protected $escaper;
     private $domDocumentFactory;
 
     /**

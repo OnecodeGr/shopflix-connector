@@ -9,6 +9,14 @@
             <item name="deps" xsi:type="string">shopflix_order_listing.shopflix_order_listing_data_source
             </item>
         </item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">sync-orders</item>
+                <item name="label" xsi:type="string">Sync</item>
+                <item name="class" xsi:type="string">primary sync-orders</item>
+                <item name="url" xsi:type="string">shopflix/order/sync</item>
+            </item>
+        </item>
     </argument>
     <settings>
         <spinner>shopflix_order_listing_columns</spinner>

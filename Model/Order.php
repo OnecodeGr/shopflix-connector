@@ -937,7 +937,7 @@ class Order extends AbstractModel implements OrderInterface
                     $this->getStatus() === StatusInterface::STATUS_PICKING))
             || ($this->getState() === self::STATE_COMPLETED &&
                 $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED ||
-                $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY);
+                $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY) ;
     }
 
     public function registerPartialShipped(string $comment = '', bool $graceful = true): OrderInterface
@@ -1077,14 +1077,14 @@ class Order extends AbstractModel implements OrderInterface
 
     public function canCancel(): bool
     {
-        return $this->getStatus() === StatusInterface::STATUS_PICKING &&
-            $this->getState() === self::STATE_ACCEPTED;
+        return  ($this->getStatus() === StatusInterface::STATUS_PENDING_ACCEPTANCE &&
+            $this->getState() === self::STATE_PENDING_ACCEPTANCE);
 
     }
 
     public function registerCanceled(string $comment = '', bool $graceful = true): OrderInterface
     {
-        if ($this->canReject()) {
+        if ($this->canCancel()) {
             $state = self::STATE_CANCELED;
             $this->setState($state)
                 ->setStatus($this->getConfig()->getStateDefaultStatus($state));

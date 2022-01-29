@@ -22,13 +22,8 @@ class View extends Action
      */
     const ADMIN_RESOURCE = 'Onecode_ShopFlixConnector::shipment';
 
-    /**
-     * @var ShipmentLoader
-     */
+
     private $shipmentLoader;
-    /**
-     * @var PageFactory
-     */
     private $resultPageFactory;
 
 

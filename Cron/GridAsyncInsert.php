@@ -10,15 +10,9 @@ namespace Onecode\ShopFlixConnector\Cron;
 
 class GridAsyncInsert
 {
-    /**
-     **
-     * @var \Onecode\ShopFlixConnector\Model\GridAsyncInsert
-     */
+
     protected $asyncInsert;
 
-    /**
-     * @param \Onecode\ShopFlixConnector\Model\GridAsyncInsert $asyncInsert
-     */
     public function __construct(
         \Onecode\ShopFlixConnector\Model\GridAsyncInsert $asyncInsert
     )

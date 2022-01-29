@@ -29,21 +29,12 @@ use Onecode\ShopFlixConnector\Helper\ExportProductData;
 class Feed implements HttpGetActionInterface
 {
 
-    /** @var ExportProductData */
+
     private $exportProductData;
-    /** @var ResultFactory */
     private $resultFactory;
-    /** @var Data */
     private $helper;
-    /** @var RequestInterface */
     private $request;
-    /**
-     * @var StoreManagerInterface
-     */
     private $storeManager;
-    /**
-     * @var Context
-     */
     private $context;
 
     /**

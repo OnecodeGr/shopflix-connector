@@ -25,20 +25,9 @@ abstract class AbstractMassAction extends Action
      */
     const ADMIN_RESOURCE = 'Onecode_ShopFlixConnector::actions';
 
-    /**
-     * @var string
-     */
+
     protected $redirectUrl = '*/*/';
-
-
-    /**
-     * @var Filter
-     */
     protected $filter;
-
-    /**
-     * @var object
-     */
     protected $collectionFactory;
 
     /**

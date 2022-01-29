@@ -9,18 +9,12 @@
 namespace Onecode\ShopFlixConnector\Helper;
 
 use Exception;
-use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Onecode\ShopFlixConnector\Api\AddressRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Api\Data\StatusInterface;
-use Onecode\ShopFlixConnector\Api\ItemRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Library\Connector;
 use Onecode\ShopFlixConnector\Model\Order;
-use Onecode\ShopFlixConnector\Model\Order\AddressFactory;
-use Onecode\ShopFlixConnector\Model\Order\ItemFactory;
-use Onecode\ShopFlixConnector\Model\OrderFactory;
 use Onecode\ShopFlixConnector\Model\OrderRepository;
 use Psr\Log\LoggerInterface;
 
@@ -28,54 +22,25 @@ class ExportOrders
 {
     private $_helper;
     private $_connector;
-    private $_orderFactory;
     private $_orderRepository;
     private $_logger;
-    private $_productRepository;
-    private $_itemFactory;
-    private $_addressFactory;
-    private $_itemRepository;
-    private $_orderAddressRepository;
-    /**
-     * @var SearchCriteriaBuilder
-     */
     private $searchCriteriaBuilder;
 
     /**
      * @param Data $data
-     * @param Connector $connector
-     * @param OrderFactory $orderFactory
      * @param OrderRepository $orderRepository
      * @param LoggerInterface $logger
-     * @param ProductRepository $productRepository
-     * @param ItemFactory $itemFactory
-     * @param AddressFactory $addressFactory
-     * @param ItemRepositoryInterface $itemRepository
-     * @param AddressRepositoryInterface $orderAddressRepository
      */
     public function __construct(Data                       $data,
-                                OrderFactory               $orderFactory,
                                 OrderRepositoryInterface   $orderRepository,
                                 LoggerInterface            $logger,
-                                ProductRepository          $productRepository,
-                                ItemFactory                $itemFactory,
-                                AddressFactory             $addressFactory,
-                                ItemRepositoryInterface    $itemRepository,
-                                AddressRepositoryInterface $orderAddressRepository,
                                 SearchCriteriaBuilder      $searchCriteriaBuilder
 
 
     )
     {
         $this->_helper = $data;
-
-        $this->_orderFactory = $orderFactory;
         $this->_orderRepository = $orderRepository;
-        $this->_productRepository = $productRepository;
-        $this->_itemFactory = $itemFactory;
-        $this->_addressFactory = $addressFactory;
-        $this->_itemRepository = $itemRepository;
-        $this->_orderAddressRepository = $orderAddressRepository;
         $this->_logger = $logger;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }

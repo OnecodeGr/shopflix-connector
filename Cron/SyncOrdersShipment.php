@@ -12,14 +12,10 @@ use Onecode\ShopFlixConnector\Helper\ImportShipments;
 
 class SyncOrdersShipment
 {
-    /**
-     * @var ImportShipments
-     */
+
     private $importShipments;
 
-    /**
-     * @param ImportShipments $importShipments
-     */
+
     public function __construct(ImportShipments $importShipments)
     {
         $this->importShipments = $importShipments;

@@ -14,7 +14,6 @@ use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Onecode\ShopFlixConnector\Api\AddressRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
-use Onecode\ShopFlixConnector\Api\ItemRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\ManagementInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Library\Connector;
@@ -36,28 +35,17 @@ class ImportOrders
     private $_productRepository;
     private $_itemFactory;
     private $_addressFactory;
-    private $_itemRepository;
-    private $_orderAddressRepository;
-    /**
-     * @var ManagementInterface
-     */
     private $_orderManagement;
-
-    private $_startTime;
-    private $_endTime;
 
 
     /**
      * @param Data $data
-     * @param Connector $connector
      * @param OrderFactory $orderFactory
      * @param OrderRepository $orderRepository
      * @param LoggerInterface $logger
      * @param ProductRepository $productRepository
      * @param ItemFactory $itemFactory
      * @param AddressFactory $addressFactory
-     * @param ItemRepositoryInterface $itemRepository
-     * @param AddressRepositoryInterface $orderAddressRepository
      * @param ManagementInterface $orderManagement
      */
     public function __construct(Data                       $data,
@@ -67,22 +55,15 @@ class ImportOrders
                                 ProductRepository          $productRepository,
                                 ItemFactory                $itemFactory,
                                 AddressFactory             $addressFactory,
-                                ItemRepositoryInterface    $itemRepository,
-                                AddressRepositoryInterface $orderAddressRepository,
                                 ManagementInterface        $orderManagement
-
-
     )
     {
         $this->_helper = $data;
-
         $this->_orderFactory = $orderFactory;
         $this->_orderRepository = $orderRepository;
         $this->_productRepository = $productRepository;
         $this->_itemFactory = $itemFactory;
         $this->_addressFactory = $addressFactory;
-        $this->_itemRepository = $itemRepository;
-        $this->_orderAddressRepository = $orderAddressRepository;
         $this->_logger = $logger;
         $this->_orderManagement = $orderManagement;
 
@@ -117,7 +98,6 @@ class ImportOrders
         }
 
         $onTheWayOrders = $this->_connector->getOnTheWayOrders();
-
         foreach ($onTheWayOrders as $onTheWayOrder) {
             $this->processOnTheWayOrder($onTheWayOrder);
         }
@@ -138,6 +118,10 @@ class ImportOrders
         }
     }
 
+    /**
+     * @param $data
+     * @return OrderInterface|\Onecode\ShopFlixConnector\Model\Order|void
+     */
     private function processNewOrder($data)
     {
         $items = [];
@@ -241,6 +225,10 @@ class ImportOrders
 
     }
 
+    /**
+     * @param $data
+     * @return void
+     */
     private function processOnTheWayOrder($data)
     {
         try {
@@ -256,6 +244,10 @@ class ImportOrders
 
     }
 
+    /**
+     * @param $data
+     * @return void
+     */
     private function processPartialShippedOrder($data)
     {
         try {
@@ -271,6 +263,10 @@ class ImportOrders
 
     }
 
+    /**
+     * @param $data
+     * @return void
+     */
     private function processShippedOrder($data)
     {
         try {
@@ -286,7 +282,10 @@ class ImportOrders
 
     }
 
-
+    /**
+     * @param $data
+     * @return void
+     */
     private function processCompletedOrder($data)
     {
         try {

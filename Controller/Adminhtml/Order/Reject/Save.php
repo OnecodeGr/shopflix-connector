@@ -47,7 +47,7 @@ class Save extends Order implements HttpPostActionInterface
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (Exception $e) {
-                dd($e);
+
                 $this->messageManager->addErrorMessage(__('You have not accepted the item.'));
                 $this->logger->critical($e);
             }

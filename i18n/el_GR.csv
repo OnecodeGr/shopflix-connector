@@ -239,4 +239,6 @@ This field is used to filter the orders we requested from the SHOPFLIX API,Αυ�
 -18 hours,-18 ώρες
 -1 day,-1 ήμερα
 Time modifier,Tροποποιητής χρόνου
-
+"We have successfully synced the orders from SHOPFLIX","Συγχρονίσαμε με επιτυχία τις παραγγελίες από το SHOPFLIX"
+"We have successfully synced the shipments from SHOPFLIX","Συγχρονίσαμε με επιτυχία τις αποστολές από το SHOPFLIX"
+"Sync","Συγχρονισμός"

@@ -13,14 +13,9 @@ use Onecode\ShopFlixConnector\Helper\ImportOrders;
 class SyncOrdersFromShopFlix
 {
 
-    /**
-     * @var ImportOrders
-     */
+
     private $importOrders;
 
-    /**
-     * @param ImportOrders $importOrders
-     */
     public function __construct(ImportOrders $importOrders)
     {
         $this->importOrders = $importOrders;

@@ -13,14 +13,10 @@ use Onecode\ShopFlixConnector\Helper\ExportOrders;
 class SyncOrdersToShopFlix
 {
 
-    /**
-     * @var ExportOrders
-     */
+
     private $exportOrders;
 
-    /**
-     * @param ExportOrders $exportOrders
-     */
+
     public function __construct(ExportOrders $exportOrders)
     {
         $this->exportOrders = $exportOrders;

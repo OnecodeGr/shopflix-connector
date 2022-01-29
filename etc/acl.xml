@@ -18,6 +18,12 @@
                                     <resource id="Onecode_ShopFlixConnector::actions_view" title="View"
                                               translate="title"
                                               sortOrder="10"/>
+                                    <resource id="Onecode_ShopFlixConnector::actions_sync_orders" title="View"
+                                              translate="title"
+                                              sortOrder="20"/>
+                                    <resource id="Onecode_ShopFlixConnector::actions_sync_shipments" title="View"
+                                              translate="title"
+                                              sortOrder="20"/>
                                     <resource id="Onecode_ShopFlixConnector::accept" title="Accept" translate="title"
                                               sortOrder="50"/>
                                     <resource id="Onecode_ShopFlixConnector::download_manifest"

@@ -28,46 +28,17 @@ use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\CollectionFacto
 
 class MassPrintManifest extends AbstractMassAction implements HttpPostActionInterface
 {
-    /**
-     * @var FileFactory
-     */
+
     private $downloader;
-    /**
-     * @var TrackFactory
-     */
-    private $trackFactory;
-    /**
-     * @var TrackRepository
-     */
-    private $trackRepository;
-    /**
-     * @var ShipmentRepository
-     */
-    private $shipmentRepository;
-    /**
-     * @var OrderRepository
-     */
-    private $orderRepository;
-    /**
-     * @var Data
-     */
     private $helper;
 
 
     public function __construct(Context            $context,
                                 Filter             $filter,
                                 CollectionFactory  $collectionFactory,
-                                TrackFactory       $trackFactory,
-                                TrackRepository    $trackRepository,
-                                ShipmentRepository $shipmentRepository,
-                                OrderRepository    $orderRepository,
                                 FileFactory        $fileFactory,
                                 Data               $data)
     {
-        $this->trackFactory = $trackFactory;
-        $this->trackRepository = $trackRepository;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->orderRepository = $orderRepository;
         $this->downloader = $fileFactory;
         $this->collectionFactory = $collectionFactory;
         $this->helper = $data;
@@ -86,7 +57,6 @@ class MassPrintManifest extends AbstractMassAction implements HttpPostActionInte
 
         try {
 
-            /** @var Connector $connector */
             $connector = new Connector($this->helper->getUsername(), $this->helper->getApikey(), $this->helper->getApiUrl());
             $date = $this->_objectManager->get(
                 DateTime::class

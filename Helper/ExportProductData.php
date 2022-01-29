@@ -41,19 +41,9 @@ class ExportProductData
     private $_localeResolver;
     private $_emulation;
     private $_categoryRepository;
-    /**
-     * @var false
-     */
     private $isInventoryEnable = true;
-    /**
-     * @var GetSalableQuantityDataBySku|mixed
-     */
     private $_salableQtyDataBySku;
-    /**
-     * @var StockStateInterface|mixed
-     */
     private $_stockState;
-
     private $_simpler = false;
 
     /**
