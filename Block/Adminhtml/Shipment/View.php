@@ -73,7 +73,7 @@ class View extends Container
     public function getBackUrl()
     {
         return $this->getUrl(
-            'shopflix/shipments/view',
+            'shopflix/order/view',
             [
                 'order_id' => $this->getShipment() ? $this->getShipment()->getOrderId() : null,
                 'active_tab' => 'order_shipments'
