@@ -180,4 +180,17 @@ class Info extends AbstractOrder
 
         parent::_beforeToHtml();
     }
+
+    /**
+     * Get object created at date
+     *
+     * @param string $createdAt
+     * @return \DateTime
+     * @throws \Exception
+     */
+    public function getOrderAdminDate($createdAt): DateTime
+    {
+        return $this->_localeDate->date(new \DateTime($createdAt));
+    }
+
 }
