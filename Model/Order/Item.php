@@ -141,7 +141,12 @@ class Item extends AbstractModel implements ItemInterface
 
     public function isOrderedQtyLower(): bool
     {
-        return $this->getQty() < $this->getRealQty();
+
+        $realQty = 0;
+        foreach ( $this->getRealQty() as $realQty){
+            $realQty += $realQty['qty'];
+        }
+        return $this->getQty() < $realQty;
     }
 
     public function getRealQty(): array

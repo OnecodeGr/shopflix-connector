@@ -12,7 +12,6 @@ namespace Onecode\ShopFlixConnector\Helper;
 use Exception;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Onecode\ShopFlixConnector\Api\AddressRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Api\ManagementInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;

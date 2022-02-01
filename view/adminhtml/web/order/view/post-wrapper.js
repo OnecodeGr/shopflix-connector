@@ -83,5 +83,25 @@ define([
 
         return false;
     });
+    $('#order-view-sync-button').click(function () {
+        const msg = $.mage.__('Are you sure you want update the order?'),
+            url = $('#order-view-sync-button').data('url'),
+            method = 'POST';
+
+        confirm({
+            'content': msg,
+            'actions': {
+
+                /**
+                 * 'Confirm' action handler.
+                 */
+                confirm: function () {
+                    getForm(url, method).appendTo('body').trigger('submit');
+                }
+            }
+        });
+
+        return false;
+    });
 
 });

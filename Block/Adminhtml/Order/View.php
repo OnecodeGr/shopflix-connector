@@ -120,7 +120,7 @@ class View extends Container
                 'order_acceptance',
                 [
                     'label' => __('Accept'),
-                    'class' => 'edit primary',
+                    'class' => 'edit primary shopflix-icon-checkmark',
                     'id' => 'order-view-accept-button',
                     'data_attribute' => [
                         'url' => $this->getAcceptanceUrl()
@@ -129,7 +129,7 @@ class View extends Container
             );
         }
 
-        if ($this->_isAllowedAction('Onecode_ShopFlix::reject') && $order->canReject()) {
+        if ($this->_isAllowedAction('Onecode_ShopFlixConnector::reject') && $order->canReject()) {
             $this->addButton(
                 'order_reject',
                 [
@@ -138,8 +138,23 @@ class View extends Container
                     'id' => 'order-view-reject-button',
                     'data_attribute' => [
                         'url' => $this->getRejectUrl()
+
                     ]
                 ]
+            );
+        }
+
+        if($this->_isAllowedAction('Onecode_ShopFlixConnector::sync_order')){
+            $this->addButton(
+                'sync_order',
+                [
+                    'label' => __('Update Order'),
+                    'class' => 'sync primary-blue shopflix-icon-loop2',
+                    'id' => 'order-view-sync-button',
+                    'data_attribute' => [
+                        'url' => $this->getSyncOrdersUrl()
+                    ]
+                ],
             );
         }
     }
@@ -160,6 +175,10 @@ class View extends Container
         return $this->getUrl("shopflix/order_reject/start");
     }
 
+    public function getSyncOrdersUrl()
+    {
+        return $this->getUrl("shopflix/*/syncOrder");
+    }
 
     public function getReadyToBeShippedUrl()
     {

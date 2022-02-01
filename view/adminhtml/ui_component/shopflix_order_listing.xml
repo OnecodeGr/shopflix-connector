@@ -13,7 +13,7 @@
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">sync-orders</item>
                 <item name="label" xsi:type="string">Sync</item>
-                <item name="class" xsi:type="string">primary sync-orders</item>
+                <item name="class" xsi:type="string">primary-blue sync-orders shopflix-icon-loop2</item>
                 <item name="url" xsi:type="string">shopflix/order/sync</item>
             </item>
         </item>
@@ -46,6 +46,15 @@
         <exportButton name="export_button"/>
         <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Onecode_ShopFlixConnector/js/grid/tree-massactions">
+            <action name="shopflix_update_orders">
+                <settings>
+                    <url path="shopflix/order/massUpdateOrders"/>
+                    <type>shopflix_update_orders</type>
+                    <label translate="true">Update Orders</label>
+                </settings>
+            </action>
+        </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="shopflix_order_listing_columns">

@@ -20,10 +20,6 @@ use Onecode\ShopFlixConnector\Api\Data\ShipmentInterface;
 use Onecode\ShopFlixConnector\Api\Data\ShipmentTrackInterface;
 use Onecode\ShopFlixConnector\Helper\Data;
 use Onecode\ShopFlixConnector\Library\Connector;
-use Onecode\ShopFlixConnector\Model\Order\Shipment\TrackFactory;
-use Onecode\ShopFlixConnector\Model\Order\Shipment\TrackRepository;
-use Onecode\ShopFlixConnector\Model\Order\ShipmentRepository;
-use Onecode\ShopFlixConnector\Model\OrderRepository;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Shipment\CollectionFactory;
 
 class MassPrintManifest extends AbstractMassAction implements HttpPostActionInterface

@@ -636,10 +636,10 @@ class Order extends AbstractModel implements OrderInterface
      * @return $this
      * @throws LocalizedException
      */
-    public function accept(): OrderInterface
+    public function accept(bool $synced = false): OrderInterface
     {
         if ($this->canAccept()) {
-            $this->registerAcceptance();
+            $this->registerAcceptance($synced);
         }
         return $this;
     }
@@ -679,18 +679,19 @@ class Order extends AbstractModel implements OrderInterface
     }
 
     /**
+     * @param bool $synced
      * @param bool $graceful
      * @return $this
      * @throws LocalizedException
      */
-    public function registerAcceptance(bool $graceful = true): OrderInterface
+    public function registerAcceptance(bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canAccept()) {
             $state = self::STATE_ACCEPTED;
             $this->setState($state)
                 ->setStatus($this->getConfig()->getStateDefaultStatus($state));
             $this->addStatusHistoryComment(__("Order Accepted"), StatusInterface::STATUS_PICKING);
-            $this->setSynced(false);
+            $this->setSynced($synced);
         } elseif (!$graceful) {
             throw new LocalizedException(__('We cannot accept this order.'));
         }
@@ -824,13 +825,14 @@ class Order extends AbstractModel implements OrderInterface
 
     /**
      * @param string $message
+     * @param bool $synced
      * @return $this
      * @throws LocalizedException
      */
-    public function reject(string $message = ''): OrderInterface
+    public function reject(string $message = '', $synced = false): OrderInterface
     {
         if ($this->canReject()) {
-            $this->registerRejection($message);
+            $this->registerRejection($message, $synced);
         }
         return $this;
     }
@@ -849,12 +851,13 @@ class Order extends AbstractModel implements OrderInterface
      * Prepare order totals to ready to be shipped
      *
      * @param string $comment
+     * @param bool synced
      * @param bool $graceful
      * @return $this
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function registerRejection(string $comment = '', bool $graceful = true): OrderInterface
+    public function registerRejection(string $comment = '', bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canReject()) {
             $state = self::STATE_REJECTED;
@@ -863,7 +866,7 @@ class Order extends AbstractModel implements OrderInterface
             if (!empty($comment)) {
                 $this->addStatusHistoryComment($comment, self::STATE_REJECTED, true);
             }
-            $this->setSynced(false);
+            $this->setSynced($synced);
         } elseif (!$graceful) {
             throw new LocalizedException(__('We cannot reject this order.'));
         }
@@ -872,20 +875,21 @@ class Order extends AbstractModel implements OrderInterface
 
     /**
      * @param string $message
+     * @param bool $synced
      * @return $this
      * @throws LocalizedException
      */
-    public function readyToBeShipped(string $message = ''): OrderInterface
+    public function readyToBeShipped(string $message = '', bool $synced = false): OrderInterface
     {
         if ($this->canReadyToBeShipped()) {
-            $this->registerReadyToBeShipped($message);
+            $this->registerReadyToBeShipped($synced , $message);
         }
         return $this;
     }
 
     public function canReadyToBeShipped(): bool
     {
-        if ($this->getStatus() !== StatusInterface::STATUS_PICKING) {
+        if ($this->getStatus() !== StatusInterface::STATUS_PICKING ) {
             return false;
         }
 
@@ -895,13 +899,14 @@ class Order extends AbstractModel implements OrderInterface
     /**
      * Prepare order totals to cancellation
      *
+     * @param bool $synced
      * @param string $comment
      * @param bool $graceful
      * @return $this
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function registerReadyToBeShipped(bool $graceful = true): OrderInterface
+    public function registerReadyToBeShipped(bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canReadyToBeShipped()) {
             $state = self::STATE_ACCEPTED;
@@ -912,7 +917,7 @@ class Order extends AbstractModel implements OrderInterface
                 StatusInterface::STATUS_READY_TO_BE_SHIPPED
             );
 
-            $this->setSynced(false);
+            $this->setSynced($synced);
         } elseif (!$graceful) {
             throw new LocalizedException(__('We cannot reject this order.'));
         }
@@ -937,7 +942,7 @@ class Order extends AbstractModel implements OrderInterface
                     $this->getStatus() === StatusInterface::STATUS_PICKING))
             || ($this->getState() === self::STATE_COMPLETED &&
                 $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED ||
-                $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY) ;
+                $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY);
     }
 
     public function registerPartialShipped(string $comment = '', bool $graceful = true): OrderInterface
@@ -1077,7 +1082,7 @@ class Order extends AbstractModel implements OrderInterface
 
     public function canCancel(): bool
     {
-        return  ($this->getStatus() === StatusInterface::STATUS_PENDING_ACCEPTANCE &&
+        return ($this->getStatus() === StatusInterface::STATUS_PENDING_ACCEPTANCE &&
             $this->getState() === self::STATE_PENDING_ACCEPTANCE);
 
     }

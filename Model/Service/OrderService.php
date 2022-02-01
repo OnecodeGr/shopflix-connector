@@ -87,11 +87,11 @@ class OrderService implements ManagementInterface
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
-    public function accept(int $id): bool
+    public function accept(int $id, bool $synced = false): bool
     {
         $order = $this->orderRepository->getById($id);
         if ($order->canAccept()) {
-            $order->accept();
+            $order->accept($synced);
             if ($this->configHelper->toOrder()) {
                 $this->converter->toMagentoOrder($order);
             }
@@ -107,11 +107,11 @@ class OrderService implements ManagementInterface
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
-    public function reject(int $id, string $message = ''): bool
+    public function reject(int $id, string $message = '', $synced = false): bool
     {
         $order = $this->orderRepository->getById($id);
         if ($order->canReject()) {
-            $order->reject($message);
+            $order->reject($message, $synced);
             $this->orderRepository->save($order);
             return true;
         }
@@ -140,12 +140,12 @@ class OrderService implements ManagementInterface
         return $this->orderRepository->getById($id)->getStatus();
     }
 
-    public function readyToBeShipped(int $id): bool
+    public function readyToBeShipped(int $id, bool $synced = false): bool
     {
         $order = $this->orderRepository->getById($id);
         if ($order->canReadyToBeShipped()) {
             try {
-                $order->readyToBeShipped();
+                $order->readyToBeShipped('', $synced);
             } catch (LocalizedException $e) {
                 $this->logger->debug($e->getMessage());
                 return false;

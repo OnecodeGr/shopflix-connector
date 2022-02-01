@@ -19,18 +19,20 @@ interface ManagementInterface
      * Accepts a specified order.
      *
      * @param int $id The order ID.
+     * @param bool $synced
      * @return bool
      */
-    public function accept(int $id): bool;
+    public function accept(int $id, bool $synced = false): bool;
 
     /**
      * Cancels a specified order.
      *
      * @param int $id The order ID.
      * @param string $message
+     * @param bool $synced
      * @return bool
      */
-    public function reject(int $id, string $message = ''): bool;
+    public function reject(int $id, string $message = '', bool $synced = false): bool;
 
     /**
      * Lists comments for a specified order.
@@ -63,9 +65,10 @@ interface ManagementInterface
      * Ready to be shipped a specified order.
      *
      * @param int $id The order ID.
+     * @param bool $synced
      * @return bool
      */
-    public function readyToBeShipped(int $id): bool;
+    public function readyToBeShipped(int $id , bool $synced = false): bool;
 
     /**
      * Cancel a specified order.
@@ -82,6 +85,7 @@ interface ManagementInterface
      * @return bool
      */
     public function partialShipped(int $id): bool;
+
     /**
      *  Shipped a specified order.
      *
@@ -104,5 +108,5 @@ interface ManagementInterface
      * @param int $id The order ID.
      * @return bool
      */
-    public function completed(int $id):bool;
+    public function completed(int $id): bool;
 }
