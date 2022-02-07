@@ -20,6 +20,16 @@
             <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\Order\Item</argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="onecodeShopFlixOrderMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName" xsi:type="string">
+                Onecode\ShopFlixConnector\Model\ResourceModel\Order
+            </argument>
+            <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\Order</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid"
                  type="Onecode\ShopFlixConnector\Model\ResourceModel\Grid">
         <arguments>
@@ -440,6 +450,11 @@
     <type name="Onecode\ShopFlixConnector\Model\Order\ItemRepository">
         <arguments>
             <argument name="metadata" xsi:type="object">onecodeShopFlixOrderItemMetadata</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\OrderRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixOrderMetadata</argument>
         </arguments>
     </type>
     <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order">

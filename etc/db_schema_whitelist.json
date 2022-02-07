@@ -19,7 +19,13 @@
             "billing_address_id": true,
             "sync": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "is_invoice": true,
+            "company_name": true,
+            "company_owner": true,
+            "company_address": true,
+            "company_vat_number": true,
+            "tax_office": true
         },
         "constraint": {
             "PRIMARY": true,
@@ -52,7 +58,8 @@
             "ONECODE_SHOPFLIX_ORDER_GRID_BILLING_NAME": true,
             "ONECODE_SHOPFLIX_ORDER_GRID_CREATED_AT": true,
             "ONECODE_SHOPFLIX_ORDER_GRID_UPDATED_AT": true,
-            "FTI_2AEFCCE74ECAA44E9B1B153F3EE56DCE": true
+            "FTI_2AEFCCE74ECAA44E9B1B153F3EE56DCE": true,
+            "FTI_DDE178BA8A2EB63B82E5AB27C51E51B2": true
         },
         "constraint": {
             "PRIMARY": true,
@@ -80,7 +87,8 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "FK_3E5F881671A2DB1114C9DBFDEAE348D2": true
+            "FK_3E5F881671A2DB1114C9DBFDEAE348D2": true,
+            "FK_D7618B7A824590C68BB441971B272047": true
         }
     },
     "onecode_shopflix_order_status_history": {
@@ -98,7 +106,8 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "FK_078562D2431827CB8F03C7D685C8457A": true
+            "FK_078562D2431827CB8F03C7D685C8457A": true,
+            "FK_F72F6628234BA2C6361ABC364E6C2C75": true
         }
     },
     "onecode_shopflix_order_item": {
@@ -120,7 +129,8 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "FK_3A9125C80F7CB33A4A4A80F313E3AEC0": true
+            "FK_3A9125C80F7CB33A4A4A80F313E3AEC0": true,
+            "FK_503540D7D0FA8C6740D9DC1DF2BBE13E": true
         }
     },
     "onecode_shopflix_shipment": {
@@ -142,7 +152,8 @@
         "constraint": {
             "PRIMARY": true,
             "FK_0FACE42F5D12F7BEAB57123FD9CD5216": true,
-            "ONECODE_SHOPFLIX_SHIPMENT_INCREMENT_ID": true
+            "ONECODE_SHOPFLIX_SHIPMENT_INCREMENT_ID": true,
+            "FK_4AA06EF6E3B849332B925AC99D6BE765": true
         }
     },
     "onecode_shopflix_shipment_grid": {
@@ -172,7 +183,8 @@
             "ONECODE_SHOPFLIX_SHIPMENT_GRID_SHIPPING_NAME": true,
             "ONECODE_SHOPFLIX_SHIPMENT_GRID_BILLING_NAME": true,
             "ONECODE_SHOPFLIX_SHIPMENT_GRID_ORDER_ID": true,
-            "FTI_72386FF6E51F27022102E7C72B91F9B9": true
+            "FTI_72386FF6E51F27022102E7C72B91F9B9": true,
+            "FTI_5E10B9AEA5E026E4962310D1C0C08E40": true
         },
         "constraint": {
             "PRIMARY": true,
@@ -195,7 +207,8 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "FK_7B5D4359CE5F69BB6EDAB9A4AC2F9A77": true
+            "FK_7B5D4359CE5F69BB6EDAB9A4AC2F9A77": true,
+            "FK_DD182CF91216338AE7EA871ACE1304F1": true
         }
     },
     "onecode_shopflix_shipment_track": {
@@ -217,7 +230,18 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "FK_E58A3D1B6332099FFD0239E895FEC515": true
+            "FK_E58A3D1B6332099FFD0239E895FEC515": true,
+            "FK_DF78C42C1ACF5E7444F4C924ADAE4B94": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "is_shopflix": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "is_shopflix": true
         }
     }
 }

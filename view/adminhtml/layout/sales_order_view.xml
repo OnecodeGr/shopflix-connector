@@ -5,5 +5,13 @@
             <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Sales\Order\View\Shopflix"
                    name="sales_order_view_shopflix" template="Onecode_ShopFlixConnector::sales/order/view/shopflix.phtml" />
         </referenceBlock>
+        <referenceBlock name="sales_order_tabs">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Sales\Order\View\Tab\CompanyData"
+                   name="shopflix.company.data"/>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">order_company_data</argument>
+                <argument name="block" xsi:type="string">shopflix.company.data</argument>
+            </action>
+        </referenceBlock>
     </body>
 </page>

@@ -16,6 +16,7 @@ use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Api\ManagementInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Library\Connector;
+use Onecode\ShopFlixConnector\Model\Order;
 use Onecode\ShopFlixConnector\Model\Order\AddressFactory;
 use Onecode\ShopFlixConnector\Model\Order\Item;
 use Onecode\ShopFlixConnector\Model\Order\ItemFactory;
@@ -47,14 +48,14 @@ class ImportOrders
      * @param AddressFactory $addressFactory
      * @param ManagementInterface $orderManagement
      */
-    public function __construct(Data                       $data,
-                                OrderFactory               $orderFactory,
-                                OrderRepositoryInterface   $orderRepository,
-                                LoggerInterface            $logger,
-                                ProductRepository          $productRepository,
-                                ItemFactory                $itemFactory,
-                                AddressFactory             $addressFactory,
-                                ManagementInterface        $orderManagement
+    public function __construct(Data                     $data,
+                                OrderFactory             $orderFactory,
+                                OrderRepositoryInterface $orderRepository,
+                                LoggerInterface          $logger,
+                                ProductRepository        $productRepository,
+                                ItemFactory              $itemFactory,
+                                AddressFactory           $addressFactory,
+                                ManagementInterface      $orderManagement
     )
     {
         $this->_helper = $data;
@@ -119,10 +120,11 @@ class ImportOrders
 
     /**
      * @param $data
-     * @return OrderInterface|\Onecode\ShopFlixConnector\Model\Order|void
+     * @return OrderInterface|Order|void
      */
     private function processNewOrder($data)
     {
+
         $items = [];
 
         $price = 0;
@@ -140,9 +142,12 @@ class ImportOrders
             }
         }
 
+
         if (empty($items)) {
             return;
         }
+
+
         try {
             $order = $this->_orderRepository->getByIncrementId($data['order']['increment_id']);
         } catch (NoSuchEntityException $e) {
@@ -182,6 +187,15 @@ class ImportOrders
         }
         $order->setItems($items);
 
+        if ($data['is_invoice']) {
+            $order->setIsInvoice(true);
+            foreach ($data['invoice'] as $key => $value) {
+                $order->setData($key, $value);
+            }
+        } else {
+            $order->setIsInvoice(false);
+        }
+
         $this->_orderRepository->save($order);
 
         if ($this->_helper->autoAccept()) {
@@ -218,7 +232,7 @@ class ImportOrders
             $order = $this->processNewOrder($data);
         }
 
-        if ($order->canCancel()) {
+        if ($order && $order->canCancel()) {
             $this->_orderManagement->cancel($order->getEntityId());
         }
 
@@ -237,7 +251,7 @@ class ImportOrders
             $order = $this->processNewOrder($data);
         }
 
-        if ($order->canOnTheWay()) {
+        if ($order && $order->canOnTheWay()) {
             $this->_orderManagement->onTheWay($order->getEntityId());
         }
 
@@ -256,7 +270,7 @@ class ImportOrders
             $order = $this->processNewOrder($data);
         }
 
-        if ($order->canPartialShipped()) {
+        if ($order && $order->canPartialShipped()) {
             $this->_orderManagement->partialShipped($order->getEntityId());
         }
 
@@ -275,7 +289,7 @@ class ImportOrders
             $order = $this->processNewOrder($data);
         }
 
-        if ($order->canShipped()) {
+        if ($order && $order->canShipped()) {
             $this->_orderManagement->shipped($order->getEntityId());
         }
 
@@ -294,7 +308,7 @@ class ImportOrders
             $order = $this->processNewOrder($data);
         }
 
-        if ($order->canCompleted()) {
+        if ($order && $order->canCompleted()) {
             $this->_orderManagement->completed($order->getEntityId());
         }
 

@@ -882,14 +882,14 @@ class Order extends AbstractModel implements OrderInterface
     public function readyToBeShipped(string $message = '', bool $synced = false): OrderInterface
     {
         if ($this->canReadyToBeShipped()) {
-            $this->registerReadyToBeShipped($synced , $message);
+            $this->registerReadyToBeShipped($synced, $message);
         }
         return $this;
     }
 
     public function canReadyToBeShipped(): bool
     {
-        if ($this->getStatus() !== StatusInterface::STATUS_PICKING ) {
+        if ($this->getStatus() !== StatusInterface::STATUS_PICKING) {
             return false;
         }
 
@@ -1166,6 +1166,66 @@ class Order extends AbstractModel implements OrderInterface
         return $this->_getData(OrderInterface::MAGENTO_ORDER_ID);
     }
 
+    public function setIsInvoice(bool $isInvoice): OrderInterface
+    {
+        return $this->setData(OrderInterface::IS_INVOICE, $isInvoice);
+    }
+
+    public function isInvoice(): bool
+    {
+        return $this->getData(OrderInterface::IS_INVOICE);
+    }
+
+    public function setCompanyName(string $companyName): OrderInterface
+    {
+        return $this->setData(OrderInterface::COMPANY_NAME, $companyName);
+    }
+
+    public function getCompanyName(): string
+    {
+        return $this->getData(OrderInterface::COMPANY_NAME);
+    }
+
+    public function setCompanyOwner(string $companyOwner): OrderInterface
+    {
+        return $this->setData(OrderInterface::COMPANY_OWNER, $companyOwner);
+    }
+
+    public function getCompanyOwner(): string
+    {
+        return $this->getData(OrderInterface::COMPANY_OWNER);
+    }
+
+    public function setCompanyAddress(string $companyAddress): OrderInterface
+    {
+        return $this->setData(OrderInterface::COMPANY_ADDRESS, $companyAddress);
+    }
+
+    public function getCompanyAddress(): string
+    {
+        return $this->getData(OrderInterface::COMPANY_ADDRESS);
+    }
+
+    public function setCompanyVatNumber(string $companyVatNumber): OrderInterface
+    {
+        return $this->setData(OrderInterface::COMPANY_VAT_NUMBER, $companyVatNumber);
+    }
+
+    public function getCompanyVatNumber(): string
+    {
+        return $this->getData(OrderInterface::COMPANY_VAT_NUMBER);
+    }
+
+    public function setTaxOffice(string $taxOffice): OrderInterface
+    {
+        return $this->setData(OrderInterface::TAX_OFFICE, $taxOffice);
+    }
+
+    public function getTaxOffice(): string
+    {
+        return $this->getData(OrderInterface::TAX_OFFICE);
+    }
+
     /**
      * @inheritdoc
      */
@@ -1174,5 +1234,6 @@ class Order extends AbstractModel implements OrderInterface
         $this->setIdFieldName(OrderInterface::ENTITY_ID);
         $this->_init(ResourceModel::class);
     }
+
 }
 

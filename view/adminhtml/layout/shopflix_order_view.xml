@@ -79,6 +79,12 @@
                         Onecode\ShopFlixConnector\Block\Adminhtml\Order\View\Tab\History
                     </argument>
                 </action>
+                <block class="Onecode\ShopFlixConnector\Block\Adminhtml\Order\View\Tab\CompanyData"
+                       name="shopflix.company.data"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">order_company_data</argument>
+                    <argument name="block" xsi:type="string">shopflix.company.data</argument>
+                </action>
             </block>
         </referenceContainer>
         <referenceBlock name="head.components">

@@ -41,6 +41,13 @@ interface OrderInterface
     const STATE_COMPLETED = "completed";
 
 
+    const IS_INVOICE = "is_invoice";
+    const COMPANY_NAME = "company_name";
+    const COMPANY_OWNER = "company_owner";
+    const COMPANY_ADDRESS = "company_address";
+    const COMPANY_VAT_NUMBER = "company_vat_number";
+    const TAX_OFFICE = "tax_office";
+
     const STATUS_HISTORIES = 'status_histories';
 
     const ATTRIBUTES = [
@@ -56,7 +63,13 @@ interface OrderInterface
         self::CUSTOMER_LASTNAME,
         self::CUSTOMER_REMOTE_IP,
         self::CUSTOMER_NOTE,
-        self::SYNCED
+        self::SYNCED,
+        self::IS_INVOICE,
+        self::COMPANY_NAME,
+        self::COMPANY_OWNER,
+        self::COMPANY_ADDRESS,
+        self::COMPANY_VAT_NUMBER,
+        self::TAX_OFFICE
     ];
 
     /**
@@ -318,4 +331,70 @@ interface OrderInterface
      * @return bool
      */
     public function canAutoAccept(): bool;
+
+    /**
+     * @param bool $isInvoice
+     * @return OrderInterface
+     */
+    public function setIsInvoice(bool $isInvoice): OrderInterface;
+
+    /**
+     * @return bool
+     */
+    public function isInvoice(): bool;
+
+    /**
+     * @param string $companyName
+     * @return OrderInterface
+     */
+    public function setCompanyName(string $companyName): OrderInterface;
+
+    /**
+     * @return string
+     */
+    public function getCompanyName(): string;
+
+    /**
+     * @param string $companyOwner
+     * @return OrderInterface
+     */
+    public function setCompanyOwner(string $companyOwner): OrderInterface;
+
+    /**
+     * @return string
+     */
+    public function getCompanyOwner(): string;
+
+    /**
+     * @param string $companyAddress
+     * @return OrderInterface
+     */
+    public function setCompanyAddress(string $companyAddress): OrderInterface;
+
+    /**
+     * @return string
+     */
+    public function getCompanyAddress(): string;
+
+    /**
+     * @param string $companyVatNumber
+     * @return OrderInterface
+     */
+    public function setCompanyVatNumber(string $companyVatNumber): OrderInterface;
+
+    /**
+     * @return string
+     */
+    public function getCompanyVatNumber(): string;
+
+    /**
+     * @param string $taxOffice
+     * @return OrderInterface
+     */
+    public function setTaxOffice(string $taxOffice): OrderInterface;
+
+    /**
+     * @return string
+     */
+    public function getTaxOffice(): string;
 }

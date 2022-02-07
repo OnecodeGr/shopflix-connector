@@ -29,6 +29,12 @@
         <column xsi:type="int" name="billing_address_id" unsigned="false" nullable="true" identity="false"
                 comment="Billing Address ID"/>
         <column xsi:type="boolean" default="1" name="sync" nullable="false" comment="Sync Status"/>
+        <column xsi:type="boolean" default="0" name="is_invoice" nullable="false" comment="Is invoice"/>
+        <column xsi:type="varchar" name="company_name" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="company_owner" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="company_address" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="company_vat_number" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="tax_office" nullable="true" length="255"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
@@ -332,9 +338,11 @@
         </index>
     </table>
     <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
-        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0" comment="Is ShopFlix Order"/>
+        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0"
+                comment="Is ShopFlix Order"/>
     </table>
     <table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Order">
-        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0" comment="Is ShopFlix Order"/>
+        <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0"
+                comment="Is ShopFlix Order"/>
     </table>
 </schema>
