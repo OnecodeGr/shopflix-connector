@@ -69,7 +69,7 @@ class CompanyData extends Template implements TabInterface
     public function canShowTab()
     {
 
-        return $this->getOrder()->isInvoice();
+        return $this->getOrder() && $this->getOrder()->isInvoice();
     }
 
     public function getOrder()
@@ -100,6 +100,6 @@ class CompanyData extends Template implements TabInterface
 
     public function isHidden()
     {
-        return !$this->getOrder()->isInvoice();
+        return $this->getOrder() && !$this->getOrder()->isInvoice();
     }
 }
