@@ -1181,7 +1181,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this->setData(OrderInterface::COMPANY_NAME, $companyName);
     }
 
-    public function getCompanyName(): string
+    public function getCompanyName(): ?string
     {
         return $this->getData(OrderInterface::COMPANY_NAME);
     }
@@ -1191,7 +1191,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this->setData(OrderInterface::COMPANY_OWNER, $companyOwner);
     }
 
-    public function getCompanyOwner(): string
+    public function getCompanyOwner(): ?string
     {
         return $this->getData(OrderInterface::COMPANY_OWNER);
     }
@@ -1211,7 +1211,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this->setData(OrderInterface::COMPANY_VAT_NUMBER, $companyVatNumber);
     }
 
-    public function getCompanyVatNumber(): string
+    public function getCompanyVatNumber(): ?string
     {
         return $this->getData(OrderInterface::COMPANY_VAT_NUMBER);
     }
@@ -1221,7 +1221,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this->setData(OrderInterface::TAX_OFFICE, $taxOffice);
     }
 
-    public function getTaxOffice(): string
+    public function getTaxOffice(): ?string
     {
         return $this->getData(OrderInterface::TAX_OFFICE);
     }

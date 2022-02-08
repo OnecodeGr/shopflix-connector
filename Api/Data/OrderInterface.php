@@ -352,7 +352,7 @@ interface OrderInterface
     /**
      * @return string
      */
-    public function getCompanyName(): string;
+    public function getCompanyName(): ?string;
 
     /**
      * @param string $companyOwner
@@ -363,7 +363,7 @@ interface OrderInterface
     /**
      * @return string
      */
-    public function getCompanyOwner(): string;
+    public function getCompanyOwner(): ?string;
 
     /**
      * @param string $companyAddress
@@ -374,7 +374,7 @@ interface OrderInterface
     /**
      * @return string
      */
-    public function getCompanyAddress(): string;
+    public function getCompanyAddress(): ?string;
 
     /**
      * @param string $companyVatNumber
@@ -385,7 +385,7 @@ interface OrderInterface
     /**
      * @return string
      */
-    public function getCompanyVatNumber(): string;
+    public function getCompanyVatNumber(): ?string;
 
     /**
      * @param string $taxOffice
@@ -396,5 +396,5 @@ interface OrderInterface
     /**
      * @return string
      */
-    public function getTaxOffice(): string;
+    public function getTaxOffice(): ?string;
 }

@@ -68,7 +68,6 @@ class CompanyData extends Template implements TabInterface
 
     public function canShowTab()
     {
-
         return $this->getOrder() && $this->getOrder()->isInvoice();
     }
 
