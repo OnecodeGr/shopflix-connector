@@ -87,19 +87,18 @@ class OrderRepository implements OrderRepositoryInterface
      * @inheritDoc
      */
     public function getByIncrementId(string $incrementId)
-    {   if (!$incrementId) {
-        throw new InputException(__('An ID is needed. Set the ID and try again.'));
-    }
+    {
+        if (!$incrementId) {
+            throw new InputException(__('An ID is needed. Set the ID and try again.'));
+        }
         if (!isset($this->registryIncrementId[$incrementId])) {
             /** @var OrderInterface $order */
-            $order = $this->metadata->getNewInstance()->load($incrementId, OrderInterface::MAGENTO_ORDER_ID);
+            $order = $this->metadata->getNewInstance()->load($incrementId, OrderInterface::SHOPFLIX_ORDER_ID);
             if (!$order->getId()) {
                 throw new NoSuchEntityException(
                     __('Unable to find shopflix order with increment id "%1"', $incrementId)
                 );
             }
-
-
             $this->registryIncrementId[$incrementId] = $order;
         }
         return $this->registryIncrementId[$incrementId];
