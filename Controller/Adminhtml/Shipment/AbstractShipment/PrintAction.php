@@ -16,6 +16,7 @@ use Magento\Backend\Model\View\Result\Forward;
 use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
@@ -87,7 +88,7 @@ abstract class PrintAction extends Action
     }
 
     /**
-     * @return ResponseInterface|Forward
+     * @return Forward|ResponseInterface|ResponseInterface
      * @throws Exception
      */
     public function execute()
@@ -110,9 +111,15 @@ abstract class PrintAction extends Action
                     }
 
                     if ($track) {
-                        $voucherPdf = $connector->printVoucher($track->getTrackNumber());
+                        $voucherPdf = $connector->printVoucher($track->getTrackNumber(), $this->helper->getVoucherPrintFormat());
                         $fileContent = base64_decode($voucherPdf['Voucher']);
 
+
+                        $content = [
+                            "type" => "string",
+                            "value" => $fileContent,
+                            "rm" => true
+                        ];
                         if ($shipment->getOrder()->getState() === OrderInterface::STATE_ACCEPTED) {
                             $this->orderRepository->save($shipment->getOrder()
                                 ->setStatus(StatusInterface::STATUS_READY_TO_BE_SHIPPED)
@@ -127,9 +134,8 @@ abstract class PrintAction extends Action
                         $this->shipmentRepository->save($shipment);
                         return $this->_fileFactory->create(
                             $track->getTrackNumber() . $date . '.pdf',
-                            $fileContent,
-                            DirectoryList::VAR_DIR,
-                            'application/pdf');
+                            $content,
+                            DirectoryList::VAR_DIR);
                     } else {
                         throw new LocalizedException(__("We can not print the voucher try again later"));
                     }
@@ -156,7 +162,6 @@ abstract class PrintAction extends Action
         } catch (ServerException $e) {
             $voucher = $connector->getVoucher($shipment->getIncrementId());
         }
-
 
 
         if ($voucher) {

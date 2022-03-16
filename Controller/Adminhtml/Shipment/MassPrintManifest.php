@@ -105,8 +105,13 @@ class MassPrintManifest extends AbstractMassAction implements HttpPostActionInte
                     throw new LocalizedException(__("SHOPFLIX: %1",[$manifest['manifest']]));
                 }
                 $fileContent = base64_decode($manifest['manifest']);
+                $content = [
+                    "type" => "string",
+                    "value" => $fileContent,
+                    "rm" => true
+                ];
                 return $this->downloader->create("manifest-" . $date . ".pdf",
-                    $fileContent, DirectoryList::VAR_DIR, 'application/pdf');
+                    $content, DirectoryList::VAR_DIR);
             } else {
                 throw new LocalizedException(__("We can not print manifest for empty shipments"));
             }

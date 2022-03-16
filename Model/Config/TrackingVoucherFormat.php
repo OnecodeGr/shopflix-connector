@@ -21,10 +21,10 @@ class TrackingVoucherFormat implements OptionSourceInterface
         return [
             "clean" => __("Courier Center Standard"),
             "pdf" => __("Courier Center Labeled"),
-            "singleclean" => __("Courier Center Standard (1 tracking voucher per page)"),
+            "singleclean" => __("Courier Center Standard ( 1 tracking voucher per page )"),
             "singlepdf" => __("Courier Center Labeled ( 1 tracking voucher per page )"),
             "singlepdf_100x150" => __("SHOPFLIX Labeled 100x150"),
-            "singlepdf_100x170" => __("SHOPFLIX labeled 100x170")
+            "singlepdf_100x170" => __("SHOPFLIX Labeled 100x170")
         ];
     }
 }

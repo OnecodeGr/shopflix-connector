@@ -91,8 +91,6 @@ class ExportProductData
      */
     public function exportData($storeId = null): array
     {
-
-
         if ($storeId) {
             $this->_localeResolver->emulate($storeId);
             $this->_emulation->startEnvironmentEmulation($storeId, Area::AREA_FRONTEND, true);
@@ -100,10 +98,8 @@ class ExportProductData
         /** @var Store $store */
         $store = $this->_storeManager->getStore();
         $select = [
-
             $this->_helper->getMpnAttribute(),
             $this->_helper->getTitleAttribute(),
-
             $this->_helper->getEanAttribute(),
             "image",
             "tax_class_id",
@@ -181,9 +177,9 @@ class ExportProductData
      * @param $data
      * @param array $variation
      * @param Product|ProductInterface|null $parent
-     * @return float|int|null
+     * @return void
      */
-    private function processSimple($product, &$data, array $variation = [], $parent = null)
+    private function processSimple($product, &$data, array $variation = [], $parent = null): void
     {
         $stock = 0;
         if ($this->isInventoryEnable) {
@@ -204,16 +200,12 @@ class ExportProductData
         }
 
         $data[$product->getId()] = [
-            "product_id" => $product->getId(),
             "sku" => $product->getSku(),
             "mpn" => $product->getData($this->_helper->getMpnAttribute()),
             "ean" => $product->getData($this->_helper->getEanAttribute()),
-
             "name" => $product->getData($this->_helper->getTitleAttribute()),
-
             "price" => $parent != null ? $parent->getData("final_price") : number_format($product->getData('final_price'), 2),
             "list_price" => $parent != null ? $parent->getData("price") : number_format($product->getData('price'), 2),
-
             "url" => $parent != null ? $parent->getProductUrl() : $product->getProductUrl(),
             "shipping_lead_time" => $parent != null ? $parent->getData("onecode_shopflix_shipping_lead_time") : $product->getData("onecode_shopflix_shipping_lead_time"),
             "offer_from" => $parent != null ? $parent->getData("onecode_shopflix_offer_date_from") : $product->getData("onecode_shopflix_offer_date_from"),
@@ -236,7 +228,6 @@ class ExportProductData
         }
 
 
-        return $stock;
     }
 
     /**
@@ -291,10 +282,9 @@ class ExportProductData
      * @param bool $simpler
      * @return $this
      */
-    public function isSimpler($simpler)
+    public function isSimpler(bool $simpler): ExportProductData
     {
         $this->_simpler = $simpler;
-
         return $this;
     }
 }

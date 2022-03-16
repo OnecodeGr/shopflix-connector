@@ -2,7 +2,7 @@
 
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="onecode_shopflix_order" resource="default" engine="innodb" comment="ShopFlix Flat Order">
+    <table name="onecode_shopflix_order" resource="default" engine="innodb" comment="SHOPFLIX Flat Order">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="int" name="shopflix_order_id" unsigned="true" nullable="false"
@@ -50,7 +50,7 @@
             <column name="magento_order_id"/>
         </index>
     </table>
-    <table name="onecode_shopflix_order_grid" resource="sales" engine="innodb" comment="ShopFlix Flat Order Grid">
+    <table name="onecode_shopflix_order_grid" resource="sales" engine="innodb" comment="SHOPFLIX Flat Order Grid">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="false"
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="status" nullable="true" length="32" comment="Status"/>
@@ -102,7 +102,7 @@
         </index>
     </table>
     <table name="onecode_shopflix_order_address" resource="default" engine="innodb"
-           comment="ShopFlix Flat Order Address">
+           comment="SHOPFLIX Flat Order Address">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="int" name="parent_id" unsigned="true" nullable="true" identity="false"
@@ -130,7 +130,7 @@
         </index>
     </table>
     <table name="onecode_shopflix_order_status_history" resource="default" engine="innodb"
-           comment="ShopFlix Flat Order Status History">
+           comment="SHOPFLIX Flat Order Status History">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
@@ -155,7 +155,7 @@
         </index>
     </table>
     <table name="onecode_shopflix_order_item" resource="default" engine="innodb"
-           comment="ShopFlix Flat Order Item">
+           comment="SHOPFLIX Flat Order Item">
         <column xsi:type="int" name="item_id" unsigned="true" nullable="false" identity="true"
                 comment="Item ID"/>
         <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
@@ -339,10 +339,10 @@
     </table>
     <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
         <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0"
-                comment="Is ShopFlix Order"/>
+                comment="Is SHOPFLIX Order"/>
     </table>
     <table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Order">
         <column xsi:type="smallint" name="is_shopflix" nullable="false" identity="false" default="0"
-                comment="Is ShopFlix Order"/>
+                comment="Is SHOPFLIX Order"/>
     </table>
 </schema>

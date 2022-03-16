@@ -144,7 +144,7 @@ class Item extends AbstractModel implements ItemInterface
 
         $realQty = 0;
         foreach ( $this->getRealQty() as $realQtyData){
-            $realQty += $realQtyData['qty'];
+            $realQty += (int)$realQtyData['qty'];
         }
         return $this->getQty() < $realQty;
     }

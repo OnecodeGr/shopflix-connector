@@ -95,8 +95,7 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
 
         try {
 
-            /** @var Connector $connector */
-            $connector =new Connector($this->helper->getUsername(),$this->helper->getApikey(),$this->helper->getApiUrl());
+            $connector = new Connector($this->helper->getUsername(), $this->helper->getApikey(), $this->helper->getApiUrl());
             $date = $this->_objectManager->get(
                 DateTime::class
             )->date('Y-m-d_H-i-s');
@@ -118,10 +117,14 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
             if (count($tracks) > 20) {
                 throw new LocalizedException(__("We can print 20 vouchers at once you have selected %1", count($tracks)));
             }
-            $voucherPdf = $connector->printVouchers($tracks);
+            $voucherPdf = $connector->printVouchers($tracks, $this->helper->getVoucherPrintFormat());
 
             $fileContent = base64_decode($voucherPdf[0]['Voucher']);
-
+            $content = [
+                "type" => "string",
+                "value" => $fileContent,
+                "rm" => true
+            ];
             foreach ($collection->getItems() as $shipment) {
                 $trackExist = false;
                 foreach ($shipment->getTracks() as $track) {
@@ -136,7 +139,7 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
                             ->setStatus(StatusInterface::STATUS_READY_TO_BE_SHIPPED)
                             ->setState(OrderInterface::STATE_COMPLETED));
                     }
-                    if($shipment->getShipmentStatus() == 1){
+                    if ($shipment->getShipmentStatus() == 1) {
                         $this->shipmentRepository->save($shipment);
                     }
                     $shipment->setShipmentStatus(2);
@@ -146,7 +149,7 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
 
 
             return $this->downloader->create("shopflix_vouchers_order_{$order->getIncrementId()}_$date.pdf",
-                $fileContent, DirectoryList::VAR_DIR, 'application/pdf');
+                $content, DirectoryList::VAR_DIR);
         } catch (Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultRedirectFactory->create();

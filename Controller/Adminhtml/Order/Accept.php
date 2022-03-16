@@ -10,6 +10,7 @@ namespace Onecode\ShopFlixConnector\Controller\Adminhtml\Order;
 
 
 use Exception;
+use GuzzleHttp\Exception\RequestException;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Exception\LocalizedException;
@@ -39,10 +40,13 @@ class Accept extends Order implements HttpPostActionInterface
         $order = $this->_initOrder();
         if ($order) {
             try {
-                $this->orderManagement->accept($order->getEntityId());
+                $this->orderManagement->accept($order->getEntityId() , true);
                 $this->messageManager->addSuccessMessage(__('You accepted the order.'));
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
+            } catch (RequestException $e){
+                $this->messageManager->addErrorMessage($e->getMessage());
+                $this->logger->critical($e);
             } catch (Exception $e) {
                 $this->messageManager->addErrorMessage(__('You have not accepted the item.'));
                 $this->logger->critical($e);

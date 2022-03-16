@@ -9,6 +9,7 @@
                 <to_order>0</to_order>
                 <invoice>0</invoice>
                 <time_modifier>-7 days</time_modifier>
+                <tracking_voucher_pdf_format>pdf</tracking_voucher_pdf_format>
             </settings>
             <xml_setting>
                 <enable>0</enable>
@@ -26,7 +27,7 @@
                 <active>1</active>
                 <sallowspecific>0</sallowspecific>
                 <model>Onecode\ShopFlixConnector\Model\Carrier\Method</model>
-                <name>ShopFlix Shipping Method</name>
+                <name>SHOPFLIX Shipping Method</name>
                 <title>Shipping method for shopflix orders</title>
                 <specificerrmsg>This shipping method is not available.</specificerrmsg>
             </onecode_shopflix_shipping>
@@ -34,7 +35,7 @@
         <payment>
             <onecode_shopflix_payment>
                 <active>1</active>
-                <title><![CDATA[ShopFlix Payment Method]]></title>
+                <title><![CDATA[SHOPFLIX Payment Method]]></title>
                 <order_status>pending</order_status>
                 <allowspecific>0</allowspecific>
                 <model>OnecodeShopFlixPaymentFacade</model>

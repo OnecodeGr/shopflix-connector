@@ -90,6 +90,15 @@
                         <field id="*/*/enable">1</field>
                     </depends>
                 </field>
+                <field id="tracking_voucher_pdf_format" translate="label,comment" type="select" sortOrder="500" showInStore="0" showInWebsite="0" showInDefault="1">
+                    <label>Tracking Voucher Print Format</label>
+                    <comment><![CDATA[This field is used to select the format which we want to print tracking voucher]]></comment>
+                    <source_model>Onecode\ShopFlixConnector\Model\Config\TrackingVoucherFormat</source_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
             </group>
             <group id="xml_setting" translate="label" type="text" sortOrder="110" showInStore="0" showInDefault="1">
                 <label>Xml Configs</label>

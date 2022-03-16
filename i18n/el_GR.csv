@@ -40,7 +40,7 @@
 "You rejected the order.","Απορρίψατε την παραγγελία."
 "Exception occurred during order load","Η εξαίρεση προέκυψε κατά τη φόρτωση της παραγγελίας"
 "Order loading error","Σφάλμα φόρτωσης παραγγελίας"
-"SHOPFLIX Order %1 has %2","Παραγγελία Shopflix %1 έχει %2"
+"SHOPFLIX Order %1 has %2","Παραγγελία SHOPFLIX %1 έχει %2"
 "Order Accepted","Η παραγγελία έγινε αποδεκτή"
 "We cannot accept this order.","Δεν μπορούμε να δεχτούμε αυτήν την παραγγελία."
 "We cannot reject this order.","Δεν μπορούμε να απορρίψουμε αυτήν την εντολή."
@@ -123,14 +123,14 @@
 "Are you sure you want to reject this order?","Είστε βέβαιοι ότι θέλετε να απορρίψετε αυτήν την παραγγελία;"
 "Are you sure you want to accept this shopflix order?","Είστε βέβαιοι ότι θέλετε να αποδεχτείτε αυτήν την παραγγελία αγοράς;"
 "Are you sure you want to change the status to Ready to be shipped this shopflix order?","Είστε βέβαιοι ότι θέλετε να αλλάξετε την κατάσταση σε Έτοιμο για αποστολή αυτής της παραγγελίας στην αγορά;"
-"Shopflix Sales","Πωλήσεις Shopflix"
-"Shopflix Operations","Λειτουργίες Αγοράς"
+"SHOPFLIX Sales","Πωλήσεις Shopflix"
+"SHOPFLIX Operations","Λειτουργίες Αγοράς"
 "Actions","Ενέργειες"
 "Cancel","Ματαίωση"
 "General Settings Section","Ενότητα Γενικές ρυθμίσεις"
 "Xml Settings Section","Ενότητα Ρυθμίσεις Xml"
-"Shopflix Shipping Settings","Ρυθμίσεις αποστολής Shopflix"
-"Shopflix Payment Settings","Ρυθμίσεις πληρωμής Shopflix"
+"SHOPFLIX Shipping Settings","Ρυθμίσεις αποστολής Shopflix"
+"SHOPFLIX Payment Settings","Ρυθμίσεις πληρωμής Shopflix"
 "General","Γενικός"
 "Enabled","Ενεργοποιημένο"
 "Convert to magento order","Μετατροπή σε παραγγελία magento"
@@ -147,14 +147,14 @@
 "Export Category Tree","Δέντρο κατηγορίας εξαγωγής"
 "Brand Attribute","Χαρακτηριστικό μάρκας"
 "Weight Attribute","Ιδιότητα βάρους"
-"Shopflix Shipping Method","Μέθοδος αποστολής στην αγορά"
+"SHOPFLIX Shipping Method","Μέθοδος αποστολής στην αγορά"
 "Title","Τίτλος"
 "Method Name","Όνομα μεθόδου"
 "Displayed Error Message","Εμφανίζεται μήνυμα σφάλματος"
 "Ship to Applicable Countries","Αποστολή σε εφαρμοστέες χώρες"
 "Ship to Specific Countries","Αποστολή σε συγκεκριμένες χώρες"
 "Sort Order","Σειρά ταξινόμησης"
-"Onecode Shopflix Payment","Πληρωμή Onecode Shopflix"
+"Onecode SHOPFLIX Payment","Πληρωμή Onecode Shopflix"
 "Instructions","Οδηγίες"
 "New Order Status","Κατάσταση νέας παραγγελίας"
 "Payment from Applicable Countries","Πληρωμή από εφαρμοστέες χώρες"
@@ -211,15 +211,15 @@ We cannot create an empty shipment.,Δεν μπορούμε να δημιουρ�
 Carrier,Φορέας
 Number,Αριθμός
 Action,Δράση
-ShopFlix Courier,ShopFlix Courier
+SHOPFLIX Courier,SHOPFLIX Courier
 Track Voucher,Κουπόνι παρακολούθησης
 Shipping and Tracking Information,Πληροφορίες αποστολής και παρακολούθησης
 Items Shipped,Είδη που αποστέλλονται
 Qty Shipped,Ποσότητα Αποστολή
 Download Manifest,Κατεβάστε το Manifest
-ShopFlix Settings Section,Ενότητα ρυθμίσεων ShopFlix
-ShopFlix Shipments,Αποστολές ShopFlix
-ShopFlix Settings,Ρυθμίσεις ShopFlix
+SHOPFLIX Settings Section,Ενότητα ρυθμίσεων ShopFlix
+SHOPFLIX Shipments,Αποστολές ShopFlix
+SHOPFLIX Settings,Ρυθμίσεις ShopFlix
 Auto Accept Order,Αυτόματη αποδοχή παραγγελίας
 Api Url,Api Url
 "Allows a valid URL. For example, https://www.example.com/api","Επιτρέπει μια έγκυρη διεύθυνση URL. Για παράδειγμα, https://www.example.com/api"
@@ -242,3 +242,11 @@ Time modifier,Tροποποιητής χρόνου
 "We have successfully synced the orders from SHOPFLIX","Συγχρονίσαμε με επιτυχία τις παραγγελίες από το SHOPFLIX"
 "We have successfully synced the shipments from SHOPFLIX","Συγχρονίσαμε με επιτυχία τις αποστολές από το SHOPFLIX"
 "Sync","Συγχρονισμός"
+"Tracking Voucher Print Format","Μορφή εκτύπωσης κουπονιού παρακολούθησης"
+"This field is used to select the format which we want to print tracking voucher","Αυτό το πεδίο χρησιμοποιείται για την επιλογή της μορφής που θέλουμε να εκτυπώσουμε το κουπόνι παρακολούθησης"
+"Courier Center Standard","Courier Center Παρατυπωμένο"
+"Courier Center Labeled","Courier Center με ετικέτα"
+"Courier Center Standard ( 1 tracking voucher per page )","Courier Center Παρατυπωμένο ( 1 κουπόνι παρακολούθησης ανά σελίδα )"
+"Courier Center Labeled ( 1 tracking voucher per page )","Courier Center με ετικέτα ( 1 κουπόνι παρακολούθησης ανά σελίδα )"
+"SHOPFLIX Labeled 100x150","SHOPFLIX με ετικέτα 100x150"
+"SHOPFLIX Labeled 100x170","SHOPFLIX με ετικέτα 100x170"

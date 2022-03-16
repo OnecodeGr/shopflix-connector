@@ -8,6 +8,8 @@
 
 namespace Onecode\ShopFlixConnector\Model\Service;
 
+use Exception;
+use GuzzleHttp\Exception\RequestException;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Event\ManagerInterface;
@@ -19,6 +21,7 @@ use Onecode\ShopFlixConnector\Api\ManagementInterface;
 use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Api\StatusHistoryRepositoryInterface;
 use Onecode\ShopFlixConnector\Helper\Data as ConfigHelper;
+use Onecode\ShopFlixConnector\Library\Connector;
 use Onecode\ShopFlixConnector\Model\Convert\Order as OrderConverter;
 use Psr\Log\LoggerInterface;
 
@@ -67,9 +70,23 @@ class OrderService implements ManagementInterface
      * @var OrderManagementInterface
      */
     private $salesOrderManagement;
+    /**
+     * @var Connector
+     */
+    private $connector;
 
 
-    public function __construct(OrderRepositoryInterface $orderRepository, StatusHistoryRepositoryInterface $historyRepository, SearchCriteriaBuilder $criteriaBuilder, FilterBuilder $filterBuilder, ManagerInterface $eventManager, OrderConverter $converter, ConfigHelper $configHelper, LoggerInterface $logger, OrderManagementInterface $salesOrderManagement)
+    public function __construct(
+        OrderRepositoryInterface         $orderRepository,
+        StatusHistoryRepositoryInterface $historyRepository,
+        SearchCriteriaBuilder            $criteriaBuilder,
+        FilterBuilder                    $filterBuilder,
+        ManagerInterface                 $eventManager,
+        OrderConverter                   $converter,
+        ConfigHelper                     $configHelper,
+        LoggerInterface                  $logger,
+        OrderManagementInterface         $salesOrderManagement
+    )
     {
 
         $this->orderRepository = $orderRepository;
@@ -81,20 +98,34 @@ class OrderService implements ManagementInterface
         $this->logger = $logger;
         $this->configHelper = $configHelper;
         $this->salesOrderManagement = $salesOrderManagement;
+        $this->connector = new Connector(
+            $this->configHelper->getUsername(),
+            $this->configHelper->getApikey(),
+            $this->configHelper->getApiUrl(),
+            $this->configHelper->getTimeModifier()
+        );
     }
 
     /**
      * @throws NoSuchEntityException
      * @throws LocalizedException
+     * @throws Exception
      */
     public function accept(int $id, bool $synced = false): bool
     {
         $order = $this->orderRepository->getById($id);
         if ($order->canAccept()) {
             $order->accept($synced);
+
             if ($this->configHelper->toOrder()) {
                 $this->converter->toMagentoOrder($order);
             }
+            try {
+                $this->connector->picking($order->getShopFlixOrderId());
+            } catch (Exception $e) {
+                $order->setSynced(false);
+            }
+
             $this->orderRepository->save($order);
             return true;
         }
@@ -106,12 +137,19 @@ class OrderService implements ManagementInterface
     /**
      * @throws NoSuchEntityException
      * @throws LocalizedException
+     * @throws Exception
      */
     public function reject(int $id, string $message = '', $synced = false): bool
     {
         $order = $this->orderRepository->getById($id);
         if ($order->canReject()) {
             $order->reject($message, $synced);
+            try{
+                $this->connector->rejected($order->getShopFlixOrderId(), $message);
+            }catch (\Exception  $e){
+                $order->setSynced(false);
+            }
+
             $this->orderRepository->save($order);
             return true;
         }

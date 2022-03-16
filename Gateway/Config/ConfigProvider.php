@@ -36,7 +36,7 @@ class ConfigProvider extends Config
             'payment' => [
                 self::CODE => [
                     "instructions" => $this->getMethodInstructions(),
-                    "title" => __("ShopFlix Payment Method")
+                    "title" => __("SHOPFLIX Payment Method")
                 ]
             ]
         ];

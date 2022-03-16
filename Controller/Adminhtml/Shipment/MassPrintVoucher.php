@@ -106,10 +106,14 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
             if (count($tracks) > 20) {
                 throw new LocalizedException(__("We can print 20 vouchers at once you have selected %1", count($tracks)));
             }
-            $voucherPdf = $connector->printVouchers($tracks);
+            $voucherPdf = $connector->printVouchers($tracks , $this->helper->getVoucherPrintFormat());
 
             $fileContent = base64_decode($voucherPdf[0]['Voucher']);
-
+            $content = [
+                "type" => "string",
+                "value" => $fileContent,
+                "rm" => true
+            ];
             foreach ($collection->getItems() as $shipment) {
                 $trackExist = false;
                 foreach ($shipment->getTracks() as $track) {
@@ -134,7 +138,7 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
 
 
             return $this->downloader->create("shopflix_vouchers-" . $date . ".pdf",
-                $fileContent, DirectoryList::VAR_DIR, 'application/pdf');
+                $content, DirectoryList::VAR_DIR);
         } catch (Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultRedirectFactory->create();

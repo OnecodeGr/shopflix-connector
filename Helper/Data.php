@@ -43,7 +43,9 @@ class Data extends AbstractHelper implements ScopeInterface
 
     const CONVERT_SHOPFLIX_ORDER_TO_MAGENTO = 'shopflix/settings/to_order';
 
-    const CONVERT_SHOPFLIX_TIME_MODIFIER = 'shopflix/settings/time_modifier';
+    const SHOPFLIX_TIME_MODIFIER = 'shopflix/settings/time_modifier';
+
+    const SHOPFLIX_VOUCHER_PRINT_FORMAT = 'shopflix/settings/tracking_voucher_pdf_format';
 
     const INVOICE_ON_ACCEPTANCE = 'shopflix/settings/invoice';
     /**
@@ -230,6 +232,11 @@ class Data extends AbstractHelper implements ScopeInterface
 
     public function getTimeModifier(): string
     {
-        return $this->getConfig(self::CONVERT_SHOPFLIX_TIME_MODIFIER);
+        return $this->getConfig(self::SHOPFLIX_TIME_MODIFIER);
+    }
+
+
+    public function getVoucherPrintFormat(){
+        return $this->getConfig(self::SHOPFLIX_VOUCHER_PRINT_FORMAT);
     }
 }

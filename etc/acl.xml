@@ -5,9 +5,9 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Onecode_Base::menu">
-                    <resource id="Onecode_ShopFlixConnector::shopflix" title="ShopFlix Sales" translate="title"
+                    <resource id="Onecode_ShopFlixConnector::shopflix" title="SHOPFLIX Sales" translate="title"
                               sortOrder="20">
-                        <resource id="Onecode_ShopFlixConnector::sales_operation" title="ShopFlix Operations"
+                        <resource id="Onecode_ShopFlixConnector::sales_operation" title="SHOPFLIX Operations"
                                   translate="title"
                                   sortOrder="10">
                             <resource id="Onecode_ShopFlixConnector::shopflix_order" title="Order"
@@ -57,7 +57,7 @@
                         <resource id="Magento_Config::config">
                             <resource id="Onecode_Base::config">
                                 <resource id="Onecode_ShopFlixConnector::config_settings"
-                                          title="ShopFlix Settings Section" translate="title"
+                                          title="SHOPFLIX Settings Section" translate="title"
                                           sortOrder="100"/>
 
                             </resource>

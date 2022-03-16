@@ -116,6 +116,10 @@ Login to the **Magento Admin**, navigate to `Store > Configuration > Onecode Ext
 
 ![Imgur](https://i.imgur.com/05OFx3z.png)
 
+**Tracking Voucher Print Format**: Select the printout of the tracking coupon 
+
+![Imgur](https://i.imgur.com/7CaXNfi.png)
+
 ### 2.2 Configure Products
 
 Navigate to `Catalog > Products` there are 2 ways to configure your products

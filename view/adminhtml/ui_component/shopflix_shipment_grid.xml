@@ -11,7 +11,7 @@
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">sync-shipments</item>
                 <item name="label" xsi:type="string">Sync</item>
-                <item name="class" xsi:type="string">primary sync-shipments</item>
+                <item name="class" xsi:type="string">primary-blue sync-shipments shopflix-icon-loop2</item>
                 <item name="url" xsi:type="string">shopflix/shipment/sync</item>
             </item>
         </item>
