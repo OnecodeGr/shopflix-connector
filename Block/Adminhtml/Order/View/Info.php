@@ -2,7 +2,7 @@
 /**
  * Info.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -11,7 +11,6 @@ namespace Onecode\ShopFlixConnector\Block\Adminhtml\Order\View;
 use DateTime;
 use Magento\Backend\Block\Template\Context;
 use Magento\Customer\Api\CustomerMetadataInterface;
-use Magento\Customer\Api\Data\AttributeMetadataInterface;
 use Magento\Customer\Model\Metadata\ElementFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
@@ -21,6 +20,9 @@ use Onecode\ShopFlixConnector\Helper\Admin;
 use Onecode\ShopFlixConnector\Model\Order\Address;
 use Onecode\ShopFlixConnector\Model\Order\Address\Renderer;
 
+/**
+ * @method setOrder($getOrder)
+ */
 class Info extends AbstractOrder
 {
     private $addressRenderer;
@@ -47,10 +49,13 @@ class Info extends AbstractOrder
      * @param int $orderId
      * @return string
      */
-    public function getViewUrl($orderId)
+    public function getViewUrl(int $orderId): string
     {
         return $this->getUrl('shopflix/order/view', ['order_id' => $orderId]);
     }
+
+
+
 
 
     /**
@@ -59,7 +64,7 @@ class Info extends AbstractOrder
      * @param int $orderId
      * @return string
      */
-    public function getMagentoOrderViewUrl($orderId)
+    public function getMagentoOrderViewUrl(int $orderId): string
     {
         return $this->getUrl('sales/order/view', ['order_id' => $orderId]);
     }
@@ -76,34 +81,6 @@ class Info extends AbstractOrder
             ScopeInterface::SCOPE_STORE,
             null
         );
-    }
-
-    public function getCustomerAccountData()
-    {
-        $accountData = [];
-        $entityType = 'customer';
-
-        /* @var AttributeMetadataInterface $attribute */
-        foreach ($this->metadata->getAllAttributesMetadata($entityType) as $attribute) {
-            if (!$attribute->isVisible() || $attribute->isSystem()) {
-                continue;
-            }
-            $orderKey = sprintf('customer_%s', $attribute->getAttributeCode());
-            $orderValue = $this->getOrder()->getData($orderKey);
-            if ($orderValue != '') {
-                $metadataElement = $this->_metadataElementFactory->create($attribute, $orderValue, $entityType);
-                $value = $metadataElement->outputValue(AttributeDataFactory::OUTPUT_FORMAT_HTML);
-                $sortOrder = $attribute->getSortOrder() + $attribute->isUserDefined() ? 200 : 0;
-                $sortOrder = $this->_prepareAccountDataSortOrder($accountData, $sortOrder);
-                $accountData[$sortOrder] = [
-                    'label' => $attribute->getFrontendLabel(),
-                    'value' => $this->escapeHtml($value, ['br']),
-                ];
-            }
-        }
-        ksort($accountData, SORT_NUMERIC);
-
-        return $accountData;
     }
 
     /**
@@ -130,7 +107,7 @@ class Info extends AbstractOrder
      * @param string $createdAt
      * @return DateTime
      */
-    public function getCreatedAtStoreDate($store, $createdAt)
+    public function getCreatedAtStoreDate($store, string $createdAt): DateTime
     {
         return $this->_localeDate->scopeDate($store, $createdAt, true);
     }
@@ -138,10 +115,9 @@ class Info extends AbstractOrder
     /**
      * Get timezone for store
      *
-     * @param mixed $store
      * @return string
      */
-    public function getTimezoneForStore($store)
+    public function getTimezoneForStore(): string
     {
         return $this->_localeDate->getConfigTimezone(
             ScopeInterface::SCOPE_STORE
@@ -154,7 +130,7 @@ class Info extends AbstractOrder
      * @param Address $address
      * @return null|string
      */
-    public function getFormattedAddress(Address $address)
+    public function getFormattedAddress(Address $address): ?string
     {
         return $this->addressRenderer->format($address, 'html');
     }

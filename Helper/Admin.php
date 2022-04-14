@@ -2,7 +2,7 @@
 /**
  * Admin.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 declare(strict_types=1);
@@ -70,10 +70,10 @@ class Admin extends AbstractHelper
      * Escape string preserving links
      *
      * @param string $data
-     * @param null|array $allowedTags
+     * @param array|null $allowedTags
      * @return string
      */
-    public function escapeHtmlWithLinks($data, $allowedTags = null)
+    public function escapeHtmlWithLinks(string $data, array $allowedTags = null): string
     {
         if (!empty($data) && is_array($allowedTags) && in_array('a', $allowedTags)) {
             $wrapperElementId = uniqid();

@@ -2,7 +2,7 @@
 /**
  * ImportOrders.php
  *
- * @copyright Copyright © 2021 Onecode All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -48,14 +48,15 @@ class ImportOrders
      * @param AddressFactory $addressFactory
      * @param ManagementInterface $orderManagement
      */
-    public function __construct(Data                     $data,
-                                OrderFactory             $orderFactory,
-                                OrderRepositoryInterface $orderRepository,
-                                LoggerInterface          $logger,
-                                ProductRepository        $productRepository,
-                                ItemFactory              $itemFactory,
-                                AddressFactory           $addressFactory,
-                                ManagementInterface      $orderManagement
+    public function __construct(
+        Data                     $data,
+        OrderFactory             $orderFactory,
+        OrderRepositoryInterface $orderRepository,
+        LoggerInterface          $logger,
+        ProductRepository        $productRepository,
+        ItemFactory              $itemFactory,
+        AddressFactory           $addressFactory,
+        ManagementInterface      $orderManagement
     )
     {
         $this->_helper = $data;

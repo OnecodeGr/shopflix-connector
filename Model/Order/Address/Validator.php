@@ -2,7 +2,7 @@
 /**
  * Validator.php
  *
- * @copyright Copyright © 2021   All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -94,8 +94,7 @@ class Validator
      * @param mixed $value
      * @return bool
      */
-    protected
-    function isEmpty($value)
+    protected function isEmpty($value): bool
     {
         return empty($value);
     }

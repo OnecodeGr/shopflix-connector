@@ -2,14 +2,13 @@
 /**
  * OrderService.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
 namespace Onecode\ShopFlixConnector\Model\Service;
 
 use Exception;
-use GuzzleHttp\Exception\RequestException;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Event\ManagerInterface;

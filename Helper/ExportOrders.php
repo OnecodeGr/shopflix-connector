@@ -2,7 +2,7 @@
 /**
  * ExportOrders.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -30,11 +30,13 @@ class ExportOrders
      * @param Data $data
      * @param OrderRepository $orderRepository
      * @param LoggerInterface $logger
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
-    public function __construct(Data                       $data,
-                                OrderRepositoryInterface   $orderRepository,
-                                LoggerInterface            $logger,
-                                SearchCriteriaBuilder      $searchCriteriaBuilder
+    public function __construct(
+        Data                     $data,
+        OrderRepositoryInterface $orderRepository,
+        LoggerInterface          $logger,
+        SearchCriteriaBuilder    $searchCriteriaBuilder
 
 
     )

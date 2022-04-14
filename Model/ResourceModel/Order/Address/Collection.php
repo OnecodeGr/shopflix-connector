@@ -2,7 +2,7 @@
 /**
  * Collection.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -33,7 +33,7 @@ class Collection extends AbstractCollection
      *
      * @var Order
      */
-    protected $_salesOrder = null;
+    protected $_order = null;
 
     /**
      * Order field for setOrderFilter
@@ -47,9 +47,9 @@ class Collection extends AbstractCollection
      *
      * @return Order|null
      */
-    public function getSalesOrder()
+    public function getOrder(): ?Order
     {
-        return $this->_salesOrder;
+        return $this->_order;
     }
 
     /**
@@ -58,9 +58,9 @@ class Collection extends AbstractCollection
      * @param Order $order
      * @return $this
      */
-    public function setSalesOrder($order)
+    public function setShopflixOrder(Order $order): Collection
     {
-        $this->_salesOrder = $order;
+        $this->_order = $order;
 
         if ($this->_eventPrefix && $this->_eventObject) {
             $this->_eventManager->dispatch(
@@ -78,10 +78,10 @@ class Collection extends AbstractCollection
      * @param int|Order|array $order
      * @return $this
      */
-    public function setOrderFilter($order)
+    public function setOrderFilter($order): Collection
     {
         if ($order instanceof Order) {
-            $this->setSalesOrder($order);
+            $this->setShopflixOrder($order);
             $orderId = $order->getId();
             if ($orderId) {
                 $this->addFieldToFilter($this->_orderField, $orderId);

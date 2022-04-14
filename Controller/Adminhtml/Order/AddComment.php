@@ -2,7 +2,7 @@
 /**
  * AddComment.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -91,12 +91,10 @@ class AddComment extends OrderAction implements HttpPostActionInterface
             } catch (Exception $e) {
                 $response = ['error' => true, 'message' => __('We cannot add order history.')];
             }
-            if (is_array($response)) {
-                $resultJson = $this->resultJsonFactory->create();
-                $resultJson->setData($response);
-                return $resultJson;
-            }
+            $resultJson = $this->resultJsonFactory->create();
+            $resultJson->setData($response);
+            return $resultJson;
         }
-        return $this->resultRedirectFactory->create()->setPath('sales/*/');
+        return $this->resultRedirectFactory->create()->setPath('shopflix/*/');
     }
 }

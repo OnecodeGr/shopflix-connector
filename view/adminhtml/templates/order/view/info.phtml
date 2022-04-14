@@ -74,19 +74,7 @@ $allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub
                     <?php if ($order->getRemoteIp() && $block->shouldDisplayCustomerIp()) : ?>
                         <tr>
                             <th><?= $block->escapeHtml(__('Placed from IP')) ?></th>
-                            <td><?= $block->escapeHtml($order->getRemoteIp()); ?><?= $order->getXForwardedFor() ? ' (' . $block->escapeHtml($order->getXForwardedFor()) . ')' : ''; ?></td>
-                        </tr>
-                    <?php endif; ?>
-                    <?php if ($globalCurrencyCode !== $baseCurrencyCode) : ?>
-                        <tr>
-                            <th><?= $block->escapeHtml(__('%1 / %2 rate:', $globalCurrencyCode, $baseCurrencyCode)) ?></th>
-                            <td><?= $block->escapeHtml($order->getBaseToGlobalRate()) ?></td>
-                        </tr>
-                    <?php endif; ?>
-                    <?php if ($baseCurrencyCode !== $orderCurrencyCode && $globalCurrencyCode !== $orderCurrencyCode) : ?>
-                        <tr>
-                            <th><?= $block->escapeHtml(__('%1 / %2 rate:', $orderCurrencyCode, $baseCurrencyCode)) ?></th>
-                            <td><?= $block->escapeHtml($order->getBaseToOrderRate()) ?></td>
+                            <td><?= $block->escapeHtml($order->getRemoteIp()); ?></td>
                         </tr>
                     <?php endif; ?>
                 </table>
@@ -126,12 +114,6 @@ $allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub
                             <a href="mailto:<?= $block->escapeHtmlAttr($order->getCustomerEmail()) ?>"><?= $block->escapeHtml($order->getCustomerEmail()) ?></a>
                         </td>
                     </tr>
-                    <?php foreach ($block->getCustomerAccountData() as $data) : ?>
-                        <tr>
-                            <th><?= $block->escapeHtml($data['label']) ?></th>
-                            <td><?= $block->escapeHtml($data['value'], ['br']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
                     <?= $block->getChildHtml('extra_customer_info') ?>
                 </table>
             </div>

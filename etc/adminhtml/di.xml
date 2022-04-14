@@ -6,6 +6,11 @@
         </arguments>
     </type>
 
+    <type name="Onecode\ShopFlixConnector\Controller\Adminhtml\ReturnOrder">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
 
 
     <type name="Magento\Ui\Model\Export\MetadataProvider">

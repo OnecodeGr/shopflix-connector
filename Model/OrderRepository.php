@@ -2,7 +2,7 @@
 /**
  * OrderRepository.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -12,7 +12,6 @@ use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Onecode\ShopFlixConnector\Api\Data\ItemInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderSearchResultInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderSearchResultInterfaceFactory;

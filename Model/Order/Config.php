@@ -2,7 +2,7 @@
 /**
  * Config.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -18,10 +18,10 @@ class Config
     /**
      *
      * @param string $state
-     * @param bool $orderStatus
+     * @param  $orderStatus
      * @return  array
      */
-    public function getStateStatuses(string $state, bool $orderStatus): array
+    public function getStateStatuses(string $state, $orderStatus): array
     {
         $status = [
             OrderInterface::STATE_ACCEPTED => [],
@@ -32,11 +32,7 @@ class Config
                 StatusInterface::STATUS_REJECTED => __("Rejected")
             ],
             OrderInterface::STATE_COMPLETED => [
-                StatusInterface::STATUS_ON_THE_WAY => __("On the way"),
-                StatusInterface::STATUS_PARTIAL_SHIPPED=> __("Partial Shipped"),
-                StatusInterface::STATUS_SHIPPED => __("Shipped"),
                 StatusInterface::STATUS_COMPLETED => __("Completed"),
-                StatusInterface::STATUS_READY_TO_BE_SHIPPED => __("Ready to be shipped")
             ],
             OrderInterface::STATE_CANCELED => [
                 StatusInterface::STATUS_CANCELED => __("Canceled"),

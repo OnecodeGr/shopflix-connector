@@ -2,7 +2,7 @@
 /**
  * DefaultRenderer.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -24,6 +24,8 @@ class DefaultRenderer extends \Onecode\ShopFlixConnector\Block\Adminhtml\Items\R
     {
         return $this->getFieldIdPrefix() . $id;
     }
+
+
 
     /**
      * Retrieve field html id prefix
@@ -101,7 +103,7 @@ class DefaultRenderer extends \Onecode\ShopFlixConnector\Block\Adminhtml\Items\R
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @since 100.1.0
      */
-    public function getColumnHtml(DataObject $item, $column, $field = null)
+    public function getColumnHtml(DataObject $item, $column, $field = null): string
     {
         $html = '';
         switch ($column) {
@@ -156,7 +158,6 @@ class DefaultRenderer extends \Onecode\ShopFlixConnector\Block\Adminhtml\Items\R
      */
     public function getColumns()
     {
-        $columns = array_key_exists('columns', $this->_data) ? $this->_data['columns'] : [];
-        return $columns;
+        return array_key_exists('columns', $this->_data) ? $this->_data['columns'] : [];
     }
 }

@@ -2,7 +2,7 @@
 /**
  * ${FILE_NAME}
  *
- * @copyright Copyright © 2021 ${ORGANIZATION_NAME}  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -45,6 +45,7 @@ use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\Collectio
 
 /**
  *
+ * @method setAddresses(AddressInterface[] $array_merge)
  */
 class Order extends AbstractModel implements OrderInterface
 {
@@ -332,7 +333,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this->_getData(self::CUSTOMER_EMAIL);
     }
 
-    public function addAddress(AddressInterface $address)
+    public function addAddress(AddressInterface $address): Order
     {
         $address->setOrder($this)->setParentId($this->getId());
         if (!$address->getId()) {
@@ -361,7 +362,7 @@ class Order extends AbstractModel implements OrderInterface
         return $this;
     }
 
-    public function getShippingAddress()
+    public function getShippingAddress(): ?AddressInterface
     {
         foreach ($this->getAddresses() as $address) {
             if ($address->getAddressType() == 'shipping' && !$address->isDeleted()) {
@@ -396,7 +397,7 @@ class Order extends AbstractModel implements OrderInterface
     /**
      * Get all items
      *
-     * @return Item[]
+     * @return \Onecode\ShopFlixConnector\Model\ReturnOrder\Item[]
      */
     public function getAllItems()
     {
@@ -483,7 +484,7 @@ class Order extends AbstractModel implements OrderInterface
     /**
      * Add item
      *
-     * @param Item $item
+     * @param \Onecode\ShopFlixConnector\Model\ReturnOrder\Item $item
      * @return $this
      */
     public function addItem(Item $item): OrderInterface
@@ -684,7 +685,7 @@ class Order extends AbstractModel implements OrderInterface
      * @return $this
      * @throws LocalizedException
      */
-    public function registerAcceptance(bool $synced = false, bool $graceful = true): OrderInterface
+    protected function registerAcceptance(bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canAccept()) {
             $state = self::STATE_ACCEPTED;
@@ -857,7 +858,7 @@ class Order extends AbstractModel implements OrderInterface
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function registerRejection(string $comment = '', bool $synced = false, bool $graceful = true): OrderInterface
+    protected function registerRejection(string $comment = '', bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canReject()) {
             $state = self::STATE_REJECTED;
@@ -906,7 +907,7 @@ class Order extends AbstractModel implements OrderInterface
      * @throws LocalizedException
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function registerReadyToBeShipped(bool $synced = false, bool $graceful = true): OrderInterface
+    protected function registerReadyToBeShipped(bool $synced = false, bool $graceful = true): OrderInterface
     {
         if ($this->canReadyToBeShipped()) {
             $state = self::STATE_ACCEPTED;
@@ -945,7 +946,7 @@ class Order extends AbstractModel implements OrderInterface
                 $this->getStatus() === StatusInterface::STATUS_ON_THE_WAY);
     }
 
-    public function registerPartialShipped(string $comment = '', bool $graceful = true): OrderInterface
+    protected function registerPartialShipped(string $comment = '', bool $graceful = true): OrderInterface
     {
         if ($this->canPartialShipped()) {
             $state = self::STATE_COMPLETED;
@@ -981,7 +982,7 @@ class Order extends AbstractModel implements OrderInterface
                     $this->getStatus() === StatusInterface::STATUS_PARTIAL_SHIPPED));
     }
 
-    public function registerShipped(string $comment = '', bool $graceful = true): OrderInterface
+    protected function registerShipped(string $comment = '', bool $graceful = true): OrderInterface
     {
         if ($this->canShipped()) {
             $state = self::STATE_COMPLETED;
@@ -1002,7 +1003,6 @@ class Order extends AbstractModel implements OrderInterface
     {
         if ($this->canOnTheWay()) {
             $this->registerOnTheWay();
-
         }
         return $this;
     }
@@ -1016,7 +1016,7 @@ class Order extends AbstractModel implements OrderInterface
                 $this->getStatus() === StatusInterface::STATUS_READY_TO_BE_SHIPPED);
     }
 
-    public function registerOnTheWay(string $comment = '', bool $graceful = true): OrderInterface
+    protected function registerOnTheWay(string $comment = '', bool $graceful = true): OrderInterface
     {
         if ($this->canOnTheWay()) {
             $state = self::STATE_COMPLETED;
@@ -1054,7 +1054,7 @@ class Order extends AbstractModel implements OrderInterface
                     $this->getStatus() === StatusInterface::STATUS_SHIPPED));
     }
 
-    public function registerCompleted(string $comment = '', bool $graceful = true): OrderInterface
+    protected function registerCompleted(string $comment = '', bool $graceful = true): OrderInterface
     {
         if ($this->canCompleted()) {
             $state = self::STATE_COMPLETED;
@@ -1087,7 +1087,7 @@ class Order extends AbstractModel implements OrderInterface
 
     }
 
-    public function registerCanceled(string $comment = '', bool $graceful = true): OrderInterface
+    protected function registerCanceled(string $comment = '', bool $graceful = true): OrderInterface
     {
         if ($this->canCancel()) {
             $state = self::STATE_CANCELED;
@@ -1173,7 +1173,7 @@ class Order extends AbstractModel implements OrderInterface
 
     public function isInvoice(): bool
     {
-        return $this->getData(OrderInterface::IS_INVOICE);
+        return (bool)$this->getData(OrderInterface::IS_INVOICE);
     }
 
     public function setCompanyName(string $companyName): OrderInterface

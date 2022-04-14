@@ -2,7 +2,7 @@
 /**
  * Collection.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -10,8 +10,8 @@ namespace Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item;
 
 use Onecode\ShopFlixConnector\Api\Data\ItemSearchResultInterface;
 use Onecode\ShopFlixConnector\Model\Order\Item as Model;
-use Onecode\ShopFlixConnector\Model\ResourceModel\Collection\AbstractCollection;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item as ResourceModel;
+use Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection implements ItemSearchResultInterface
 {
@@ -45,11 +45,11 @@ class Collection extends AbstractCollection implements ItemSearchResultInterface
     public function addIdFilter($item): Collection
     {
         if (is_array($item)) {
-            $this->addFieldToFilter('entity_id', ['in' => $item]);
+            $this->addFieldToFilter('item_id', ['in' => $item]);
         } elseif ($item instanceof Model) {
-            $this->addFieldToFilter('entity_id', $item->getId());
+            $this->addFieldToFilter('item_id', $item->getId());
         } else {
-            $this->addFieldToFilter('entity_id', $item);
+            $this->addFieldToFilter('item_id', $item);
         }
         return $this;
     }

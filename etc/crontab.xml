@@ -12,6 +12,11 @@
              method="execute">
             <schedule>* * * * *</schedule>
         </job>
+        <job name="onecode_shopflix_grid_return_order_async_insert"
+             instance="OnecodeShopFlixConnectorIndexGridAsyncInsertReturnOrderCron"
+             method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
     </group>
     <group id="onecode_shopflix_sync_order_from_shopflix">
         <job name="onecode_shopflix_order_sync_from_shopflix"
@@ -32,6 +37,18 @@
              instance="OnecodeShopFlixConnectorSyncShipmentCron"
              method="execute">
             <schedule>* * * * *</schedule>
+        </job>
+    </group>
+    <group id="onecode_shopflix_sync_return_order_from_shopflix">
+        <job name="onecode_shopflixconnector_sync_return_orders_from_shopflix"
+             instance="Onecode\ShopFlixConnector\Cron\SyncReturnOrdersFromShopflix" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group>
+    <group id="onecode_shopflix_sync_return_order_to_shopflix">
+        <job name="onecode_shopflixconnector_sync_return_orders_to_shop_flix"
+             instance="Onecode\ShopFlixConnector\Cron\SyncReturnOrdersToShopFlix" method="execute">
+            <schedule>*/5  * * * *</schedule>
         </job>
     </group>
 </config>

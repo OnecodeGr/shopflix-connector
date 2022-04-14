@@ -1,0 +1,42 @@
+<?php
+/** @var CompanyData $block */
+
+use Onecode\ShopFlixConnector\Block\Adminhtml\Order\View\Tab\CompanyData;
+
+?>
+
+<section class="admin__page-section order-view-account-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Company Data')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <?php /* Order Information */ ?>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-information-table">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Company Name')) ?></th>
+                        <td><?= $block->escapeHtml($block->getOrder()->getCompanyName()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Company Owner')) ?></th>
+                        <td><?= $block->escapeHtml($block->getOrder()->getCompanyOwner()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Company Address')) ?></th>
+                        <td><?= $block->escapeHtml($block->getOrder()->getCompanyAddress()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Vat Number')) ?></th>
+                        <td><?= $block->escapeHtml($block->getOrder()->getCompanyVatNumber()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Tax Office')) ?></th>
+                        <td><?= $block->escapeHtml($block->getOrder()->getTaxOffice()) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>

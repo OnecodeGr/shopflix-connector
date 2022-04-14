@@ -2,7 +2,7 @@
 /**
  * ItemInterface.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -31,17 +31,6 @@ interface ItemInterface
         self::PARENT_ITEM_ID,
         self::ORDER_ID
     ];
-
-    /**
-     * @return $this
-     */
-    public function getId();
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId(int $id);
 
     /**
      * @return int

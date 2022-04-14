@@ -1,0 +1,21 @@
+<?php
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\Items\Column\ReturnReason;
+
+?>
+
+<?php
+/**
+ * @var $block ReturnReason
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php if ($_item = $block->getItem()): ?>
+    <div id="order_item_<?= (int)$_item->getId() ?>_title"
+         class="product-return-reason">
+        <strong style="color:red">
+            <?= $block->getReturnReason() ?>
+        </strong>
+    </div>
+<?php endif; ?>

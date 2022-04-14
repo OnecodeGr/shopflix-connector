@@ -2,7 +2,7 @@
 /**
  * Address.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -75,9 +75,9 @@ class Address extends EntityAbstract implements AddressResourceInterface
      */
     protected function _beforeSave(AbstractModel $object): AbstractDb
     {
-        /**@var $object \Onecode\ShopFlixConnector\Model\Order\Item */
-        if (!$object->getOrderId() && $object->getOrder()) {
-            $object->setOrderId($object->getOrder()->getId());
+        /**@var $object \Onecode\ShopFlixConnector\Model\Order\Address */
+        if (!$object->getParentId() && $object->getOrder()) {
+            $object->setParentId($object->getOrder()->getId());
         }
         $warnings = $this->_validator->validate($object);
         if (!empty($warnings)) {

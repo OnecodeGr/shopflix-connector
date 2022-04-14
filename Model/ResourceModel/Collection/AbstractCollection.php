@@ -2,7 +2,7 @@
 /**
  * AbstractCollection.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -170,7 +170,7 @@ abstract class AbstractCollection
      *
      * @return DataObject[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         $this->load();
         return $this->_items;

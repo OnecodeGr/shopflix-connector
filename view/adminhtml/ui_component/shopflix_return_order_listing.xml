@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                shopflix_return_order_listing.shopflix_return_order_listing_data_source
+            </item>
+            <item name="deps" xsi:type="string">shopflix_return_order_listing.shopflix_return_order_listing_data_source
+            </item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">sync-orders</item>
+                <item name="label" xsi:type="string">Sync</item>
+                <item name="class" xsi:type="string">primary-blue sync-orders shopflix-icon-loop2</item>
+                <item name="url" xsi:type="string">*/*/sync</item>
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>shopflix_return_order_listing_columns</spinner>
+        <deps>
+            <dep>shopflix_return_order_listing.shopflix_return_order_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="shopflix_return_order_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Onecode_ShopFlixConnector::shopflix</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="shopflix_return_order_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="shopflix_return_order_listing_columns">
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="increment_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Return Order</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="parent_increment_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Order #</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="status" sortOrder="20" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Onecode\ShopFlixConnector\Ui\Component\ReturnOrder\Listing\Column\Status\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="created_at" sortOrder="100" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Purchase Date</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="billing_name" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Bill-to Name</label>
+            </settings>
+        </column>
+        <column name="shipping_name" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Ship-to Name</label>
+            </settings>
+        </column>
+        <column name="billing_address" sortOrder="50"
+                class="Onecode\ShopFlixConnector\Ui\Component\Listing\Column\Address">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Billing Address</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="shipping_address" sortOrder="60"
+                class="Onecode\ShopFlixConnector\Ui\Component\Listing\Column\Address">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Shipping Address</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="customer_email" sortOrder="70">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Email</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="subtotal" sortOrder="80" class="Onecode\ShopFlixConnector\Ui\Component\Listing\Column\Price">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Subtotal</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="customer_name" sortOrder="90">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Name</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="110"
+                       class="Onecode\ShopFlixConnector\Ui\Component\Listing\Column\ViewAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">shopflix/returnOrder/view</item>
+                    <item name="urlEntityParamName" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

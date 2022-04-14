@@ -46,6 +46,32 @@
                                               sortOrder="140"/>
                                 </resource>
                             </resource>
+                            <resource id="Onecode_ShopFlixConnector::shopflix_return_order" title="Return Order"
+                                      translate="title"
+                                      sortOrder="10">
+                                <resource id="Onecode_ShopFlixConnector::return_order_actions" title="Actions" translate="title"
+                                          sortOrder="10">
+                                    <resource id="Onecode_ShopFlixConnector::return_order_actions_view" title="View"
+                                              translate="title"
+                                              sortOrder="10"/>
+                                    <resource id="Onecode_ShopFlixConnector::return_order_actions_sync_orders" title="Force Sync Orders"
+                                              translate="title"
+                                              sortOrder="20"/>
+                                    <resource id="Onecode_ShopFlixConnector::sync_return_order" title="Force Sync Order"
+                                              translate="title"
+                                              sortOrder="30"/>
+                                    <resource id="Onecode_ShopFlixConnector::mass_action_update_return_orders" title="Mass action update orders"
+                                              translate="title"
+                                              sortOrder="40"/>
+                                    <resource id="Onecode_ShopFlixConnector::return_order_accept" title="Accept" translate="title"
+                                              sortOrder="50"/>
+                                    <resource id="Onecode_ShopFlixConnector::return_order_decline" title="Decline" translate="title"/>
+                                    <resource id="Onecode_ShopFlixConnector::return_order_comment" title="Comment"
+                                              translate="title"
+                                              sortOrder="140"/>
+                                </resource>
+                                <resource id="Onecode_ShopFlixConnector::listing" title="Return Orders"/>
+                            </resource>
                             <resource id="Onecode_ShopFlixConnector::shipment" title="Shipments" translate="title"
                                       sortOrder="30"/>
                         </resource>

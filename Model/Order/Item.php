@@ -2,7 +2,7 @@
 /**
  * Item.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -14,6 +14,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Module\Manager;
 use Magento\InventorySalesAdminUi\Model\GetSalableQuantityDataBySku;
+use Onecode\ShopFlixConnector\Api\Data\AddressInterface;
 use Onecode\ShopFlixConnector\Api\Data\ItemInterface;
 use Onecode\ShopFlixConnector\Model\Order;
 use Onecode\ShopFlixConnector\Model\Order as OrderModel;
@@ -32,7 +33,7 @@ class Item extends AbstractModel implements ItemInterface
     /**
      * @var GetSalableQuantityDataBySku|mixed
      */
-    private $_salebleQtyDataBySku;
+    private $_salableQtyDataBySku;
     /**
      * @var Manager|mixed
      */
@@ -50,7 +51,7 @@ class Item extends AbstractModel implements ItemInterface
         $this->_productRepository = ObjectManager::getInstance()->create(ProductRepository::class);
         $moduleManager = ObjectManager::getInstance()->create(Manager::class);
         if ($moduleManager->isEnabled("Magento_Inventory")) {
-            $this->_salebleQtyDataBySku = ObjectManager::getInstance()->create(GetSalableQuantityDataBySku::class);
+            $this->_salableQtyDataBySku = ObjectManager::getInstance()->create(GetSalableQuantityDataBySku::class);
         } else {
             $this->isInventoryEnable = false;
         }
@@ -152,7 +153,7 @@ class Item extends AbstractModel implements ItemInterface
     public function getRealQty(): array
     {
         if ($this->isInventoryEnable) {
-            return $this->_salebleQtyDataBySku->execute($this->getSku());
+            return $this->_salableQtyDataBySku->execute($this->getSku());
         }
 
         return [
@@ -219,5 +220,21 @@ class Item extends AbstractModel implements ItemInterface
 
     }
 
+    /**
+     * @return AddressInterface|null
+     * @throws NoSuchEntityException
+     */
+    public function getBillingAddress(): ?AddressInterface
+    {
+        return $this->getOrder()->getBillingAddress();
+    }
 
+    /**
+     * @return AddressInterface|null
+     * @throws NoSuchEntityException
+     */
+    public function getShippingAddress(): ?AddressInterface
+    {
+        return $this->getOrder()->getShippingAddress();
+    }
 }

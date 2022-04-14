@@ -2,7 +2,7 @@
 /**
  * MassPrintVoucher.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -106,7 +106,7 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
             if (count($tracks) > 20) {
                 throw new LocalizedException(__("We can print 20 vouchers at once you have selected %1", count($tracks)));
             }
-            $voucherPdf = $connector->printVouchers($tracks , $this->helper->getVoucherPrintFormat());
+            $voucherPdf = $connector->printVouchers($tracks, $this->helper->getVoucherPrintFormat());
 
             $fileContent = base64_decode($voucherPdf[0]['Voucher']);
             $content = [
@@ -131,7 +131,8 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
                     if ($shipment->getShipmentStatus() == 1) {
                         $connector->forShipment($shipment->getIncrementId());
                     }
-                    $shipment->setShipmentStatus(2);
+                    $shipment->setShipmentStatus(2)
+                        ->setIsPrinted(true);
                     $this->shipmentRepository->save($shipment);
                 }
             }

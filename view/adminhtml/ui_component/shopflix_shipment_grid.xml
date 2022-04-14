@@ -123,6 +123,14 @@
                 <visible>false</visible>
             </settings>
         </column>
+        <column name="is_printed" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Onecode\ShopFlixConnector\Ui\Component\Listing\Column\IsPrinted"/>
+                <dataType>select</dataType>
+                <label translate="true">Is Printed</label>
+            </settings>
+        </column>
         <column name="customer_name">
             <settings>
                 <filter>text</filter>

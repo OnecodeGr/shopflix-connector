@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Onecode_ShopFlixConnector::js/bootstrap/return-order-post-action.js"/>
+    </head>
+    <update handle="shopflix_returnorder_item_price"/>
+    <body>
+        <referenceContainer name="admin.scope.col.wrap"
+                            htmlClass="admin__old"/>
+
+        <referenceContainer name="content">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View" name="shopflix_return_order_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Tabs" name="shopflix_return_order_tabs">
+                <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Tab\Info" name="return_order_tab_info"
+                       template="Onecode_ShopFlixConnector::return_order/view/tab/info.phtml">
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Messages"
+                           name="return_order_messages"/>
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Info" name="return_order_info"
+                           template="Onecode_ShopFlixConnector::return_order/view/info.phtml">
+                        <container name="extra_customer_info"/>
+                    </block>
+                    <container name="order_additional_info"/>
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Items"
+                           name="shopflix_return_order_items"
+                           template="Onecode_ShopFlixConnector::return_order/view/items.phtml">
+                        <arguments>
+                            <argument name="columns" xsi:type="array">
+                                <item name="product" xsi:type="string" translate="true">Product</item>
+                                <item name="reason_text" xsi:type="string" translate="true">Return Reason</item>
+                                <item name="price" xsi:type="string" translate="true">Price</item>
+                                <item name="ordered-qty" xsi:type="string" translate="true">Qty</item>
+                                <item name="total" xsi:type="string" translate="true">Row Total</item>
+                            </argument>
+                        </arguments>
+                        <block
+                            class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Items\Renderer\DefaultRenderer"
+                            as="default" name="default_order_items_renderer"
+                            template="Onecode_ShopFlixConnector::return_order/view/items/renderer/default.phtml">
+                            <arguments>
+                                <argument name="columns" xsi:type="array">
+                                    <item name="product" xsi:type="string" translate="false">col-product</item>
+                                    <item name="reason_text" xsi:type="string" translate="false">col-return-reason</item>
+                                    <item name="price" xsi:type="string" translate="false">col-price</item>
+                                    <item name="qty" xsi:type="string" translate="false">col-ordered-qty</item>
+                                    <item name="total" xsi:type="string" translate="false">col-total</item>
+                                </argument>
+                            </arguments>
+                        </block>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\Items\Column\DefaultColumn"
+                               name="column_qty"
+                               template="Onecode_ShopFlixConnector::return_order/items/qty.phtml" group="column"/>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\Items\Column\Name" name="column_name"
+                               template="Onecode_ShopFlixConnector::items/column/name.phtml" group="column"/>
+                        <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\Items\Column\ReturnReason" name="column_reason_text"
+                               template="Onecode_ShopFlixConnector::return_order/items/return_reason.phtml" group="column"/>
+                        <block class="Magento\Framework\View\Element\Text\ListText" name="order_item_extra_info"/>
+                    </block>
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\History" name="return_order_history"
+                           template="Onecode_ShopFlixConnector::return_order/view/history.phtml"/>
+                    <block class="Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\Totals" name="return_order_totals"
+                           template="Onecode_ShopFlixConnector::return_order/totals.phtml">
+                    </block>
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">return_order_info</argument>
+                    <argument name="block" xsi:type="string">return_order_tab_info</argument>
+                </action>
+
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">return_order_history</argument>
+                    <argument name="block" xsi:type="string">Onecode\ShopFlixConnector\Block\Adminhtml\ReturnOrder\View\Tab\History</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

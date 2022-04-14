@@ -2,7 +2,7 @@
 /**
  * AbstractCollection.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -19,7 +19,7 @@ abstract class AbstractCollection extends
      *
      * @var Order
      */
-    protected $_salesOrder = null;
+    protected $_shopflixOrder = null;
 
     /**
      * Order field for setOrderFilter
@@ -33,14 +33,14 @@ abstract class AbstractCollection extends
      *
      * @return Order|null
      */
-    public function getSalesOrder()
+    public function getShopflixOrder(): ?Order
     {
-        return $this->_salesOrder;
+        return $this->_shopflixOrder;
     }
 
-    public function setSalesOrder($order)
+    public function setShopflixOrder($order): AbstractCollection
     {
-        $this->_salesOrder = $order;
+        $this->_shopflixOrder = $order;
         if ($this->_eventPrefix && $this->_eventObject) {
             $this->_eventManager->dispatch(
                 $this->_eventPrefix . '_set_shopflix_order',
@@ -57,10 +57,10 @@ abstract class AbstractCollection extends
      * @param int|Order|array $order
      * @return \Onecode\ShopFlixConnector\Model\ResourceModel\Collection\AbstractCollection
      */
-    public function setOrderFilter($order)
+    public function setOrderFilter($order): \Onecode\ShopFlixConnector\Model\ResourceModel\Collection\AbstractCollection
     {
         if ($order instanceof Order) {
-            $this->setSalesOrder($order);
+            $this->setShopflixOrder($order);
             $orderId = $order->getId();
             if ($orderId) {
                 $this->addFieldToFilter($this->_orderField, $orderId);

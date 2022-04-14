@@ -2,7 +2,7 @@
 /**
  * ${FILE_NAME}
  *
- * @copyright Copyright © 2021 ${ORGANIZATION_NAME}  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 

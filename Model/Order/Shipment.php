@@ -2,7 +2,7 @@
 /**
  * Shipment.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -262,6 +262,17 @@ class Shipment extends AbstractModel implements EntityInterface, ShipmentInterfa
     {
         return $this->setData(ShipmentInterface::UPDATED_AT, $timestamp);
     }
+
+    public function isPrinted()
+    {
+       return $this->getData(ShipmentInterface::IS_PRINTED);
+    }
+
+    public function setIsPrinted($isPrinted)
+    {
+        return $this->setData(ShipmentInterface::IS_PRINTED, $isPrinted);
+    }
+
 
     /**
      * Retrieves all non-deleted items from the shipment

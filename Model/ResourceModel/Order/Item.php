@@ -2,12 +2,13 @@
 /**
  * Item.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
 namespace Onecode\ShopFlixConnector\Model\ResourceModel\Order;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 use Onecode\ShopFlixConnector\Model\Spi\ItemResourceInterface;
@@ -30,6 +31,7 @@ class Item extends AbstractDb implements ItemResourceInterface
      * @param AbstractModel $object
      *
      * @return AbstractDb
+     * @throws NoSuchEntityException
      */
     protected function _beforeSave(AbstractModel $object): AbstractDb
     {

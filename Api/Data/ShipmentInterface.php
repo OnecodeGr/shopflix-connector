@@ -2,12 +2,11 @@
 /**
  * ShipmentInterface.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
 namespace Onecode\ShopFlixConnector\Api\Data;
-
 
 
 interface ShipmentInterface
@@ -52,6 +51,8 @@ interface ShipmentInterface
      * Tracks.
      */
     const TRACKS = 'tracks';
+
+    const IS_PRINTED = "is_printed";
 
     /**
      * Gets the billing address ID for the shipment.
@@ -204,5 +205,17 @@ interface ShipmentInterface
      */
     public function setUpdatedAt($timestamp);
 
+    /**
+     * Gets the printed
+     * @return boolean
+     */
+    public function isPrinted();
+
+    /**
+     * Sets the flag is printed
+     * @param $isPrinted
+     * @return $this
+     */
+    public function setIsPrinted($isPrinted);
 
 }

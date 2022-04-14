@@ -2,7 +2,7 @@
 /**
  * IsShopFlix.php
  *
- * @copyright Copyright © 2022 Onecode  All rights reserved.
+ * @copyright Copyright © 2022 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 

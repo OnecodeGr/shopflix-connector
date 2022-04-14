@@ -2,7 +2,7 @@
 /**
  * PrintAction.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -130,7 +130,8 @@ abstract class PrintAction extends Action
                             $connector->forShipment($shipment->getIncrementId());
 
                         }
-                        $shipment->setShipmentStatus(2);
+                        $shipment->setShipmentStatus(2)
+                            ->setIsPrinted(true);
                         $this->shipmentRepository->save($shipment);
                         return $this->_fileFactory->create(
                             $track->getTrackNumber() . $date . '.pdf',

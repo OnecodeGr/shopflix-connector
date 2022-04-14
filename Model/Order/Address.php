@@ -2,22 +2,22 @@
 /**
  * Address.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
 namespace Onecode\ShopFlixConnector\Model\Order;
 
 use Magento\Directory\Model\RegionFactory;
-use Magento\Framework\Api\AttributeValueFactory;
-use Magento\Framework\Api\ExtensionAttributesFactory;
 use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
 use Onecode\ShopFlixConnector\Api\Data\AddressInterface;
 use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
+use Onecode\ShopFlixConnector\Api\OrderRepositoryInterface;
 use Onecode\ShopFlixConnector\Model\Order;
 use Onecode\ShopFlixConnector\Model\OrderFactory;
 use Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address as ResourceModel;
@@ -55,13 +55,15 @@ class Address extends AbstractModel implements AddressInterface
      * @var RegionFactory
      */
     protected $regionFactory;
+    /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
 
 
     /**
      * @param Context $context
      * @param Registry $registry
-     * @param ExtensionAttributesFactory $extensionFactory
-     * @param AttributeValueFactory $customAttributeFactory
      * @param OrderFactory $orderFactory
      * @param RegionFactory $regionFactory
      * @param AbstractResource|null $resource
@@ -71,9 +73,7 @@ class Address extends AbstractModel implements AddressInterface
     public function __construct(
         Context                    $context,
         Registry                   $registry,
-        ExtensionAttributesFactory $extensionFactory,
-        AttributeValueFactory      $customAttributeFactory,
-        OrderFactory               $orderFactory,
+        OrderRepositoryInterface   $orderRepository,
         RegionFactory              $regionFactory,
         AbstractResource           $resource = null,
         AbstractDb                 $resourceCollection = null,
@@ -82,7 +82,7 @@ class Address extends AbstractModel implements AddressInterface
     {
         $data = $this->implodeStreetField($data);
         $this->regionFactory = $regionFactory;
-        $this->orderFactory = $orderFactory;
+        $this->orderRepository = $orderRepository;
         parent::__construct($context, $registry, $resource, $resourceCollection);
     }
 
@@ -184,14 +184,6 @@ class Address extends AbstractModel implements AddressInterface
     public function getLastname()
     {
         return $this->_getData(AddressInterface::LASTNAME);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getParentId()
-    {
-        return $this->_getData(AddressInterface::PARENT_ID);
     }
 
     /**
@@ -374,11 +366,33 @@ class Address extends AbstractModel implements AddressInterface
         return $this->setData(AddressInterface::KEY_REGION_CODE, $regionCode);
     }
 
+    /**
+     * @return Order
+     * @throws NoSuchEntityException
+     */
+    public function getOrder(): Order
+    {
+        if ($this->order === null && ($orderId = $this->getParentId())) {
+            $order = $this->orderRepository->getById($orderId);
+            $this->setOrder($order);
+        }
+
+        return $this->order;
+    }
+
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
         $this->setParentId($order->getId());
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getParentId()
+    {
+        return $this->_getData(AddressInterface::PARENT_ID);
     }
 
     /**

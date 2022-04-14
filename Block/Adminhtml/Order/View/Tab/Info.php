@@ -2,22 +2,22 @@
 /**
  * Info.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
 namespace Onecode\ShopFlixConnector\Block\Adminhtml\Order\View\Tab;
 
 use Magento\Backend\Block\Widget\Tab\TabInterface;
+use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Block\Adminhtml\Order\AbstractOrder;
-use Onecode\ShopFlixConnector\Model\Order;
 
 class Info extends AbstractOrder implements TabInterface
 {
     /**
      * Retrieve source model instance
      *
-     * @return Order
+     * @return OrderInterface
      */
     public function getSource()
     {
@@ -27,9 +27,9 @@ class Info extends AbstractOrder implements TabInterface
     /**
      * Retrieve order model instance
      *
-     * @return Order
+     * @return OrderInterface
      */
-    public function getOrder()
+    public function getOrder(): OrderInterface
     {
         return $this->_coreRegistry->registry('current_shopflix_order');
     }
@@ -39,19 +39,19 @@ class Info extends AbstractOrder implements TabInterface
      *
      * @return array
      */
-    public function getOrderTotalData()
+    public function getOrderTotalData(): array
     {
         return [
             'can_display_total_paid' => true,
         ];
     }
 
-    public function getOrderInfoData()
+    public function getOrderInfoData(): array
     {
         return ['no_use_order_link' => true];
     }
 
-    public function getTrackingHtml()
+    public function getTrackingHtml(): string
     {
         return $this->getChildHtml('order_tracking');
     }
@@ -62,13 +62,13 @@ class Info extends AbstractOrder implements TabInterface
      * @param int $orderId
      * @return string
      */
-    public function getViewUrl($orderId)
+    public function getViewUrl(int $orderId): string
     {
         return $this->getUrl('shopflix/*/*', ['order_id' => $orderId]);
     }
 
 
-    public function getItemsHtml()
+    public function getItemsHtml(): string
     {
         return $this->getChildHtml('shopflix_order_items');
     }

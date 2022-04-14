@@ -87,10 +87,6 @@
                 </action>
             </block>
         </referenceContainer>
-        <referenceBlock name="head.components">
-            <block class="Magento\Framework\View\Element\Js\Components" name="sales_page_head_components"
-                   template="Magento_Sales::page/js/components.phtml"/>
-        </referenceBlock>
         <referenceBlock name="shopflix_order_shipment.grid.container">
             <uiComponent name="shopflix_order_view_shipment_grid"/>
         </referenceBlock>

@@ -2,7 +2,7 @@
 /**
  * AbstractItems.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -103,7 +103,7 @@ class AbstractItems extends Template
      * @return AbstractBlock
      * @throws RuntimeException|LocalizedException
      */
-    public function getItemRenderer($type)
+    public function getItemRenderer(string $type)
     {
         /** @var $renderer AbstractItems */
         $renderer = $this->getChildBlock($type) ?: $this->getChildBlock(self::DEFAULT_TYPE);
@@ -122,7 +122,7 @@ class AbstractItems extends Template
      * @return $this
      * @throws LocalizedException
      */
-    public function setColumnRenders(array $blocks): AbstractItems
+    public function setColumnRenders(array $blocks)
     {
         foreach ($blocks as $blockName) {
             $block = $this->getLayout()->getBlock($blockName);
@@ -133,6 +133,7 @@ class AbstractItems extends Template
         }
         return $this;
     }
+
 
     /**
      * Retrieve rendered item extra info html content
@@ -289,6 +290,4 @@ class AbstractItems extends Template
     {
         return $this->getOrder()->formatPrice($price);
     }
-
-
 }

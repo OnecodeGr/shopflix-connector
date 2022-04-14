@@ -1,8 +1,8 @@
 <?php
 /**
- * ${FILE_NAME}
+ * Order.php
  *
- * @copyright Copyright © 2021 ${ORGANIZATION_NAME}  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -29,12 +29,12 @@ class Order extends AbstractDb implements OrderResourceInterface
      * @return array
      */
     public function aggregateProductsByTypes($orderId, $productTypeIds = [],
-                                             $isProductTypeIn = false)
+                                             $isProductTypeIn = false): array
     {
         $connection = $this->getConnection();
         $select = $connection->select()
             ->from(
-                ['o' => $this->getTable('onecode_shopflix_item')],
+                ['o' => $this->getTable('onecode_shopflix_order_item')],
                 ['o.product_type', new Zend_Db_Expr('COUNT(*)')]
             )
             ->where('o.order_id=?', $orderId)

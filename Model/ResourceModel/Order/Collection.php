@@ -2,7 +2,7 @@
 /**
  * Collection
  *
- * @copyright Copyright © 2021 Onecode All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -59,7 +59,7 @@ class Collection extends AbstractCollection implements OrderSearchResultInterfac
      * @return $this
      *
      */
-    public function addAddressFields()
+    public function addAddressFields(): Collection
     {
         return $this->_addAddressFields();
     }
@@ -71,11 +71,11 @@ class Collection extends AbstractCollection implements OrderSearchResultInterfac
      *
      * @return $this
      */
-    protected function _addAddressFields()
+    protected function _addAddressFields(): Collection
     {
         $billingAliasName = 'billing_o_a';
         $shippingAliasName = 'shipping_o_a';
-        $joinTable = $this->getTable('onecode_shopflix_address');
+        $joinTable = $this->getTable('onecode_shopflix_order_address');
 
         $this->addFilterToMap(
             'billing_firstname',
@@ -135,7 +135,7 @@ class Collection extends AbstractCollection implements OrderSearchResultInterfac
      * @param array|int|string|null $condition
      * @return $this
      */
-    public function addAttributeToSearchFilter($attributes, $condition = null)
+    public function addAttributeToSearchFilter($attributes, $condition = null): Collection
     {
         if (is_array($attributes) && !empty($attributes)) {
             $this->_addAddressFields();

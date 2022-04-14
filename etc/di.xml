@@ -20,7 +20,24 @@
             <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\Order\Item</argument>
         </arguments>
     </virtualType>
-
+    <virtualType name="onecodeShopFlixReturnOrderItemMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName" xsi:type="string">
+                Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Item
+            </argument>
+            <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\ReturnOrder\Item</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="onecodeReturnShopFlixOrderMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName" xsi:type="string">
+                Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder
+            </argument>
+            <argument name="modelClassName" xsi:type="string">Onecode\ShopFlixConnector\Model\ReturnOrder</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="onecodeShopFlixOrderMetadata"
                  type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
         <arguments>
@@ -97,10 +114,30 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="OnecodeShopFlixReturnOrderCustomerNameAggregator" type="Magento\Framework\DB\Sql\ConcatExpression">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="customer_firstname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_return_order</item>
+                    <item name="columnName" xsi:type="string">customer_firstname</item>
+                </item>
+                <item name="customer_lastname" xsi:type="array">
+                    <item name="tableAlias" xsi:type="string">onecode_shopflix_return_order</item>
+                    <item name="columnName" xsi:type="string">customer_lastname</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="OnecodeShopFlixConnectorOrderIndexGridSyncInsert"
                  type="Onecode\ShopFlixConnector\Observer\GridSyncInsertObserver">
         <arguments>
             <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorReturnOrderIndexGridSyncInsert"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncInsertObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid</argument>
         </arguments>
     </virtualType>
     <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"
@@ -146,11 +183,26 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorReturnOrderIndexGridAsyncInsert"
+                 type="Onecode\ShopFlixConnector\Model\GridAsyncInsert">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="OnecodeShopFlixConnectorIndexGridAsyncInsertCron"
                  type="Onecode\ShopFlixConnector\Cron\GridAsyncInsert">
         <arguments>
             <argument name="asyncInsert"
                       xsi:type="object">OnecodeShopFlixConnectorOrderIndexGridAsyncInsert
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorIndexGridAsyncInsertReturnOrderCron"
+                 type="Onecode\ShopFlixConnector\Cron\GridAsyncInsert">
+        <arguments>
+            <argument name="asyncInsert"
+                      xsi:type="object">OnecodeShopFlixConnectorReturnOrderIndexGridAsyncInsert
             </argument>
         </arguments>
     </virtualType>
@@ -216,6 +268,15 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorReturnOrderRelationsComposite"
+                 type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite">
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="default" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Relation
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="OnecodeShopFlixConnectorShipmentRelationsComposite"
                  type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite">
         <arguments>
@@ -268,6 +329,17 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="onecodeShopFlixReturnOrderAddressMetadata"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
+        <arguments>
+            <argument name="resourceClassName"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Address
+            </argument>
+            <argument name="modelClassName"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ReturnOrder\Address
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="onecodeShopFlixShipmentMetadata"
                  type="Onecode\ShopFlixConnector\Model\ResourceModel\Metadata">
         <arguments>
@@ -292,6 +364,13 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="OnecodeShopFlixConnectorReturnOrderIndexGridSyncRemove"
+                 type="Onecode\ShopFlixConnector\Observer\GridSyncRemoveObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncRemove"
                  type="Onecode\ShopFlixConnector\Observer\GridSyncRemoveObserver">
         <arguments>
@@ -302,6 +381,22 @@
                  type="Onecode\ShopFlixConnector\Model\GridAsyncInsert">
         <arguments>
             <argument name="entityGrid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver" type="Onecode\ShopFlixConnector\Observer\GridAsyncInsertObserver">
+        <arguments>
+            <argument name="asyncInsert" xsi:type="object">OnecodeShopFlixConnectorShipmentIndexGridAsyncInsert</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver" type="Onecode\ShopFlixConnector\Observer\GridAsyncInsertObserver">
+        <arguments>
+            <argument name="asyncInsert" xsi:type="object">OnecodeShopFlixConnectorOrderIndexGridAsyncInsert</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OnecodeShopFlixShipmentIndexReturnOrderGridAsyncInsertObserver" type="Onecode\ShopFlixConnector\Observer\GridAsyncInsertObserver">
+        <arguments>
+            <argument name="asyncInsert" xsi:type="object">OnecodeShopFlixConnectorReturnOrderIndexGridAsyncInsert</argument>
         </arguments>
     </virtualType>
     <virtualType name="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"
@@ -316,6 +411,7 @@
                 <item name="order_grid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid
                 </item>
                 <item name="shipment_grid" xsi:type="object">OnecodeShopFlixConnectorShipmentGridAggregator</item>
+                <item name="return_order_grid" xsi:type="object">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid</item>
             </argument>
         </arguments>
     </type>
@@ -344,6 +440,7 @@
             </argument>
             <argument name="columns" xsi:type="array">
                 <item name="entity_id" xsi:type="string">onecode_shopflix_shipment.entity_id</item>
+                <item name="is_printed" xsi:type="string">onecode_shopflix_shipment.is_printed</item>
                 <item name="increment_id" xsi:type="string">onecode_shopflix_shipment.increment_id</item>
                 <item name="order_increment_id" xsi:type="string">onecode_shopflix_order.increment_id</item>
                 <item name="order_created_at" xsi:type="string">onecode_shopflix_order.created_at</item>
@@ -363,7 +460,47 @@
             </argument>
         </arguments>
     </virtualType>
-
+    <virtualType name="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid"
+                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="mainTableName" xsi:type="string">onecode_shopflix_return_order</argument>
+            <argument name="gridTableName" xsi:type="string">onecode_shopflix_return_order_grid</argument>
+            <argument name="orderIdField" xsi:type="string">onecode_shopflix_return_order.entity_id</argument>
+            <argument name="joins" xsi:type="array">
+                <item name="onecode_shopflix_shipping_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_return_order_address</item>
+                    <item name="origin_column" xsi:type="string">shipping_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="onecode_shopflix_billing_address" xsi:type="array">
+                    <item name="table" xsi:type="string">onecode_shopflix_return_order_address</item>
+                    <item name="origin_column" xsi:type="string">billing_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <argument name="columns" xsi:type="array">
+                <item name="entity_id" xsi:type="string">onecode_shopflix_return_order.entity_id</item>
+                <item name="status" xsi:type="string">onecode_shopflix_return_order.status</item>
+                <item name="total_paid" xsi:type="string">onecode_shopflix_return_order.total_paid</item>
+                <item name="increment_id" xsi:type="string">onecode_shopflix_return_order.increment_id</item>
+                <item name="parent_increment_id" xsi:type="string">onecode_shopflix_return_order.shopflix_parent_order_id</item>
+                <item name="shipping_name" xsi:type="object">OnecodeShopFlixConnectorShippingNameAggregator</item>
+                <item name="billing_name" xsi:type="object">OnecodeShopFlixConnectorBillingNameAggregator</item>
+                <item name="created_at" xsi:type="string">onecode_shopflix_return_order.created_at</item>
+                <item name="updated_at" xsi:type="string">onecode_shopflix_return_order.updated_at</item>
+                <item name="billing_address" xsi:type="object">OnecodeShopFlixConnectorBillingAddressAggregator
+                </item>
+                <item name="shipping_address" xsi:type="object">OnecodeShopFlixConnectorShippingAddressAggregator
+                </item>
+                <item name="customer_email" xsi:type="string">onecode_shopflix_return_order.customer_email</item>
+                <item name="subtotal" xsi:type="string">onecode_shopflix_return_order.subtotal</item>
+                <item name="customer_name" xsi:type="object">OnecodeShopFlixReturnOrderCustomerNameAggregator</item>
+            </argument>
+            <argument name="notSyncedDataProvider" xsi:type="object">
+                Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedOrderDataProvider
+            </argument>
+        </arguments>
+    </virtualType>
 
     <type name="Onecode\ShopFlixConnector\Model\Order\ShipmentRepository">
         <arguments>
@@ -377,6 +514,9 @@
                 <item name="onecode_shopflix_syncing_shipments" xsi:type="object">SyncShipmentsCommand</item>
                 <item name="onecode_shopflix_syncing_order_to_shopflix" xsi:type="object">
                     SyncOrderToShopFlixCommand
+                </item>
+                <item name="onecode_shopflixconnector_sync_return_orders" xsi:type="object">
+                    Onecode\ShopFlixConnector\Console\Command\SyncReturnOrders
                 </item>
             </argument>
         </arguments>
@@ -406,12 +546,27 @@
             <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
         </arguments>
     </type>
+    <type name="Onecode\ShopFlixConnector\Helper\ExportReturnOrders">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
     <type name="Onecode\ShopFlixConnector\Model\Service\OrderService">
         <arguments>
             <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
         </arguments>
     </type>
+    <type name="Onecode\ShopFlixConnector\Model\Service\ReturnOrderService">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
     <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Collection">
         <arguments>
             <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
         </arguments>
@@ -422,6 +577,11 @@
         </arguments>
     </type>
     <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Item\Collection">
         <arguments>
             <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
         </arguments>
@@ -442,9 +602,19 @@
             <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
         </arguments>
     </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Address\Collection">
+        <arguments>
+            <argument name="logger" xsi:type="object">Onecode\ShopFlixConnector\Logger</argument>
+        </arguments>
+    </type>
     <type name="Onecode\ShopFlixConnector\Model\Order\AddressRepository">
         <arguments>
             <argument name="metadata" xsi:type="object">onecodeShopFlixOrderAddressMetadata</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ReturnOrder\AddressRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixReturnOrderAddressMetadata</argument>
         </arguments>
     </type>
     <type name="Onecode\ShopFlixConnector\Model\Order\ItemRepository">
@@ -452,16 +622,29 @@
             <argument name="metadata" xsi:type="object">onecodeShopFlixOrderItemMetadata</argument>
         </arguments>
     </type>
+    <type name="Onecode\ShopFlixConnector\Model\ReturnOrder\ItemRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeShopFlixReturnOrderItemMetadata</argument>
+        </arguments>
+    </type>
     <type name="Onecode\ShopFlixConnector\Model\OrderRepository">
         <arguments>
             <argument name="metadata" xsi:type="object">onecodeShopFlixOrderMetadata</argument>
         </arguments>
     </type>
+    <type name="Onecode\ShopFlixConnector\Model\ReturnOrderRepository">
+        <arguments>
+            <argument name="metadata" xsi:type="object">onecodeReturnShopFlixOrderMetadata</argument>
+        </arguments>
+    </type>
     <type name="Onecode\ShopFlixConnector\Model\ResourceModel\Order">
         <arguments>
-            <argument name="entityRelationComposite" xsi:type="object">
-                OnecodeShopFlixConnectorOrderRelationsComposite
-            </argument>
+            <argument name="entityRelationComposite" xsi:type="object">OnecodeShopFlixConnectorOrderRelationsComposite</argument>
+        </arguments>
+    </type>
+    <type name="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">OnecodeShopFlixConnectorReturnOrderRelationsComposite</argument>
         </arguments>
     </type>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
@@ -469,6 +652,9 @@
             <argument name="collections" xsi:type="array">
                 <item name="shopflix_order_listing_data_source"
                       xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\Order\Grid\Collection
+                </item>
+                <item name="shopflix_return_order_listing_data_source"
+                      xsi:type="string">Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Grid\Collection
                 </item>
                 <item name="shopflix_order_view_shipment_grid_data_source"
                       xsi:type="string">
@@ -497,12 +683,16 @@
                 type="Onecode\ShopFlixConnector\Model\Order\Status\HistoryRepository"/>
     <preference for="Onecode\ShopFlixConnector\Model\Spi\AddressResourceInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\AddressSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Address\Collection"/>
     <preference for="Onecode\ShopFlixConnector\Model\Spi\ItemResourceInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Item"/>
     <preference for="Onecode\ShopFlixConnector\Model\Spi\StatusHistoryResourceInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History"/>
     <preference for="Onecode\ShopFlixConnector\Model\Spi\OrderResourceInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Order"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ReturnOrderResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder"/>
     <preference for="Onecode\ShopFlixConnector\Api\Data\StatusHistorySearchResultInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Order\Status\History\Collection"/>
     <preference for="Onecode\ShopFlixConnector\Api\ItemRepositoryInterface"
@@ -533,6 +723,38 @@
                 type="Onecode\ShopFlixConnector\Model\Order\ShipmentRepository"/>
     <preference for="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedDataProviderInterface"
                 type="Onecode\ShopFlixConnector\Model\ResourceModel\Provider\NotSyncedDataProvider"/>
+
+    <preference for="Onecode\ShopFlixConnector\Api\ReturnOrderRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrderRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderAddressInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\Address"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ReturnOrderAddressResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Address"/>
+
+    <preference for="Onecode\ShopFlixConnector\Api\ReturnOrderAddressRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\AddressRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderItemInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\Item"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ReturnOrderItemResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Item"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderItemSearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Item\Collection"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ReturnOrderItemRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\ItemRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ReturnOrderStatusHistoryRepositoryInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\Status\HistoryRepository"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderStatusHistoryInterface"
+                type="Onecode\ShopFlixConnector\Model\ReturnOrder\Status\History"/>
+    <preference for="Onecode\ShopFlixConnector\Model\Spi\ReturnOrderStatusHistoryResourceInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Status\History"/>
+    <preference for="Onecode\ShopFlixConnector\Api\ReturnOrderManagementInterface"
+                type="Onecode\ShopFlixConnector\Model\Service\ReturnOrderService"/>
+    <preference for="Onecode\ShopFlixConnector\Api\Data\ReturnOrderStatusHistorySearchResultInterface"
+                type="Onecode\ShopFlixConnector\Model\ResourceModel\ReturnOrder\Status\History\Collection"/>
     <!-- Payment Method Facade configuration -->
     <virtualType name="OnecodeShopFlixPaymentFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
@@ -578,5 +800,4 @@
             </argument>
         </arguments>
     </virtualType>
-
 </config>

@@ -2,7 +2,7 @@
 /**
  * AbstractOrder.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -12,9 +12,13 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
+use Onecode\ShopFlixConnector\Api\Data\OrderInterface;
 use Onecode\ShopFlixConnector\Helper\Admin;
 use Onecode\ShopFlixConnector\Model\Order;
 
+/**
+ * @method hasOrder()
+ */
 class AbstractOrder extends Widget
 {
 
@@ -33,18 +37,6 @@ class AbstractOrder extends Widget
         parent::__construct($context, $data);
     }
 
-    /**
-     * Display price attribute
-     *
-     * @param string $code
-     * @param bool $strong
-     * @param string $separator
-     * @return string
-     */
-    public function displayPriceAttribute($code, $strong = false, $separator = '<br/>')
-    {
-        return $this->_adminHelper->displayPriceAttribute($this->getPriceDataObject(), $code, $strong, $separator);
-    }
 
     /**
      * Get price data object
@@ -64,10 +56,10 @@ class AbstractOrder extends Widget
     /**
      * Retrieve available order
      *
-     * @return Order
+     * @return OrderInterface
      * @throws LocalizedException
      */
-    public function getOrder()
+    public function getOrder(): OrderInterface
     {
         if ($this->hasOrder()) {
             return $this->getData('order');
@@ -89,8 +81,9 @@ class AbstractOrder extends Widget
      * @param bool $strong
      * @param string $separator
      * @return string
+     * @throws LocalizedException
      */
-    public function displayPrices($basePrice, $price, $strong = false, $separator = '<br/>')
+    public function displayPrices(float $basePrice, float $price, bool $strong = false, string $separator = '<br/>'): string
     {
         return $this->_adminHelper->displayPrices(
             $this->getPriceDataObject(),
@@ -106,7 +99,7 @@ class AbstractOrder extends Widget
      *
      * @return array
      */
-    public function getOrderTotalData()
+    public function getOrderTotalData(): array
     {
         return [];
     }
@@ -117,7 +110,7 @@ class AbstractOrder extends Widget
      *
      * @return array
      */
-    public function getOrderInfoData()
+    public function getOrderInfoData(): array
     {
         return [];
     }

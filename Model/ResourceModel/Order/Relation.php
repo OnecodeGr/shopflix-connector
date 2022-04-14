@@ -2,7 +2,7 @@
 /**
  * Relation.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -69,12 +69,6 @@ class Relation implements RelationInterface
                 $statusHistory->setParentId($object->getId());
                 $statusHistory->setOrder($object);
                 $this->orderStatusHistoryResource->save($statusHistory);
-            }
-        }
-        if (null !== $object->getRelatedObjects()) {
-            foreach ($object->getRelatedObjects() as $relatedObject) {
-                $relatedObject->setOrder($object);
-                $relatedObject->save();
             }
         }
         $this->addressHandler->removeEmptyAddresses($object);

@@ -2,7 +2,7 @@
 /**
  * MassPrintVoucher.php
  *
- * @copyright Copyright © 2021 Onecode  All rights reserved.
+ * @copyright Copyright © 2021 Onecode P.C. All rights reserved.
  * @author    Spyros Bodinis {spyros@onecode.gr}
  */
 
@@ -142,7 +142,8 @@ class MassPrintVoucher extends AbstractMassAction implements HttpPostActionInter
                     if ($shipment->getShipmentStatus() == 1) {
                         $this->shipmentRepository->save($shipment);
                     }
-                    $shipment->setShipmentStatus(2);
+                    $shipment->setShipmentStatus(2)
+                        ->setIsPrinted(true);
                     $this->shipmentRepository->save($shipment);
                 }
             }

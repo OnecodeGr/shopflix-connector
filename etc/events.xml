@@ -6,16 +6,24 @@
                   instance="OnecodeShopFlixConnectorOrderIndexGridSyncInsert"/>
         <observer name="onecode_shopflix_grid_shipment_sync_insert_order"
                   instance="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"/>
+
     </event>
     <event name="onecode_shopflix_shipment_process_relation">
         <observer name="onecode_shopflix_grid_shipment_sync_insert"
                   instance="OnecodeShopFlixConnectorShipmentIndexGridSyncInsert"/>
     </event>
+
+    <event name="onecode_shopflix_return_order_process_relation">
+        <observer name="onecode_shopflix_grid_return_order_sync_insert_order"
+                  instance="OnecodeShopFlixConnectorReturnOrderIndexGridSyncInsert"/>
+    </event>
     <event name="config_data_dev_grid_async_indexing_disabled">
         <observer name="onecode_shopflix_grid_order_async_insert"
-                  instance="OnecodeShopFlixConnectorIndexGridAsyncInsertObserver"/>
+                  instance="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver"/>
         <observer name="onecode_shopflix_grid_shipment_async_insert"
-                  instance="SOnecodeShopFlixConnectorShipmentIndexGridAsyncInsertObserver"/>
+                  instance="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver"/>
+        <observer name="onecode_shopflix_grid_return_order_async_insert"
+                  instance="OnecodeShopFlixShipmentIndexReturnOrderGridAsyncInsertObserver"/>
     </event>
 
 </config>
