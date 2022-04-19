@@ -31,10 +31,6 @@ class Options implements OptionSourceInterface
                 "label" => __("Declined")
             ],
             [
-                "value" => ReturnOrderStatusInterface::STATUS_RETURN_COMPLETED,
-                "label" => __("Completed")
-            ],
-            [
                 "value" => ReturnOrderStatusInterface::STATUS_DELIVERED_TO_THE_STORE,
                 "label" => __("Delivered to the store")
             ],
