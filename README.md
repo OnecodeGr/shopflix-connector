@@ -1,4 +1,8 @@
 # Connect Magento with SHOPFLIX
+Magento 2.4.0 | Magento 2.4.1 | Magento 2.4.2 | Magento 2.4.3
+:------------ | :-------------| :-------------| :-------------
+substr | :heavy_check_mark: |  :heavy_check_mark: | :heavy_check_mark:
+
 
 This extension is connecting your Magento 2 with [SHOPFLIX](https://SHOPFLIX.gr)
 
