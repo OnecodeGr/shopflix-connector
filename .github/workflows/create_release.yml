@@ -8,13 +8,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - uses: actions/cache@v2
-      with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
+
     - name: Install dependencies
       run: |
         git clone https://github.com/OnecodeGr/base.git app/code/Oneocde/Base
