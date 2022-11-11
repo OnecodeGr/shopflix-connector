@@ -23,8 +23,7 @@ jobs:
       run: |
         git clone https://github.com/OnecodeGr/base.git app/code/Oneocde/Base
     - name: Move to Onecode Folder
-       run:|
-        mv -R * app/code/Onecode/ShopFlixConnector
+       run: mv -R !(README.md) app/code/Onecode/ShopFlixConnector
     - name: Zip Folder 
       run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "Onecode/Base/.git" "Onecode/Base/.github" "Onecode/Base/.github"
     - name: Release
