@@ -25,7 +25,11 @@ jobs:
     - name: Move to Onecode Folder
       run: |
        mkdir --verbose --parents  app/code/Onecode/ShopFlixConnector
-       mv -R !(README.md) app/code/Onecode/ShopFlixConnector
+       mv -R * app/code/Onecode/ShopFlixConnector
+       echo "## Pre-requirements
+       
+Require ShopFlixConnectoLibrary before installation run the command ``composer require onecode/shopflix-connector-library``" > README.md
+
     - name: Zip Folder 
       run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "Onecode/Base/.git" "Onecode/Base/.github" "Onecode/Base/.github"
     - name: Release
