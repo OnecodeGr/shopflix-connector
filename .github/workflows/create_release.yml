@@ -21,7 +21,7 @@ jobs:
           ${{ runner.os }}-composer-
     - name: Install dependencies
       run: |
-        composer install -o --ignore-platform-reqs
+        composer require onecode/base --ignore-platform-reqs
     - name: Zip Folder
       run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore"
 
