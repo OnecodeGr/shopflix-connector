@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ github.event.repository.name }}.zip 
-        path: ${{ github.event.repository.name }}.zip 
+        path: ${{ github.workspace }}/${{ github.event.repository.name }}.zip 
