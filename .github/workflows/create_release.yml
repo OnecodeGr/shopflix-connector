@@ -1,6 +1,6 @@
 name: Create release
 
-on: 
+on:
   workflow_dispatch:
   release:
     types:
@@ -15,14 +15,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        git clone https://github.com/OnecodeGr/base.git app/code/Oneocde/Base
+        git clone https://github.com/OnecodeGr/base.git app/code/Onecode/Base
     - name: Move to Onecode Folder
       run: |
        mkdir --verbose --parents  app/code/Onecode/ShopFlixConnector
        mv $(ls --ignore=app)  app/code/Onecode/ShopFlixConnector
        echo "## Pre-requirements \n Require ShopFlixConnectoLibrary before installation run the command ``composer require onecode/shopflix-connector-library``" > README.md
-    - name: Zip Folder 
-      run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "Onecode/Base/.git" "Onecode/Base/.github" "Onecode/Base/.github"
+    - name: Zip Folder
+      run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "Onecode/Base/.git" "Onecode/Base/.github" "Onecode/Base/.git" "Onecode/Base/.github"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
