@@ -20,7 +20,7 @@
         "ext-simplexml": "*",
         "ext-intl": "*"
     },
-    "license": "OSL-3.0",
+    "license": "MIT",
     "autoload": {
         "files": [
             "registration.php"
