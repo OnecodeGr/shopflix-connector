@@ -3,6 +3,8 @@
 [![GitHub version](https://badge.fury.io/gh/OnecodeGr%2Fshopflix-connector.svg)](https://badge.fury.io/gh/OnecodeGr%2Fshopflix-connector)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 [![PHP Version Require](http://poser.pugx.org/onecode/shopflix-connector/require/php)](https://packagist.org/packages/onecode/shopflix-connector)
+[![Supported Magento Version](https://img.shields.io/badge/magento-2.4.0_2.4.1_2.4.2_2.4.3-brightgreen.svg?logo=magento&longCache=true)](https://packagist.org/packages/onecode/shopflix-connector)
+
 
 Magento 2.4.0 | Magento 2.4.1 | Magento 2.4.2 | Magento 2.4.3
 :------------ | :-------------| :-------------| :-------------
