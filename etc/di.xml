@@ -389,7 +389,7 @@
             <argument name="asyncInsert" xsi:type="object">OnecodeShopFlixConnectorShipmentIndexGridAsyncInsert</argument>
         </arguments>
     </virtualType>
-    <virtualType name="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver" type="Onecode\ShopFlixConnector\Observer\GridAsyncInsertObserver">
+    <virtualType name="OnecodeShopFlixOrderIndexGridAsyncInsertObserver" type="Onecode\ShopFlixConnector\Observer\GridAsyncInsertObserver">
         <arguments>
             <argument name="asyncInsert" xsi:type="object">OnecodeShopFlixConnectorOrderIndexGridAsyncInsert</argument>
         </arguments>
