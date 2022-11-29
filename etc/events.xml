@@ -19,7 +19,7 @@
     </event>
     <event name="config_data_dev_grid_async_indexing_disabled">
         <observer name="onecode_shopflix_grid_order_async_insert"
-                  instance="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver"/>
+                  instance="OnecodeShopFlixOrderIndexGridAsyncInsertObserver"/>
         <observer name="onecode_shopflix_grid_shipment_async_insert"
                   instance="OnecodeShopFlixShipmentIndexGridAsyncInsertObserver"/>
         <observer name="onecode_shopflix_grid_return_order_async_insert"
